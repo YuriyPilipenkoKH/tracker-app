@@ -2,8 +2,9 @@ const path = require('path')
 const configPath = path.join(__dirname, '..',  '.env')
 const express = require('express')
 const cors = require('cors')
-const exp = require('constants')
 require('colors') 
+const Transaction = require('./models/Transaction.js')
+const  mongoose = require('mongoose')
 
 console.log(require('dotenv').config({path: configPath}))
 // console.log(process.env.PORT)
@@ -17,7 +18,11 @@ app.get('/api/test', (req, res) => {
 })
 
 app.post('/api/transaction', (req, res) => {
-    res.json(req.body)
+    mongoose.connect(process.env.MONGO_URL)
+    const { name, description, dateTime } = req.body
+    console.log(name, description, dateTime)
+
+     res.json(req.body)
 })
 
 
