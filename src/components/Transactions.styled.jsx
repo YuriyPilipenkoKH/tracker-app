@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledForm = styled.div`
+export const StyledForm = styled.form`
     display: grid;
     gap: 12px;
     padding: 12px 0;
