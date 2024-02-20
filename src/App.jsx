@@ -7,20 +7,42 @@ function App() {
   const [dateTime, setDateTime] = useState('')
   const [description, setDescription] = useState('')
   
- function addNewTransaction (e) {
-    e.preventDefault()
-    const url = process.env.REACT_APP_API_URL+'/transaction'
-    fetch(url, {
-      method: 'POST',
-      headers: {'Content-type': 'application/json' },
-      body: JSON.stringify({ name,description,dateTime})
-    }).then(response => {
-      response.json()
-      .then(data => {
-      console.log(data)
-      })
+//  function addNewTransaction (e) {
+//     e.preventDefault()
+//     const url = process.env.REACT_APP_API_URL+'/transaction'
+//     fetch(url, {
+//       method: 'POST',
+//       headers: {'Content-type': 'application/json' },
+//       body: JSON.stringify({ name,description,dateTime})
+//     }).then(response => {
+//       response.json()
+//       .then(data => {
+//       console.log(data)
+//       })
+//     })
+//   }
+
+function addNewTransaction(e) {
+  e.preventDefault();
+  const url = process.env.REACT_APP_API_URL + '/transaction';
+  fetch(url, {
+    method: 'POST',
+    headers: { 'Content-type': 'application/json' },
+    body: JSON.stringify({ name, description, dateTime }),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
     })
-  }
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+}
 
 
   return (
