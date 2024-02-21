@@ -1,13 +1,31 @@
 import './css/App.css';
 import { StyledForm, StyledInputWrapper, StyledTransaction } from './components/Transactions.styled';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
 
 function App() {
+  const [price, setPrice] = useState(0)
   const [name, setName] = useState('')
   const [dateTime, setDateTime] = useState('')
   const [description, setDescription] = useState('')
+  const [transactions, setTransactions] = useState([])
+
+  useEffect(() => {
+    getTransactions().then(list => {
+      setTransactions(list)
+    })
+  }, [])
+
+ async function getTransactions () {
+    const url = process.env.REACT_APP_API_URL + '/transactions';
+    const response = await fetch(url)
+    console.log(response)
+    const result = await response.json()
+    console.log(result)
+    return result
+  }
   
-//  function addNewTransaction (e) {
+  //  function addNewTransaction (e) {
 //     e.preventDefault()
 //     const url = process.env.REACT_APP_API_URL+'/transaction'
 //     fetch(url, {
@@ -28,7 +46,7 @@ function addNewTransaction(e) {
   fetch(url, {
     method: 'POST',
     headers: { 'Content-type': 'application/json' },
-    body: JSON.stringify({ name, description, dateTime }),
+    body: JSON.stringify({ name, price, description, dateTime }),
   })
     .then((response) => {
       if (!response.ok) {
@@ -37,6 +55,10 @@ function addNewTransaction(e) {
       return response.json();
     })
     .then((data) => {
+      setPrice(0)
+      setName('')
+      setDescription('')
+      setDateTime('')
       console.log(data);
     })
     .catch((error) => {
@@ -52,9 +74,14 @@ function addNewTransaction(e) {
       <StyledInputWrapper className='basic'>
         <input 
          type ='text'
+         value={price}
+         onChange={(e) => setPrice(e.target.value)}
+         placeholder={'$'}/>
+        <input 
+         type ='text'
          value={name}
          onChange={(e) => setName(e.target.value)}
-         placeholder={'+200 new samsung tv'}/>
+         placeholder={'transaction name'}/>
         <input 
         type ='datetime-local'
         value={dateTime}
@@ -69,19 +96,22 @@ function addNewTransaction(e) {
       </StyledInputWrapper>
      <button type='submit'> 
      Add new transaction </button>
+     {transactions.length }
      </StyledForm>
 
     <div className='transactions'>
-    <StyledTransaction className='transaction'>
-    <div className='left'>
-      <div className='name'>New Samsung tv</div>
-      <div className='description'>it was time for new tv</div>
-    </div>
-    <div className='right'>
-      <div className='price'>$500</div>
-      <div className='datetime'>2024-02-12 13:45</div>
-    </div>
-    </StyledTransaction>
+     {transactions.length > 0 && transactions.map((item) => (
+        <StyledTransaction className='transaction'>
+        <div className='left'>
+          <div className='name'>{ item.name }</div>
+          <div className='description'>{ item.description }</div>
+        </div>
+        <div className='right'>
+          <div className='price'>{ item.price }</div>
+          <div className='datetime'>{ item.dateTime }</div>
+        </div>
+        </StyledTransaction>
+     ))}
 
     </div>
 

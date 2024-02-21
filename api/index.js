@@ -17,15 +17,20 @@ app.get('/api/test', (req, res) => {
     res.json('test OK')
 })
 
-app.post('/api/transaction', (req, res) => {
-    mongoose.connect(process.env.MONGO_URL)
-    const { name, description, dateTime } = req.body
+app.post('/api/transaction', async (req, res) => {
+    await mongoose.connect(process.env.MONGO_URL)
+    const { name, price, description, dateTime } = req.body
     console.log(name, description, dateTime)
 
-     res.json(req.body)
+    const transaction = await Transaction.create({ name, price, description, dateTime })
+     res.json(transaction)
 })
 
-
+app.get('/api/transactions', async (req, res) => {
+    await mongoose.connect(process.env.MONGO_URL)
+    const list  = await Transaction.find()
+    res.json(list)
+})
 
 app.listen(process.env.API_PORT, () => {
     console.log(`server is running on port: ${process.env.API_PORT}`.green.bold.italic)
