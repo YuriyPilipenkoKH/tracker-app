@@ -1,14 +1,13 @@
 import './css/App.css';
-import { List, StyledForm, StyledInputWrapper, StyledTransaction, TransactionContainer } from './components/Transactions.styled';
+import { ErrorWrap, Label, List, StyledForm, StyledInputWrapper, StyledTransaction, TransactionContainer } from './components/Transactions.styled';
 import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
+import { useForm } from 'react-hook-form';
+import { ValidationSchema } from './models/schemas';
+import { zodResolver } from "@hookform/resolvers/zod";
 
 
 function App() {
-  const [price, setPrice] = useState(0)
-  const [name, setName] = useState('')
-  const [dateTime, setDateTime] = useState('')
-  const [description, setDescription] = useState('')
   const [transactions, setTransactions] = useState([])
   const [reRender, setReRender] = useState(false)
 
@@ -17,6 +16,7 @@ function App() {
       setTransactions(list)
     })
   }, [reRender])
+  
 
  async function getTransactions () {
     const url = process.env.REACT_APP_API_URL + '/transactions';
@@ -29,6 +29,36 @@ function App() {
   const totalBallance = transactions.reduce((acc, transaction) => {
     return acc + (transaction.price || 0);
   }, 0);
+
+  const {
+    register,
+    handleSubmit,
+    formState,
+    reset,
+    getValues
+  } = useForm({
+    defaultValues: {
+      name: '',
+      price: null,
+      dateTime: '',
+      description: '',
+    },
+    mode: 'all',
+    resolver: zodResolver(ValidationSchema)
+  });
+
+  const {
+    errors,
+    isDirty,
+    isValid,
+    isSubmitSuccessful
+  } = formState;
+
+  useEffect(() => {
+    if(isSubmitSuccessful) {
+        reset()
+    }
+}, [isSubmitSuccessful, reset])
   
   //  function addNewTransaction (e) {
 //     e.preventDefault()
@@ -44,9 +74,11 @@ function App() {
 //       })
 //     })
 //   }
+const { name, price, description, dateTime } = getValues();
+
 
 function addNewTransaction(e) {
-  e.preventDefault();
+  // e.preventDefault();
   const url = process.env.REACT_APP_API_URL + '/transaction';
   fetch(url, {
     method: 'POST',
@@ -60,10 +92,6 @@ function addNewTransaction(e) {
       return response.json();
     })
     .then((data) => {
-      setPrice(0)
-      setName('')
-      setDescription('')
-      setDateTime('')
       setReRender(true)
       console.log(data);
     })
@@ -76,35 +104,58 @@ function addNewTransaction(e) {
 
   return (
     <main>
-     <div className='upeerWrapper'>
+     <div className='upperWrapper'>
        <h1>$ {totalBallance}<span>.00</span></h1>
        <p className='trAmount'>{transactions.length }</p>
      </div>
-     <StyledForm onSubmit={addNewTransaction}>
-      <StyledInputWrapper className='basic'>
-        <input 
-         type ='text'
-         value={price}
-         onChange={(e) => setPrice(e.target.value)}
-         placeholder={'$'}/>
-        <input 
-         type ='text'
-         value={name}
-         onChange={(e) => setName(e.target.value)}
-         placeholder={'transaction name'}/>
-        <input 
-        type ='datetime-local'
-        value={dateTime}
-        onChange={(e) => setDateTime(e.target.value)}/>
-      </StyledInputWrapper>
-      <StyledInputWrapper className='description'>
-        <input 
-        type ='text' 
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        placeholder={'description'}/>
-      </StyledInputWrapper>
-     <button type='submit'> 
+     <StyledForm onSubmit={handleSubmit(addNewTransaction)}
+                 autoComplete="off"
+                 noValidate>
+        <Label>
+          <input
+            {...register('price')}
+            type ='text'
+            errors={errors?.price }
+            placeholder={'$'}/>
+            {errors?.price && (
+          <ErrorWrap>{errors.price.message}</ErrorWrap>
+              )}
+        </Label>
+        <Label>
+          <input
+            {...register('name')}
+            type ='text'
+            errors={errors?.name }
+            placeholder={'transaction name'}/>
+            {errors?.name && (
+          <ErrorWrap>{errors.name.message}</ErrorWrap>
+              )}
+        </Label>  
+        <Label>
+          <input
+          type ='datetime-local'
+          {...register('dateTime')}
+           errors={errors?.dateTime }
+          />
+          {errors?.dateTime && (
+        <ErrorWrap>{errors.dateTime.message}</ErrorWrap>
+            )}
+         </Label>
+   
+        <Label>
+          <input
+            {...register('description')}
+            type ='text'
+            errors={errors?.description }
+            placeholder={'description'}/>
+            {errors?.description && (
+          <ErrorWrap>{errors.description.message}</ErrorWrap>
+              )}
+        </Label>
+    
+     <button 
+     type='submit'
+     disabled={!isDirty || !isValid}> 
      Add new transaction </button>
      
      </StyledForm>
@@ -112,7 +163,7 @@ function addNewTransaction(e) {
 
     <List  className='transactions'>
      {transactions.length > 0 && transactions.map((item) => (
-       <StyledTransaction className='transaction' key={item.dateTime} price ={item.price}>
+       <StyledTransaction className='transaction' key={item._id} price ={item.price}>
         <div className='left'>
           <div className='name'>{ item.name }</div>
           <div className='description'>{ item.description }</div>

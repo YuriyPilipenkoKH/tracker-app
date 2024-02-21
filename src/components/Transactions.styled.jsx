@@ -66,6 +66,7 @@ export const StyledInputWrapper = styled.div`
     display: grid;
     gap: 26px;
     &>input {
+        position: relative;
         width: 100%;
         background-color: transparent;
         color: #ddd;
@@ -108,3 +109,29 @@ export const TransactionContainer = styled.div`
 }
  
 `;
+
+export const ErrorWrap = styled.div`
+ 
+    color: #eccc;
+    position: absolute;
+    bottom: -18px;
+    font-size: 12px;
+    font-weight: 500;
+    z-index: 4;
+`
+export const Label = styled.label`
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    &>input {
+        position: relative;
+        width: 100%;
+        background-color: transparent;
+        color: #ddd;
+        border: 2px solid #30313d;
+        padding: 2px 5px;
+        border-radius: 5px;
+    }
+    
+`
