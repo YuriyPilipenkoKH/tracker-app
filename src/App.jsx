@@ -1,5 +1,5 @@
 import './css/App.css';
-import { ErrorWrap, Label, List, StyledForm, StyledInputWrapper, StyledTransaction, TransactionContainer } from './components/Transactions.styled';
+import { ErrorWrap, Label, List, StyledForm,  StyledTransaction, TransactionContainer } from './components/Transactions.styled';
 import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 import { useForm } from 'react-hook-form';
@@ -21,9 +21,9 @@ function App() {
  async function getTransactions () {
     const url = process.env.REACT_APP_API_URL + '/transactions';
     const response = await fetch(url)
-    console.log(response)
+    // console.log(response)
     const result = await response.json()
-    console.log(result)
+    // console.log(result)
     return result
   }
   const totalBallance = transactions.reduce((acc, transaction) => {
@@ -75,7 +75,6 @@ function App() {
 //     })
 //   }
 const { name, price, description, dateTime } = getValues();
-
 
 function addNewTransaction(e) {
   // e.preventDefault();
@@ -154,10 +153,9 @@ function addNewTransaction(e) {
         </Label>
     
      <button 
-     type='submit'
-     disabled={!isDirty || !isValid}> 
-     Add new transaction </button>
-     
+        type='submit'
+        disabled={!isDirty || !isValid}> 
+        Add new transaction </button>
      </StyledForm>
     <TransactionContainer>
 

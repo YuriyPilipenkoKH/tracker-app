@@ -22,5 +22,9 @@ export const ValidationSchema = z.object({
         .min(3, 'Name must be 3 or more characters long')  ,
     description: z
         .string()
-        .min(3, 'Name must be 3 or more characters long')  ,      
+        .trim()
+        .min(6, 'Name must be 6 or more characters long') 
+        .refine((val) => !val.toLowerCase().startsWith('qwe'), {
+            message: 'Enter a different description'
+          }) ,      
 })
