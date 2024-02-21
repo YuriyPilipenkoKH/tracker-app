@@ -1,5 +1,18 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import isPropValid from "@emotion/is-prop-valid"
+
+const ulAnimation = keyframes`
+    0% {
+        transform: rotateX(-90deg)
+    }
+    70% {
+        transform: rotateX(20deg) 
+    }
+    100% {
+        transform: rotateX(0deg) 
+    }
+
+`
 
 export const StyledForm = styled.form`
     display: grid;
@@ -25,7 +38,7 @@ export const StyledTransaction = styled.div.withConfig({
         isPropValid(prop) 
         && prop !== 'price'
           })`
-    padding: 12px 4px;
+    padding: 8px 4px;
     display: flex;
     justify-content: space-between;
     gap: 16px;
@@ -67,3 +80,31 @@ export const StyledInputWrapper = styled.div`
     
     }
 `
+export const List = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style-type: disc;
+
+
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+
+   animation: ${ulAnimation} 1s ease;   
+`;
+
+export const TransactionContainer = styled.div`
+  position: relative;
+  /* width: 320px; */
+  max-height: 380px;
+  box-shadow: var(--shadow-four);
+  overflow: auto;
+  transition: 1s ease-in-out;
+
+&::-webkit-scrollbar {
+    width: 2px;
+}
+ 
+`;

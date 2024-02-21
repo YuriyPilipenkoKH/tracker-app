@@ -1,5 +1,5 @@
 import './css/App.css';
-import { StyledForm, StyledInputWrapper, StyledTransaction } from './components/Transactions.styled';
+import { List, StyledForm, StyledInputWrapper, StyledTransaction, TransactionContainer } from './components/Transactions.styled';
 import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 
@@ -26,7 +26,7 @@ function App() {
     console.log(result)
     return result
   }
-  const totalPrice = transactions.reduce((acc, transaction) => {
+  const totalBallance = transactions.reduce((acc, transaction) => {
     return acc + (transaction.price || 0);
   }, 0);
   
@@ -77,7 +77,7 @@ function addNewTransaction(e) {
   return (
     <main>
      <div className='upeerWrapper'>
-       <h1>$ {totalPrice}<span>.00</span></h1>
+       <h1>$ {totalBallance}<span>.00</span></h1>
        <p className='trAmount'>{transactions.length }</p>
      </div>
      <StyledForm onSubmit={addNewTransaction}>
@@ -108,10 +108,11 @@ function addNewTransaction(e) {
      Add new transaction </button>
      
      </StyledForm>
+    <TransactionContainer>
 
-    <div className='transactions'>
+    <List  className='transactions'>
      {transactions.length > 0 && transactions.map((item) => (
-        <StyledTransaction className='transaction' price ={item.price}>
+       <StyledTransaction className='transaction' key={item.dateTime} price ={item.price}>
         <div className='left'>
           <div className='name'>{ item.name }</div>
           <div className='description'>{ item.description }</div>
@@ -124,7 +125,8 @@ function addNewTransaction(e) {
         </StyledTransaction>
      ))}
  
-    </div>
+    </List>
+     </TransactionContainer>
 
     </main>
   );
