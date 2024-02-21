@@ -1,6 +1,7 @@
 import './css/App.css';
 import { StyledForm, StyledInputWrapper, StyledTransaction } from './components/Transactions.styled';
 import { useEffect, useState } from 'react';
+import { format } from 'date-fns';
 
 
 function App() {
@@ -24,6 +25,9 @@ function App() {
     console.log(result)
     return result
   }
+  const totalPrice = transactions.reduce((acc, transaction) => {
+    return acc + (transaction.price || 0);
+  }, 0);
   
   //  function addNewTransaction (e) {
 //     e.preventDefault()
@@ -69,7 +73,10 @@ function addNewTransaction(e) {
 
   return (
     <main>
-     <h1>$400<span>.00</span></h1>
+     <div className='upeerWrapper'>
+       <h1>$ {totalPrice}<span>.00</span></h1>
+       <p className='trAmount'>{transactions.length }</p>
+     </div>
      <StyledForm onSubmit={addNewTransaction}>
       <StyledInputWrapper className='basic'>
         <input 
@@ -96,23 +103,24 @@ function addNewTransaction(e) {
       </StyledInputWrapper>
      <button type='submit'> 
      Add new transaction </button>
-     {transactions.length }
+     
      </StyledForm>
 
     <div className='transactions'>
      {transactions.length > 0 && transactions.map((item) => (
-        <StyledTransaction className='transaction'>
+        <StyledTransaction className='transaction' price ={item.price}>
         <div className='left'>
           <div className='name'>{ item.name }</div>
           <div className='description'>{ item.description }</div>
         </div>
         <div className='right'>
-          <div className='price'>{ item.price }</div>
-          <div className='datetime'>{ item.dateTime }</div>
+          <div className='price'>{ item.price && Math.abs(item.price) }</div>
+          <div className='datetime'>{ format(item.dateTime, 'MMM-dd-yy, HH:mm') }</div>
+          
         </div>
         </StyledTransaction>
      ))}
-
+ 
     </div>
 
     </main>

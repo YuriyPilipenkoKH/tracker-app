@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import isPropValid from "@emotion/is-prop-valid"
 
 export const StyledForm = styled.form`
     display: grid;
@@ -19,7 +20,11 @@ export const StyledForm = styled.form`
     }
 
 `
-export const StyledTransaction = styled.div`
+export const StyledTransaction = styled.div.withConfig({
+    shouldForwardProp: prop =>
+        isPropValid(prop) 
+        && prop !== 'price'
+          })`
     padding: 12px 4px;
     display: flex;
     justify-content: space-between;
@@ -37,6 +42,10 @@ export const StyledTransaction = styled.div`
         &>.description{
             font-size: 0.8rem;
             color: #888;
+        }
+        &>.price{
+        color: ${({ price }) => 
+        ((price > 0) ? "#068806" :  "#bb1212")}; 
         }
     }
 `
