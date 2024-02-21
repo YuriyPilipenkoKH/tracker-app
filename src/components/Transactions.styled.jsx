@@ -3,7 +3,7 @@ import isPropValid from "@emotion/is-prop-valid"
 
 export const StyledForm = styled.form`
     display: grid;
-    gap: 12px;
+    gap: 26px;
     padding: 12px 0;
     &>button{
         width: 100%;
@@ -51,7 +51,7 @@ export const StyledTransaction = styled.div.withConfig({
 `
 export const StyledInputWrapper = styled.div`
     display: grid;
-    gap: 12px;
+    gap: 26px;
     &>input {
         width: 100%;
         background-color: transparent;

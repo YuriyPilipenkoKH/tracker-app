@@ -10,12 +10,13 @@ function App() {
   const [dateTime, setDateTime] = useState('')
   const [description, setDescription] = useState('')
   const [transactions, setTransactions] = useState([])
+  const [reRender, setReRender] = useState(false)
 
   useEffect(() => {
     getTransactions().then(list => {
       setTransactions(list)
     })
-  }, [])
+  }, [reRender])
 
  async function getTransactions () {
     const url = process.env.REACT_APP_API_URL + '/transactions';
@@ -63,8 +64,10 @@ function addNewTransaction(e) {
       setName('')
       setDescription('')
       setDateTime('')
+      setReRender(true)
       console.log(data);
     })
+    .finally(setReRender(false))
     .catch((error) => {
       console.error('Error:', error);
     });
