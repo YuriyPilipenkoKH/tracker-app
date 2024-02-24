@@ -19,7 +19,7 @@ function App() {
     })
   }, [reRender])
   
-  const totalBallance = transactions.reduce((acc, transaction) => {
+  const totalBalance = transactions.reduce((acc, transaction) => {
     return acc + (transaction.price || 0);
   }, 0);
 
@@ -38,7 +38,7 @@ function App() {
       description: '',
     },
     mode: 'all',
-    resolver: zodResolver(ValidationSchema)
+    resolver: zodResolver(ValidationSchema(totalBalance))
   });
 
   const {
@@ -99,7 +99,7 @@ function addNewTransaction(data) {
   return (
     <main>
      <div className='upperWrapper'>
-       <h1>$ {totalBallance}<span>.00</span></h1>
+       <h1>$ {totalBalance}<span>.00</span></h1>
        <p className='trAmount'>{transactions.length }</p>
      </div>
      <StyledForm onSubmit={handleSubmit(addNewTransaction)}
@@ -108,7 +108,7 @@ function addNewTransaction(data) {
         <Label>
           <input
             {...register('price', {
-              validate: (value) => parseFloat(value) <= totalBallance || 'Price should not be greater than total balance',
+              validate: (value) => parseFloat(value) <= totalBalance || 'Price should not be greater than total balance',
             })}
             type ='text'
             errors={errors?.price }

@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const ValidationSchema = z.object({
+export const ValidationSchema = (totalBalance) => z.object({
     name: z
         .string()
         .trim()
@@ -15,10 +15,10 @@ export const ValidationSchema = z.object({
     price: z
         .string()
         .trim()
-        .toLowerCase()
-        // .refine((val) => val < 150, {
-        //     message: 'You haven`t got enough money'
-        //   })  
+        // .max(totalBalance, { message: 'You haven`t got enough money' })
+        .refine((val) => (val * -1) < totalBalance, {
+            message: 'You haven`t got enough money'
+          })  
         ,
     dateTime: z
         .string()
