@@ -32,6 +32,10 @@ app.get('/api/transactions', async (req, res) => {
     res.json(list)
 })
 
-app.listen(process.env.API_PORT, () => {
-    console.log(`server is running on port: ${process.env.API_PORT}`.green.bold.italic)
-    })
+if(process.env.API_PORT) {
+    app.listen(process.env.API_PORT, () => {
+        console.log(`server is running on port: ${process.env.API_PORT}`.green.bold.italic)
+        })
+}
+
+module.exports = app

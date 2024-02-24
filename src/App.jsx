@@ -5,9 +5,11 @@ import { format } from 'date-fns';
 import { useForm } from 'react-hook-form';
 import { ValidationSchema } from './models/schemas';
 import { zodResolver } from "@hookform/resolvers/zod";
+import {  getTransactions } from './utils/fetch';
 
 
 function App() {
+
   const [transactions, setTransactions] = useState([])
   const [reRender, setReRender] = useState(false)
 
@@ -17,18 +19,10 @@ function App() {
     })
   }, [reRender])
   
-
- async function getTransactions () {
-    const url = process.env.REACT_APP_API_URL + '/transactions';
-    const response = await fetch(url)
-    // console.log(response)
-    const result = await response.json()
-    // console.log(result)
-    return result
-  }
   const totalBallance = transactions.reduce((acc, transaction) => {
     return acc + (transaction.price || 0);
   }, 0);
+
 
   const {
     register,
@@ -76,7 +70,7 @@ function App() {
 //   }
 const { name, price, description, dateTime } = getValues();
 
-function addNewTransaction(e) {
+function addNewTransaction(data) {
   // e.preventDefault();
   const url = process.env.REACT_APP_API_URL + '/transaction';
   fetch(url, {
@@ -92,6 +86,7 @@ function addNewTransaction(e) {
     })
     .then((data) => {
       setReRender(true)
+
       console.log(data);
     })
     .finally(setReRender(false))
@@ -112,7 +107,9 @@ function addNewTransaction(e) {
                  noValidate>
         <Label>
           <input
-            {...register('price')}
+            {...register('price', {
+              validate: (value) => parseFloat(value) <= totalBallance || 'Price should not be greater than total balance',
+            })}
             type ='text'
             errors={errors?.price }
             placeholder={'$'}/>
