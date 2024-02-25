@@ -65,6 +65,13 @@ export const StyledTransaction = styled.div.withConfig({
 export const StyledInputWrapper = styled.div`
     display: grid;
     gap: 26px;
+   
+`
+export const StyledLabel = styled.label`
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
     &>input {
         position: relative;
         width: 100%;
@@ -78,9 +85,16 @@ export const StyledInputWrapper = styled.div`
         width: 100%;
         background-color: transparent;
         color: #777;
-    
+        fill: crimson !important;
+        &>::-webkit-calendar-picker-indicator {
+            color: #777;
+ 
+        }
     }
+    
+
 `
+
 export const List = styled.ul`
   display: flex;
   flex-direction: column;
@@ -118,20 +132,4 @@ export const ErrorWrap = styled.div`
     font-size: 12px;
     font-weight: 500;
     z-index: 4;
-`
-export const Label = styled.label`
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    &>input {
-        position: relative;
-        width: 100%;
-        background-color: transparent;
-        color: #ddd;
-        border: 2px solid #30313d;
-        padding: 2px 5px;
-        border-radius: 5px;
-    }
-    
 `

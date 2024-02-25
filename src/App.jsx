@@ -1,5 +1,5 @@
 import './css/App.css';
-import { ErrorWrap, Label, List, StyledForm,  StyledTransaction, TransactionContainer } from './components/Transactions.styled';
+import { ErrorWrap,  List, StyledForm,  StyledLabel,  StyledTransaction, TransactionContainer } from './components/Transactions.styled';
 import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 import { useForm } from 'react-hook-form';
@@ -105,7 +105,7 @@ function addNewTransaction(data) {
      <StyledForm onSubmit={handleSubmit(addNewTransaction)}
                  autoComplete="off"
                  noValidate>
-        <Label>
+        <StyledLabel>
           <input
             {...register('price', {
               validate: (value) => parseFloat(value) <= totalBalance || 'Price should not be greater than total balance',
@@ -116,8 +116,8 @@ function addNewTransaction(data) {
             {errors?.price && (
           <ErrorWrap>{errors.price.message}</ErrorWrap>
               )}
-        </Label>
-        <Label>
+        </StyledLabel>
+        <StyledLabel>
           <input
             {...register('name')}
             type ='text'
@@ -126,8 +126,8 @@ function addNewTransaction(data) {
             {errors?.name && (
           <ErrorWrap>{errors.name.message}</ErrorWrap>
               )}
-        </Label>  
-        <Label>
+        </StyledLabel>  
+        <StyledLabel>
           <input
           type ='datetime-local'
           {...register('dateTime')}
@@ -136,9 +136,9 @@ function addNewTransaction(data) {
           {errors?.dateTime && (
         <ErrorWrap>{errors.dateTime.message}</ErrorWrap>
             )}
-         </Label>
+         </StyledLabel>
    
-        <Label>
+        <StyledLabel>
           <input
             {...register('description')}
             type ='text'
@@ -147,7 +147,7 @@ function addNewTransaction(data) {
             {errors?.description && (
           <ErrorWrap>{errors.description.message}</ErrorWrap>
               )}
-        </Label>
+        </StyledLabel>
     
      <button 
         type='submit'
