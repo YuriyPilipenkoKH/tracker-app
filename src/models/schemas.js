@@ -25,7 +25,7 @@ export const ValidationSchema = (totalBalance) => z.object({
         .min(3, 'Date must be 3 or more characters long')  ,
     description: z
         .string()
-        // .min(4, 'Description must be 6 or more characters long') 
+        .min(4) 
         .refine((val) => !val.toLowerCase().startsWith('qwe'), {
             message: 'Enter a different description'
           }) ,      
