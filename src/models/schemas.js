@@ -27,5 +27,6 @@ export const ValidationSchema = (totalBalance) => z.object({
         .string()
         .refine((val) => !val.toLowerCase().startsWith('qwe'), {
             message: 'Enter a different description'
-          }) ,      
+          })
+          .optional() ,      
 })
