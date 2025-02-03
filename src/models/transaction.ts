@@ -5,7 +5,7 @@ export const TransactionSchema = (totalBalance :number) => z.object({
         .string()
         .trim()
         .min(3, 'Name needs to be at least 3 characters')
-        .max( 32, 'Name should be shorter than 32 characters')
+        .max( 64, 'Name should be shorter than 64 characters')
         .refine((val) => !val.toLowerCase().startsWith('qwe'), {
             message: 'Enter a different name'
           })
@@ -19,8 +19,7 @@ export const TransactionSchema = (totalBalance :number) => z.object({
           })  
         ,
     dateTime: z
-        .string()
-        .min(3, 'Date must be 3 or more characters long')  ,
+        .date() ,
     description: z
         .string()
         .trim()
