@@ -1,7 +1,7 @@
 import NextAuth, {  Session, User } from 'next-auth';
+import { JWT } from 'next-auth/jwt';
 import GoogleProvider from 'next-auth/providers/google';
 import GitHubProvider from 'next-auth/providers/github';
-import { JWT } from 'next-auth/jwt';
 
 export const authOptions = {
   providers: [
