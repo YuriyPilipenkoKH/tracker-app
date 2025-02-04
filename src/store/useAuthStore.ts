@@ -37,41 +37,16 @@ export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
     }
   },
   handleGoogleLogin: async () => {
+    set({ isLoggingIn: true });
     try {
-      set({ isLoggingIn: true });
-  
       const response = await signIn("google", { redirect: false });
-  
-      if (!response || response.error) {
-        console.error("Google sign-in error:", response?.error);
-        toast.error("Google sign-in failed!");
+      if (response?.error) {
+        console.error("Google sign-in error:", response.error);
         return;
       }
-  
-      if (!response.url) {
-        console.error("No URL returned from Google sign-in.");
-        toast.error("Authentication failed. Try again.");
-        return;
-      }
-  
-      // Extract authorization code from URL
-      const codeMatch = response.url.match(/code=([^&]*)/);
-      if (!codeMatch) {
-        console.error("Authorization code not found in URL:", response.url);
-        toast.error("Invalid authentication response.");
-        return;
-      }
-      const authorizationCode = codeMatch[1];
-  
-      // Send the authorization code to the backend
-      const { data } = await axios.post(
-        `/auth/google`,
-        { code: authorizationCode },
-        { withCredentials: true }
-      );
-  
-      console.log("Login successful:", data);
-      toast.success("Login successful!");
+      await axios.post("/auth/google", {
+        code: response?.url?.split("code=")[1]?.split("&")[0],
+      });
     } catch (error) {
       if (error instanceof AxiosError && error.response) {
         toast.error(error.response.data.message);
@@ -96,3 +71,48 @@ export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
     }
   },
 }))
+
+
+// handleGoogleLogin: async () => {
+//   set({ isLoggingIn: true });
+//   try {
+//       const response = await signIn("google", { redirect: false });
+
+//     if (!response || response.error) {
+//       console.error("Google sign-in error:", response?.error);
+//       toast.error("Google sign-in failed!");
+//       return;
+//     }
+
+//     if (!response.url) {
+//       console.error("No URL returned from Google sign-in.");
+//       toast.error("Authentication failed. Try again.");
+//       return;
+//     }
+
+//     // Extract authorization code from URL
+//     const codeMatch = response.url.match(/code=([^&]*)/);
+//     if (!codeMatch) {
+//       console.error("Authorization code not found in URL:", response.url);
+//       toast.error("Invalid authentication response.");
+//       return;
+//     }
+//     const authorizationCode = codeMatch[1];
+
+//     // Send the authorization code to the backend
+//     const { data } = await axios.post(
+//       `/auth/google`,
+//       { code: authorizationCode },
+//       { withCredentials: true }
+//     );
+
+//     console.log("Login successful:", data);
+//     toast.success("Login successful!");
+//   } catch (error) {
+//     if (error instanceof AxiosError && error.response) {
+//       toast.error(error.response.data.message);
+//     }
+//   } finally {
+//     set({ isLoggingIn: false });
+//   }
+// },
