@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import { Toaster } from 'react-hot-toast';
 import { options } from "./lib/hotToast"
+import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
  
@@ -11,6 +12,7 @@ function App() {
     <div >
       <Routes>
       <Route path="/" element ={<HomePage/>}/>
+      <Route path="*" element={<NotFoundPage />} />
       </Routes>
 
       <Toaster

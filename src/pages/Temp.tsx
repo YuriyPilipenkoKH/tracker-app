@@ -24,7 +24,7 @@ const Temp = () => {
   
   //  function addNewTransaction (e) {
 //     e.preventDefault()
-//     const url = process.env.REACT_APP_API_URL+'/transaction'
+//     const url = .REACT_APP_API_URL+'/transaction'
 //     fetch(url, {
 //       method: 'POST',
 //       headers: {'Content-type': 'application/json' },
