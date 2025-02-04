@@ -6,15 +6,15 @@ import GitHubProvider from 'next-auth/providers/github';
 export const authOptions = {
   providers: [
     GoogleProvider({
-      clientId: import.meta.env.VITE_GOOGLE_CLIENT_ID,
-      clientSecret: import.meta.env.VITE_GOOGLE_CLIENT_SECRET,
+      clientId: import.meta.env.GOOGLE_CLIENT_ID,
+      clientSecret: import.meta.env.GOOGLE_CLIENT_SECRET,
     }),
     GitHubProvider({
-      clientId: import.meta.env.VITE_GITHUB_CLIENT_ID,
-      clientSecret: import.meta.env.VITE_GITHUB_CLIENT_SECRET,
+      clientId: import.meta.env.GITHUB_CLIENT_ID,
+      clientSecret: import.meta.env.GITHUB_CLIENT_SECRET,
     }),
   ],
-  secret: import.meta.env.VITE_NEXTAUTH_SECRET, // Optional secret for JWT
+  secret: import.meta.env.SECRET, // Optional secret for JWT
   callbacks: {
     async jwt({ token, user }: { token: JWT; user?: User }): Promise<JWT> {
       if (user) {

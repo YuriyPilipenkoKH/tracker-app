@@ -40,7 +40,7 @@ const { name, price, description, dateTime } = getValues();
 
 function addNewTransaction(data) {
   // e.preventDefault();
-  const url = process.env.REACT_APP_API_URL + '/transaction';
+  const url = import.meta.env.REACT_APP_API_URL + '/transaction';
   console.log(url)
   fetch(url, {
     method: 'POST',

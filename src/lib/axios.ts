@@ -13,7 +13,7 @@ export const axios = axiosInstance.create({
 
 export async function getTransactions() {
   try {
-    const url = process.env.REACT_APP_API_URL + '/transactions';
+    const url = import.meta.env.HOST + '/api/transaction';
     const response = await fetch(url);
     const result = await response.json();
     return result;
