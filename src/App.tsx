@@ -12,6 +12,7 @@ function App() {
     <div >
       <Routes>
       <Route path="/" element ={<HomePage/>}/>
+      <Route path="/auth/callback" element={<AuthCallbackPage />} /> 
       <Route path="*" element={<NotFoundPage />} />
       </Routes>
 
