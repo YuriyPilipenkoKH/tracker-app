@@ -4,15 +4,20 @@ import HomePage from './pages/HomePage'
 import { Toaster } from 'react-hot-toast';
 import { options } from "./lib/hotToast"
 import NotFoundPage from './pages/NotFoundPage';
+import AuthCallbackPage from './pages/AuthCallbackPage';
+import { useAuthStore } from './store/useAuthStore';
+import { useEffect } from 'react';
 
 function App() {
- 
-
+  const { checkAuth } = useAuthStore();
+  useEffect(() => {
+    checkAuth(); // ✅ Safe to call here inside a React component
+  }, []);
   return (
-    <div >
+    <>
       <Routes>
       <Route path="/" element ={<HomePage/>}/>
-      <Route path="/auth/callback" element={<AuthCallbackPage />} /> 
+      <Route path="/api/auth/callback" element={<AuthCallbackPage />} /> 
       <Route path="*" element={<NotFoundPage />} />
       </Routes>
 
@@ -20,7 +25,7 @@ function App() {
        position="top-center" 
       toastOptions={options} />
     
-    </div>
+    </>
   )
 }
 

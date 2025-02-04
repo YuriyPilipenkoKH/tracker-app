@@ -24,7 +24,7 @@ export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
   isLoggingIn: false,
   checkAuth: async() =>{
     try {
-      const response = await axios.get('/auth/check')
+      const response = await axios.get('/auth/session')
       // console.log('response',response.data);
       set({authUser: response.data})
 
