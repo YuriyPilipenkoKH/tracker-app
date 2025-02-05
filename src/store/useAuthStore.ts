@@ -5,6 +5,8 @@ import { AxiosError } from 'axios';
 import toast from 'react-hot-toast';
 import capitalize from '../lib/capitalize';
 import { wait } from '../lib/wait';
+import { signUpSchemaType } from '../models/signUpSchema';
+import { LoginSchemaType } from '../models/loginSchema';
 
 
 
@@ -23,6 +25,7 @@ export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
   pending: false,
 
   checkAuth: async() =>{
+    set({ pending: true });
     try {
       const response = await axios.get('/auth/session')
       // console.log('response',response.data);
@@ -33,7 +36,7 @@ export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
       console.log('error in checkAuth', error)
     }
     finally{
-      set({isCheckingAuth: false})
+      set({pending: false})
     }
   },
   signUp : async (data) => {
