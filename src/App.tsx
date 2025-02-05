@@ -4,7 +4,7 @@ import HomePage from './pages/HomePage'
 import { Toaster } from 'react-hot-toast';
 import { options } from "./lib/hotToast"
 import NotFoundPage from './pages/NotFoundPage';
-import AuthCallbackPage from './pages/AuthCallbackPage';
+
 import { useAuthStore } from './store/useAuthStore';
 import { useEffect } from 'react';
 
@@ -17,7 +17,7 @@ function App() {
     <>
       <Routes>
       <Route path="/" element ={<HomePage/>}/>
-      <Route path="/api/auth/*" element={<AuthCallbackPage />} /> 
+
       <Route path="*" element={<NotFoundPage />} />
       </Routes>
 
