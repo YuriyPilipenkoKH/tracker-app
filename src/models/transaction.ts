@@ -12,7 +12,7 @@ export const TransactionSchema = (totalBalance :number) => z.object({
         .refine((val) => val.toLowerCase() !== 'some', {
             message: 'Some is not allowed'
           })    ,
-    price: z
+    ammount: z
         .number()
         .refine((val) => (val * -1) < totalBalance, {
             message: 'You haven`t got enough money'

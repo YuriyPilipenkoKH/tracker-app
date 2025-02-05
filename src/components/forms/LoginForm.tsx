@@ -28,6 +28,7 @@ const LoginForm = () => {
     } = formState
 
     const onSubmit = async (data: LoginSchemaType) => {
+      console.log(data);
       const response = await login(data)
       if(response) reset()
       }

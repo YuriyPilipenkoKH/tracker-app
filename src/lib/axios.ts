@@ -30,7 +30,7 @@ export async function getTotalBallance() {
  const transactions =  getTransactions().then(list => {
 
      const totalBallance = list.reduce((acc: number, transaction: Transaction) => {
-        return acc + (transaction.price || 0);
+        return acc + (transaction.ammount || 0);
       }, 0);
       return totalBallance
 })
