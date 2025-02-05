@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --background-color: #e5e5ab;
+  --background-color: #738260;
   --text-color: #212121;
   --card-color: #e3ecc0;
   --accent-color: #555;
@@ -40,4 +40,6 @@ body {
   color: var(--text-color);
   background: var(--background-color);
   font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
 }

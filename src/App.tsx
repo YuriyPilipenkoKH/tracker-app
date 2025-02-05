@@ -1,4 +1,3 @@
-import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import { Toaster } from 'react-hot-toast';
@@ -9,6 +8,7 @@ import { useAuthStore } from './store/useAuthStore';
 import { useEffect } from 'react';
 import { Loader } from 'lucide-react';
 import Navbar from './components/nav/Navbar';
+import DashboardPage from './pages/DashboardPage';
 
 function App() {
   const {authUser, checkAuth ,pending} = useAuthStore();
@@ -26,7 +26,7 @@ function App() {
       <Navbar/>
       <Routes>
       <Route path="/" element ={<HomePage/>}/>
-      <Route path="/dashboard" element ={<HomePage/>}/>
+      <Route path="/dashboard" element ={<DashboardPage/>}/>
 
       <Route path="*" element={<NotFoundPage />} />
       </Routes>
