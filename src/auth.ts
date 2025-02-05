@@ -2,16 +2,17 @@ import NextAuth, {  Session, User } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 import GoogleProvider from 'next-auth/providers/google';
 import GitHubProvider from 'next-auth/providers/github';
+import { getEnv } from './lib/dotEnv';
 
 export const authOptions = {
   providers: [
     GoogleProvider({
-      clientId: import.meta.env.GOOGLE_CLIENT_ID,
-      clientSecret: import.meta.env.GOOGLE_CLIENT_SECRET,
+      clientId: getEnv().GOOGLE_CLIENT_ID,
+      clientSecret: getEnv().GOOGLE_CLIENT_SECRET,
     }),
     GitHubProvider({
-      clientId: import.meta.env.GITHUB_CLIENT_ID,
-      clientSecret: import.meta.env.GITHUB_CLIENT_SECRET,
+      clientId: getEnv().GITHUB_CLIENT_ID,
+      clientSecret: getEnv().GITHUB_CLIENT_SECRET,
     }),
   ],
   secret: import.meta.env.NEXTAUTH_SECRET, // Optional secret for JWT
