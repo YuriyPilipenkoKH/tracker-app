@@ -17,6 +17,7 @@ function App() {
     <>
       <Routes>
       <Route path="/" element ={<HomePage/>}/>
+      <Route path="/dashboard" element ={<HomePage/>}/>
 
       <Route path="*" element={<NotFoundPage />} />
       </Routes>
