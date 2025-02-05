@@ -8,20 +8,20 @@ const AuthCallbackPage = () => {
   const navigate = useNavigate();
   const checkAuth = useAuthStore((state) => state.checkAuth);
 
-  useEffect(() => {
-    const handleAuth = async () => {
-      try {
-        await checkAuth(); // Refresh auth state
-        toast.success("Login successful!");
-        navigate("/"); // Redirect to homepage
-      } catch (error) {
-        toast.error("Authentication failed");
-        navigate("/"); // Redirect to homepage or login page
-      }
-    };
+  // useEffect(() => {
+  //   const handleAuth = async () => {
+  //     try {
+  //       await checkAuth(); // Refresh auth state
+  //       toast.success("Login successful!");
+  //       navigate("/"); // Redirect to homepage
+  //     } catch (error) {
+  //       toast.error("Authentication failed");
+  //       navigate("/"); // Redirect to homepage or login page
+  //     }
+  //   };
 
-    handleAuth();
-  }, [navigate, checkAuth]);
+  //   handleAuth();
+  // }, [navigate, checkAuth]);
 
   return <div>Loading...</div>; // Show a loading indicator
 };

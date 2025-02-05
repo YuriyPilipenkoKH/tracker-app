@@ -14,7 +14,7 @@ export const authOptions = {
       clientSecret: import.meta.env.GITHUB_CLIENT_SECRET,
     }),
   ],
-  secret: import.meta.env.SECRET, // Optional secret for JWT
+  secret: import.meta.env.NEXTAUTH_SECRET, // Optional secret for JWT
   callbacks: {
     async jwt({ token, user }: { token: JWT; user?: User }): Promise<JWT> {
       if (user) {

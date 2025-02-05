@@ -37,22 +37,50 @@ export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
     }
   },
   handleGoogleLogin: async () => {
-    set({ isLoggingIn: true });
     try {
+    //   const googleAuthUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${import.meta.env.VITE_GOOGLE_CLIENT_ID}
+    //   &redirect_uri=${import.meta.env.VITE_GOOGLE_REDIRECT_URI}
+    //   &response_type=code
+    //   &scope=profile email`;
+
+    // // Open Google OAuth in a new window
+    // const authWindow = window.open(googleAuthUrl, "_blank", "width=500,height=600");
+
+    // // Listen for authentication completion
+    // const interval = setInterval(() => {
+    //   if (authWindow?.closed) {
+    //     clearInterval(interval);
+    //     window.location.reload(); // Refresh to check session
+    //   }
+    // }, 1000);
+
+
+
       const response = await signIn("google", { redirect: false });
-      if (response?.error) {
-        console.error("Google sign-in error:", response.error);
+
+      if (!response || response.error) {
+        console.error("Google sign-in error:", response?.error);
         return;
       }
-      await axios.post("/auth/google", {
-        code: response?.url?.split("code=")[1]?.split("&")[0],
-      });
+
+      // Extract the code from response URL
+      const url = new URL(response.url!);
+      const code = url.searchParams.get("code");
+      console.log('url',url,'code',code);
+
+      if (!code) {
+        console.error("Authorization code missing from response.");
+        return;
+      }
+
+      // Send authorization code to backend
+      const { data } = await axios.post("/auth/google", { code });
+
+      console.log("Google Login successful:", data);
     } catch (error) {
       if (error instanceof AxiosError && error.response) {
         toast.error(error.response.data.message);
       }
-    } finally {
-      set({ isLoggingIn: false });
     }
   },
   
@@ -74,6 +102,7 @@ export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
 
 
 // handleGoogleLogin: async () => {
+
 //   set({ isLoggingIn: true });
 //   try {
 //       const response = await signIn("google", { redirect: false });
@@ -108,6 +137,27 @@ export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
 
 //     console.log("Login successful:", data);
 //     toast.success("Login successful!");
+//   } catch (error) {
+//     if (error instanceof AxiosError && error.response) {
+//       toast.error(error.response.data.message);
+//     }
+//   } finally {
+//     set({ isLoggingIn: false });
+//   }
+// },
+
+
+// handleGoogleLogin: async () => {
+//   set({ isLoggingIn: true });
+//   try {
+//     const response = await signIn("google", { redirect: false });
+//     if (response?.error) {
+//       console.error("Google sign-in error:", response.error);
+//       return;
+//     }
+//     await axios.post("/auth/google", {
+//       code: response?.url?.split("code=")[1]?.split("&")[0],
+//     });
 //   } catch (error) {
 //     if (error instanceof AxiosError && error.response) {
 //       toast.error(error.response.data.message);
