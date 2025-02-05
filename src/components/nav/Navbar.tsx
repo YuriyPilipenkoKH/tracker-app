@@ -1,10 +1,14 @@
 import { LogOut,  User ,} from "lucide-react";
 import { useAuthStore } from "../../store/useAuthStore";
 import { Link } from "react-router-dom";
+import ThemeChanger from "../button/ThemeChanger";
+import Logo from "./Logo";
+
 
 
 const Navbar = () => {
   const {  authUser, logOut } = useAuthStore();
+  //
   return (
     <header
       className=" border-b border-base-300  w-full " >
@@ -13,13 +17,14 @@ const Navbar = () => {
         <div className="flex items-center gap-8">
           <Link to="/" className="flex items-center gap-2.5 hover:opacity-80 transition-all">
             <div className="size-9 rounded-lg bg-primary/10 flex items-center justify-center">
-             
+            <Logo/>
             </div>
             <h1 className="text-lg font-bold">Tracker</h1>
           </Link>
         </div>
 
         <div className="flex items-center gap-2">
+       < ThemeChanger/>
           {/* <Link
             to={"/login"}
             className={`btn btn-sm gap-2 transition-colors `}
