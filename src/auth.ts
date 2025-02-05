@@ -7,15 +7,15 @@ import { getEnv } from './lib/dotEnv';
 export const authOptions = {
   providers: [
     GoogleProvider({
-      clientId: getEnv().GOOGLE_CLIENT_ID,
-      clientSecret: getEnv().GOOGLE_CLIENT_SECRET,
+      clientId: getEnv().VITE_GOOGLE_CLIENT_ID,
+      clientSecret: getEnv().VITE_GOOGLE_CLIENT_SECRET,
     }),
     GitHubProvider({
-      clientId: getEnv().GITHUB_CLIENT_ID,
-      clientSecret: getEnv().GITHUB_CLIENT_SECRET,
+      clientId: getEnv().VITE_GITHUB_CLIENT_ID,
+      clientSecret: getEnv().VITE_GITHUB_CLIENT_SECRET,
     }),
   ],
-  secret: import.meta.env.NEXTAUTH_SECRET, // Optional secret for JWT
+  secret: import.meta.env.VITE_NEXTAUTH_SECRET, // Optional secret for JWT
   callbacks: {
     async jwt({ token, user }: { token: JWT; user?: User }): Promise<JWT> {
       if (user) {
