@@ -8,3 +8,7 @@ export interface User {
   createdAt?:Date
   updatedAt?:Date
 }
+
+export interface img {
+  image: File
+}

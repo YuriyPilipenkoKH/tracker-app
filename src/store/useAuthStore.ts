@@ -1,5 +1,5 @@
 import {create} from 'zustand'
-import { User } from '../types/userTypes';
+import { img, User } from '../types/userTypes';
 import { axios } from '../lib/axios';
 import { AxiosError } from 'axios';
 import toast from 'react-hot-toast';
@@ -18,6 +18,7 @@ interface AuthStoreTypes {
   login: (data: LoginSchemaType) => Promise<boolean | undefined>
   checkAuth: () => Promise<void>
   logOut: () => Promise<void>
+  updateProfile: (data: img) => Promise<void>
 }
 
 export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
@@ -87,7 +88,7 @@ export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
       set({pending: false})
     }
   },
-  
+
   logOut: async () => {
     set({ pending: true });
     try {
@@ -104,6 +105,26 @@ export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
     }
     finally{
       set({pending: false})
+    }
+  },
+  updateProfile: async (data) => {
+    set({ pending: true });
+    try {
+      const formData = new FormData();
+      formData.append('file', data.image);
+      const response = await axios.put("/auth/upload-avatar", formData,{
+          headers: { "Content-Type": "multipart/form-data", },
+      });
+      if(response.data){
+      set({ authUser: response.data.user });
+      toast.success(response.data.message);
+    }
+    } catch (error: unknown) {
+      if (error instanceof AxiosError && error.response) {
+        toast.error(error.response.data.message);
+      }
+    } finally {
+      set({ pending: false });
     }
   },
 }))
