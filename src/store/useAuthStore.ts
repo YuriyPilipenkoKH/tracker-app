@@ -39,6 +39,7 @@ export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
       set({pending: false})
     }
   },
+
   signUp : async (data) => {
     set({ pending: true });
     try {
@@ -63,6 +64,7 @@ export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
     }
   
   },
+
   login : async (data) => {
     set({ pending: true });
   
@@ -85,6 +87,7 @@ export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
       set({pending: false})
     }
   },
+  
   logOut: async () => {
     set({ pending: true });
     try {
