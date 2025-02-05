@@ -60,13 +60,16 @@ export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
 
       if (!response || response.error) {
         console.error("Google sign-in error:", response?.error);
+        toast.error("Google sign-in failed");
         return;
       }
-
+      console.log("Google Sign-in Response:", response);
       // Extract the code from response URL
       const url = new URL(response.url!);
       const code = url.searchParams.get("code");
-      console.log('url',url,'code',code);
+      
+      console.log("Google Auth URL:", url);
+      console.log("Authorization Code:", code);
 
       if (!code) {
         console.error("Authorization code missing from response.");
