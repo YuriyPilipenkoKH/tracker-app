@@ -24,28 +24,29 @@ function App() {
     </div>
   )
   return (
-    <div>
+    <div className='min-h-screen flex flex-col gap-12 items-center '>
       <Navbar/>
-      <Routes>
-      <Route path="/" 
-          element ={authUser 
-            ? <HomePage/> 
-            : <Navigate to='/login'/>}/>
-       <Route path="/signup" 
-            element ={!authUser 
-            ? <SignUpPage/> 
-            : <Navigate to='/'/>}/>
-      <Route path="/login" 
-            element ={!authUser 
-            ? <LoginPage/> 
-            : <Navigate to='/dashboard'/>}/>
-      <Route path="dashboard" 
-            element ={authUser 
-            ? <DashboardPage/> 
-            : <Navigate to='/login'/>}/>
-
-      <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+      <div className='container mx-auto'> 
+        <Routes>
+        <Route path="/"
+            element ={authUser
+              ? <HomePage/>
+              : <Navigate to='/login'/>}/>
+         <Route path="/signup"
+              element ={!authUser
+              ? <SignUpPage/>
+              : <Navigate to='/'/>}/>
+        <Route path="/login"
+              element ={!authUser
+              ? <LoginPage/>
+              : <Navigate to='/dashboard'/>}/>
+        <Route path="dashboard"
+              element ={authUser
+              ? <DashboardPage/>
+              : <Navigate to='/login'/>}/>
+        <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </div>
 
       <Toaster
        position="top-center" 
