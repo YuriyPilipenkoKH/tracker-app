@@ -54,9 +54,11 @@ export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
     //   }
     // }, 1000);
 
+//=====================================
 
-
-      const response = await signIn("google", { redirect: false });
+      const response = await signIn("google", 
+        // { redirect: false }
+      );
 
       if (!response || response.error) {
         console.error("Google sign-in error:", response?.error);
@@ -67,7 +69,7 @@ export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
       // Extract the code from response URL
       const url = new URL(response.url!);
       const code = url.searchParams.get("code");
-      
+
       console.log("Google Auth URL:", url);
       console.log("Authorization Code:", code);
 

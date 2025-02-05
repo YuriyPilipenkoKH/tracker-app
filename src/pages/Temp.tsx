@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { getTransactions } from '../lib/axios'
+import { ProviderType } from 'next-auth/providers/index'
 
 const Temp = () => {
   const [transactions, setTransactions] = useState([])
   const [reRender, setReRender] = useState(false)
+
+  let x:ProviderType
 
   useEffect(() => {
     getTransactions().then(list => {

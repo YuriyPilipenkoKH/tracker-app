@@ -8,7 +8,9 @@ const SignInButton = (
 ) => {
  const {handleGoogleLogin} = useAuthStore()
 return(
-  <button className='flex w-full justify-center border rounded-lg p-2 space-x-2 items-center'
+  <button 
+  type="button"
+  className='flex w-full justify-center border rounded-lg p-2 space-x-2 items-center'
   onClick={handleGoogleLogin}>
     Google
   </button>
