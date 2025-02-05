@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import { Toaster } from 'react-hot-toast';
 import { options } from "./lib/hotToast"
@@ -9,6 +9,8 @@ import { useEffect } from 'react';
 import { Loader } from 'lucide-react';
 import Navbar from './components/nav/Navbar';
 import DashboardPage from './pages/DashboardPage';
+import SignUpPage from './pages/SignUpPage';
+import LoginPage from './pages/LoginPage';
 
 function App() {
   const {authUser, checkAuth ,pending} = useAuthStore();
@@ -25,8 +27,22 @@ function App() {
     <div>
       <Navbar/>
       <Routes>
-      <Route path="/" element ={<HomePage/>}/>
-      <Route path="/dashboard" element ={<DashboardPage/>}/>
+      <Route path="/" 
+          element ={authUser 
+            ? <HomePage/> 
+            : <Navigate to='/login'/>}/>
+       <Route path="/signup" 
+            element ={!authUser 
+            ? <SignUpPage/> 
+            : <Navigate to='/'/>}/>
+      <Route path="/login" 
+            element ={!authUser 
+            ? <LoginPage/> 
+            : <Navigate to='/dashboard'/>}/>
+      <Route path="dashboard" 
+            element ={authUser 
+            ? <DashboardPage/> 
+            : <Navigate to='/login'/>}/>
 
       <Route path="*" element={<NotFoundPage />} />
       </Routes>
