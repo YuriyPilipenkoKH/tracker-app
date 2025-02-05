@@ -8,6 +8,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import { useAuthStore } from './store/useAuthStore';
 import { useEffect } from 'react';
 import { Loader } from 'lucide-react';
+import Navbar from './components/nav/Navbar';
 
 function App() {
   const {authUser, checkAuth ,pending} = useAuthStore();
@@ -21,7 +22,8 @@ function App() {
     </div>
   )
   return (
-    <>
+    <div>
+      <Navbar/>
       <Routes>
       <Route path="/" element ={<HomePage/>}/>
       <Route path="/dashboard" element ={<HomePage/>}/>
@@ -33,7 +35,7 @@ function App() {
        position="top-center" 
       toastOptions={options} />
     
-    </>
+    </div>
   )
 }
 

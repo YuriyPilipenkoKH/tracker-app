@@ -1,4 +1,4 @@
-import SignInButton from "../components/button/SignInButton"
+
 import { useAuthStore } from "../store/useAuthStore"
 
 
@@ -9,7 +9,7 @@ console.log('authUser',authUser);
     <div className="h-screen bg-base-200">
         HomePage
 
-      <SignInButton/>
+
     </div>
   )
 }
