@@ -4,14 +4,16 @@ import { useAuthStore } from "../store/useAuthStore";
 
 const AuthCallbackPage = () => {
   const navigate = useNavigate();
-  const {authUser, checkAuth } = useAuthStore();
+  // const {authUser, checkAuth } = useAuthStore();
+
+
 
   useEffect(() => {
-    checkAuth().then(() => {
+    // checkAuth().then(() => {
 
-    if(authUser)  navigate("/dashboard"); // Redirect to home after login
-    });
-  }, [navigate, checkAuth]);
+    // if(authUser)  navigate("/dashboard"); // Redirect to home after login
+    // });
+  }, []);
 
   return <div>Authenticating...</div>;
 };

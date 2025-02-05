@@ -57,7 +57,7 @@ export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
 //=====================================
 
       const response = await signIn("google", 
-        // { redirect: false }
+        { redirect: false }
       );
 
       if (!response || response.error) {
