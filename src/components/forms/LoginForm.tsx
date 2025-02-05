@@ -17,6 +17,7 @@ const LoginForm = () => {
       formState,
       reset,
     } = useForm<LoginSchemaType >({
+      mode:'all',
     resolver: zodResolver(loginSchema), })
     const {
       errors,
@@ -28,12 +29,11 @@ const LoginForm = () => {
 
     const onSubmit = async (data: LoginSchemaType) => {
       const response = await login(data)
-
       if(response) reset()
       }
-    const handleInputChange =   (field: keyof LoginSchemaType) => {
+
+    const handleInputChange =   () => {
       if(logError) setLogError('')
-        console.log(field);
       }
 
   return (
@@ -46,7 +46,7 @@ const LoginForm = () => {
             <input 
               className={cn('grow input input-bordered' )}
               {...register('email', 
-              { onChange: handleInputChange })}
+              { onChange: handleInputChange } )}
               placeholder=	{( isSubmitting )? "Processing" : 'email'}
               />
           </label>
@@ -55,7 +55,7 @@ const LoginForm = () => {
             <input 
               className={cn('grow input input-bordered' )}
               {...register('password', 
-              { onChange: handleInputChange })}
+              { onChange: handleInputChange } )}
               placeholder=	{( isSubmitting )? "Processing" : "•••••"}
               type = {show ? 'text' : 'password' }
               />

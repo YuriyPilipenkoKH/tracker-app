@@ -17,6 +17,7 @@ export const SignUpForm = () => {
     formState,
     reset,
   } = useForm<signUpSchemaType >({
+    mode:'all',
     resolver: zodResolver(signUpSchema), })
   const {
     errors,

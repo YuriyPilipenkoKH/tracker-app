@@ -22,9 +22,9 @@ export const signUpSchema = z.object({
   password: z
   .string()
   .trim()
-  .min(5)
-  .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d$#&]*$/, {
-    message: 'include numbers & capital letters',
+  .min(4)
+  .regex(/^(?=.*[A-Za-z])(?=.*\d).+$/, {
+    message: 'include numbers ',
   }),
 })
 
