@@ -24,8 +24,8 @@ interface AuthStoreTypes {
 }
 
 export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
-  userId: '',
-  authUser: null,
+  userId: localStorage.getItem("userId") || '',
+  authUser:  null,
   pending: false,
 
   checkAuth: async() =>{
