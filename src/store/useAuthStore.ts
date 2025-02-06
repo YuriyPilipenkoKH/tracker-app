@@ -104,6 +104,9 @@ export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
       const response = await axios.post('/auth/logout')
       if (response.status === 200) {
         set({authUser: null})
+        set({userId: ''})
+        localStorage.setItem("tracker-userId",'')
+        wait(500)
         toast.success(`Logout successful !`)
       }
 
