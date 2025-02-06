@@ -30,7 +30,7 @@ function App() {
       <div className='container mx-auto'> 
         <Routes>
         <Route path="/"
-            element ={authUser
+            element ={userId
               ? <HomePage/>
               : <Navigate to='/login'/>}/>
          <Route path="/signup"
@@ -42,11 +42,11 @@ function App() {
               ? <LoginPage/>
               : <Navigate to='/dashboard'/>}/>
         <Route path="dashboard"
-              element ={authUser && userId
+              element ={ userId
               ? <DashboardPage/>
               : <Navigate to='/login'/>}/>
         <Route path="/profile"
-          element={ authUser  && userId
+          element={ userId
               ? <ProfilePage /> 
               : <Navigate to='/login' />}
           />
