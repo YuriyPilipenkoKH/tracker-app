@@ -4,7 +4,7 @@ import { useAuthStore } from "../store/useAuthStore"
 
 const HomePage = () => {
 const {authUser} = useAuthStore()
-console.log('authUser',authUser);
+// console.log('authUser',authUser);
   return (
     <div className=" grid transition-all duration-800 ease-in-out">
     <div className="flex flex-col justify-center items-center ">

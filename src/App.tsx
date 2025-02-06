@@ -46,7 +46,7 @@ function App() {
               ? <DashboardPage/>
               : <Navigate to='/login'/>}/>
          <Route path="/profile" 
-            element ={!authUser 
+            element ={authUser 
             ? <ProfilePage/> 
             : <Navigate to='/login'/>}/>
         <Route path="*" element={<NotFoundPage />} />
