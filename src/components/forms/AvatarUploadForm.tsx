@@ -5,7 +5,7 @@ import { Camera, } from "lucide-react";
 import { cn } from "../../lib/cn";
 
 
-const AvatarUploadFormCustom = () => {
+const AvatarUploadForm = () => {
     const { authUser, pending, updateProfile } = useAuthStore();
     const [selectedImg, setSelectedImg] =  useState<string >('');
     const [file, setFile] = useState<File | null>(null); 
@@ -58,4 +58,4 @@ const AvatarUploadFormCustom = () => {
   )
 }
 
-export default AvatarUploadFormCustom
+export default AvatarUploadForm
