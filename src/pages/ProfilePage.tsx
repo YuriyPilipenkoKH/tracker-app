@@ -1,10 +1,12 @@
 import AvatarUploadFormCustom from "../components/forms/AvatarUploadForm.custom";
 import ProfileForm from "../components/forms/ProfileForm";
 import AccountInfo from "../components/profile/AccountInfo.orig";
+import { useAuthStore } from "../store/useAuthStore";
 
 
 const ProfilePage = () => {
-
+const {authUser} = useAuthStore()
+console.log('authUser',authUser);
 
   return (
      <div className="grid pt-20 transition-all duration-800 ease-in-out">
