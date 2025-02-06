@@ -14,7 +14,7 @@ import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
 
 function App() {
-  const {authUser, checkAuth ,pending} = useAuthStore();
+  const {authUser, userId, checkAuth ,pending} = useAuthStore();
   useEffect(() => {
     checkAuth(); // ✅ Safe to call here inside a React component
     console.log('authUser',authUser)
@@ -42,11 +42,11 @@ function App() {
               ? <LoginPage/>
               : <Navigate to='/dashboard'/>}/>
         <Route path="dashboard"
-              element ={authUser
+              element ={authUser && userId
               ? <DashboardPage/>
               : <Navigate to='/login'/>}/>
         <Route path="/profile"
-          element={ authUser 
+          element={ authUser  && userId
               ? <ProfilePage /> 
               : <Navigate to='/login' />}
           />
