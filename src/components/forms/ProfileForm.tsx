@@ -1,4 +1,3 @@
-
 import { useForm } from 'react-hook-form';
 import { useAuthStore } from '../../store/useAuthStore'
 import {  Mail, User } from "lucide-react";
@@ -7,21 +6,27 @@ import { profileSchema, profileSchemaType } from '../../models/profileSchema';
 
 const ProfileForm = () => {
 
-  const { authUser, } = useAuthStore()
+  const { authUser, updateProfile} = useAuthStore()
      const {
-        // register, 
-        // handleSubmit,
-        // reset,
+        register, 
+        handleSubmit,
+        reset,
         formState = {errors, isValid, isSubmitting},
       } = useForm<profileSchemaType >({
         mode:'all',
         defaultValues: {
-          name: '',
-          email: '',
-          phone: '',
-          city: '' 
+          name: authUser?.name,
+          email: authUser?.email,
+          phone: authUser?.phone,
+          city: authUser?.city 
         },
       resolver: zodResolver(profileSchema), })
+
+    const onSubmit = async (data: profileSchemaType) => {
+      console.log(data);
+      const response = await updateProfile(data)
+      if(response) reset()
+      }
   return (
     <div className="space-y-6 ">
     <div className="space-y-1.5">
@@ -39,6 +44,10 @@ const ProfileForm = () => {
       </div>
       <p className="px-4 py-2.5 bg-base-200 rounded-lg border">{authUser?.email}</p>
     </div>
+
+    <form >
+
+    </form>
   </div>
   )
 }

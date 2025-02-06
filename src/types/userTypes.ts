@@ -5,6 +5,8 @@ export interface User {
   password?: string
   image: string
   role: string
+  phone?: string
+  city?: string
   createdAt?:Date
   updatedAt?:Date
 }

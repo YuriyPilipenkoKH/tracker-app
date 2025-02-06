@@ -7,6 +7,7 @@ import capitalize from '../lib/capitalize';
 import { wait } from '../lib/wait';
 import { signUpSchemaType } from '../models/signUpSchema';
 import { LoginSchemaType } from '../models/loginSchema';
+import { profileSchemaType } from '../models/profileSchema';
 // import Cookies from "js-cookie"; 
 // import { dummyUser } from '../data/userProps';
 
@@ -19,7 +20,7 @@ interface AuthStoreTypes {
   login: (data: LoginSchemaType) => Promise<boolean | undefined>
   checkAuth: () => Promise<void>
   logOut: () => Promise<void>
-  updateProfile: (data: profile) => Promise<void>
+  updateProfile: (data: profileSchemaType) => Promise<boolean | undefined>
   uploadAvatar: (data: img) => Promise<void>
 }
 
@@ -121,6 +122,23 @@ export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
   },
   updateProfile: async (data) => {
 
+    set({ pending: true });
+      try {
+      const response = await axios.post('/auth/', data)
+      if (response.data) {
+
+
+        await wait(1000)
+        toast.success(`Hello, ${capitalize(response.data.user.name)} !`)
+
+      return true
+    } 
+    } catch (error: unknown) {
+      if (error instanceof AxiosError && error.response) {
+        toast.error(error.response.data.message);
+      }
+      return false
+    }
   },
   uploadAvatar: async (data) => {
     set({ pending: true });
