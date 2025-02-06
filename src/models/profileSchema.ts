@@ -5,6 +5,8 @@ import z from 'zod'
 export const profileSchema = primarySchema.pick({
   name: true,
   email: true,
+  phone: true,
+  city: true,
 });
 
 // Infer the type of loginSchema

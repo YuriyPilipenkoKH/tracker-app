@@ -26,7 +26,16 @@ export const primarySchema = z.object({
   .regex(/^(?=.*[A-Za-z])(?=.*\d).+$/, {
     message: 'include numbers ',
   }),
-})
+  phone: z
+  .string()
+  .trim()
+  .regex(/^0\d{9}$/, {
+    message: 'orrect format: 0985551204 ',
+  }),
+  city: z
+  .string()
+  .trim()
+ })
 
 export type primarySchemaType =  z.infer<typeof primarySchema>
 
