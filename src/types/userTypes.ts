@@ -15,6 +15,10 @@ export interface img {
   image: File
 }
 
+export interface loginResponse {
+  success: boolean
+  message: string
+}
 
 export interface profile {
   name: string

@@ -1,5 +1,5 @@
 import {create} from 'zustand'
-import { img, profile, User } from '../types/userTypes';
+import { img, loginResponse, profile, User } from '../types/userTypes';
 import { axios } from '../lib/axios';
 import { AxiosError } from 'axios';
 import toast from 'react-hot-toast';
@@ -17,7 +17,7 @@ interface AuthStoreTypes {
   pending: boolean
 
   signUp: (data: signUpSchemaType) => Promise<boolean | undefined>
-  login: (data: LoginSchemaType) => Promise<boolean | undefined>
+  login: (data: LoginSchemaType) => Promise<loginResponse | undefined>
   checkAuth: () => Promise<void>
   logOut: () => Promise<void>
   updateProfile: (data: profileSchemaType) => Promise<boolean | undefined>
@@ -86,13 +86,15 @@ export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
         await wait(1000)
         toast.success(`Hello, ${capitalize(response.data.user.name)} !`)
 
-      return true
+      return {success: true, message: response.data?.message}
     } 
     } catch (error: unknown) {
       if (error instanceof AxiosError && error.response) {
-        toast.error(error.response.data.message);
+
+        console.log(error.response.data.message);
+        return { success: false, message: error.response.data.message };
       }
-      return false
+      return { success: false, message: "An unexpected error occurred" };
     }
     finally{
       set({pending: false})
