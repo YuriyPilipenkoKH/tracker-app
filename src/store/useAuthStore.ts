@@ -11,6 +11,7 @@ import { LoginSchemaType } from '../models/loginSchema';
 // import { dummyUser } from '../data/userProps';
 
 interface AuthStoreTypes {
+  userId: string
   authUser: User | null 
   pending: boolean
 
@@ -23,16 +24,12 @@ interface AuthStoreTypes {
 }
 
 export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
+  userId: '',
   authUser: null,
   pending: false,
 
   checkAuth: async() =>{
     set({ pending: true });
-    // const token = Cookies.get("tracker-token"); // Read token from cookies
-    // if (token) {
-    //   set({authUser: dummyUser})
-    //   wait(500)
-    // }
 
     try {
       const response = await axios.get('/auth/check')
@@ -54,6 +51,9 @@ export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
       const response = await axios.post('/auth/signup', data)
       if (response.data) {
         set({authUser: response.data.user})
+        set({userId: response.data.user._id})
+        localStorage.setItem("tracker-userId",response.data.user._id)
+
         toast.success('Account created!')
         await wait(1000) 
         toast.success(`Welcome, ${capitalize(response.data.user.name)} !`)
@@ -75,11 +75,13 @@ export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
 
   login : async (data) => {
     set({ pending: true });
-  
-    try {
+      try {
       const response = await axios.post('/auth/login', data)
       if (response.data) {
         set({authUser: response.data.user})
+        set({userId: response.data.user._id})
+        localStorage.setItem("tracker-userId",response.data.user._id)
+
         await wait(1000)
         toast.success(`Hello, ${capitalize(response.data.user.name)} !`)
 
@@ -140,3 +142,9 @@ export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
 }))
 
 
+    //
+    // const token = Cookies.get("tracker-token"); // Read token from cookies
+    // if (token) {
+    //   set({authUser: dummyUser})
+    //   wait(500)
+    // }
