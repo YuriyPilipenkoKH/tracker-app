@@ -3,26 +3,43 @@ import { useAuthStore } from "../../store/useAuthStore";
 import toast from "react-hot-toast";
 import { Camera, } from "lucide-react";
 import { cn } from "../../lib/cn";
+import { useForm } from "react-hook-form";
+import { avatarUploadSchema, AvatarUploadSchemaType } from "../../models/avatarUploadSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 
 const AvatarUploadForm = () => {
     const { authUser, pending, updateProfile } = useAuthStore();
-    const [selectedImg, setSelectedImg] =  useState<string >('');
-    const [file, setFile] = useState<File | null>(null); 
+    const [selectedImg, setSelectedImg] =  useState<string >(authUser?.image || "/avatar.png");
 
+    const {
+      handleSubmit,
+      setValue,
+      formState: { errors, isSubmitting },
+    } = useForm<AvatarUploadSchemaType>({
+      resolver: zodResolver(avatarUploadSchema),
+    });
+    const onSubmit = async (data: AvatarUploadSchemaType) => {
+      try {
+        await updateProfile({ image: data.image });
+        toast.success("Profile image updated successfully!");
+      } catch (error) {
+        toast.error("Failed to upload image.");
+      }
+    };
 
     const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0]; // Use optional chaining to handle null or undefined
       if (!file) return;
-      if (file.size > 5 * 1024 * 1024) { // 5MB
-        toast.error("File size exceeds the limit of 5MB.");
-        return;
-      }
-      setFile(file)
-      setSelectedImg(URL.createObjectURL(file));
 
-      await updateProfile({ image: file });
+      const validation = avatarUploadSchema.safeParse({ image: file });
+      if (!validation.success) {
+        toast.error(validation.error.errors[0].message);
+        return;
     }
+    setSelectedImg(URL.createObjectURL(file));
+    setValue("image", file, { shouldValidate: true });
+  };
 
   return (
 
@@ -33,6 +50,7 @@ const AvatarUploadForm = () => {
           className="size-32 rounded-full object-cover border-4 "
         />
       <form 
+      onSubmit={handleSubmit(onSubmit)}
       className="relative">
         <label
           htmlFor="avatar-upload"
@@ -47,10 +65,13 @@ const AvatarUploadForm = () => {
             className="hidden"
             accept=".png, .jpg, .jpeg, .webp"
             onChange={handleImageUpload}
-            disabled={pending}
+            disabled={pending || isSubmitting}
           />
         </label>
+        <button type="submit" className="hidden"></button>
       </form>
+      {errors.image && <p className="text-sm text-red-500">{errors.image.message}</p>}
+
       <p className="text-sm text-zinc-400">
         {pending ? "Uploading..." : "Click the camera icon to update your photo"}
       </p>
