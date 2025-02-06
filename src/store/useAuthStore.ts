@@ -28,7 +28,7 @@ export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
   checkAuth: async() =>{
     set({ pending: true });
     try {
-      const response = await axios.get('/auth/session')
+      const response = await axios.get('/auth/check')
       // console.log('response',response.data);
       set({authUser: response.data})
 

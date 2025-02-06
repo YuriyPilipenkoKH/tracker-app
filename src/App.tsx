@@ -11,6 +11,7 @@ import Navbar from './components/nav/Navbar';
 import DashboardPage from './pages/DashboardPage';
 import SignUpPage from './pages/SignUpPage';
 import LoginPage from './pages/LoginPage';
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
   const {authUser, checkAuth ,pending} = useAuthStore();
@@ -44,6 +45,10 @@ function App() {
               element ={authUser
               ? <DashboardPage/>
               : <Navigate to='/login'/>}/>
+         <Route path="/profile" 
+            element ={!authUser 
+            ? <ProfilePage/> 
+            : <Navigate to='/login'/>}/>
         <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>

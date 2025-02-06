@@ -11,7 +11,7 @@ const Navbar = () => {
   //
   return (
     <header
-      className=" border-b border-base-300  w-full " >
+      className=" border-b border-base-300  w-full transition-all duration-800 ease-in-out" >
     <div className="container mx-auto px-4 h-16">
       <div className="flex items-center justify-between h-full">
         <div className="flex items-center gap-8">
