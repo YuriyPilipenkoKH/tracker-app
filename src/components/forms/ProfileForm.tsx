@@ -1,10 +1,27 @@
 
+import { useForm } from 'react-hook-form';
 import { useAuthStore } from '../../store/useAuthStore'
 import {  Mail, User } from "lucide-react";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { profileSchema, profileSchemaType } from '../../models/profileSchema';
 
 const ProfileForm = () => {
-  
+
   const { authUser, } = useAuthStore()
+     const {
+        // register, 
+        // handleSubmit,
+        // reset,
+        formState = {errors, isValid, isSubmitting},
+      } = useForm<profileSchemaType >({
+        mode:'all',
+        defaultValues: {
+          name: '',
+          email: '',
+          phone: '',
+          city: '' 
+        },
+      resolver: zodResolver(profileSchema), })
   return (
     <div className="space-y-6 ">
     <div className="space-y-1.5">

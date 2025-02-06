@@ -14,8 +14,8 @@ const LoginForm = () => {
    const {
       register, 
       handleSubmit,
-      formState,
       reset,
+      formState,
     } = useForm<LoginSchemaType >({
       mode:'all',
     resolver: zodResolver(loginSchema), })
