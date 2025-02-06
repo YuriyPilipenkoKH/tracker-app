@@ -3,6 +3,7 @@ import { useAuthStore } from '../../store/useAuthStore'
 import {  Mail, User } from "lucide-react";
 
 const ProfileForm = () => {
+  
   const { authUser, } = useAuthStore()
   return (
     <div className="space-y-6 ">
