@@ -46,9 +46,7 @@ function App() {
               ? <DashboardPage/>
               : <Navigate to='/login'/>}/>
         <Route path="/profile"
-          element={pending 
-            ? <div className="flex items-center justify-center h-screen"><Loader className="size-10 animate-spin"/></div>
-            : authUser 
+          element={ authUser 
               ? <ProfilePage /> 
               : <Navigate to='/login' />}
           />

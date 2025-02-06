@@ -7,8 +7,8 @@ import capitalize from '../lib/capitalize';
 import { wait } from '../lib/wait';
 import { signUpSchemaType } from '../models/signUpSchema';
 import { LoginSchemaType } from '../models/loginSchema';
-import Cookies from "js-cookie"; 
-import { dummyUser } from '../data/userProps';
+// import Cookies from "js-cookie"; 
+// import { dummyUser } from '../data/userProps';
 
 interface AuthStoreTypes {
   authUser: User | null 
@@ -27,14 +27,15 @@ export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
   pending: false,
 
   checkAuth: async() =>{
-    const token = Cookies.get("token"); // Read token from cookies
-    if (token) {
-      // Optimistically set a dummy user (optional, for better UX)
-      set({  authUser: dummyUser })
-      set({  pending: true })
+    set({ pending: true });
+    // const token = Cookies.get("tracker-token"); // Read token from cookies
+    // if (token) {
+    //   set({authUser: dummyUser})
+    //   wait(500)
+    // }
+
     try {
       const response = await axios.get('/auth/check')
-      // console.log('response',response.data);
       set({authUser: response.data})
 
     } catch (error) {
@@ -44,7 +45,7 @@ export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
     finally{
       set({pending: false})
     }
-  }
+  
   },
 
   signUp : async (data) => {
