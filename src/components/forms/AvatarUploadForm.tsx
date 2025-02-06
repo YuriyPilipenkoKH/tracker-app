@@ -9,7 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 
 const AvatarUploadForm = () => {
-    const { authUser, pending, updateProfile } = useAuthStore();
+    const { authUser, pending, uploadAvatar } = useAuthStore();
     const [selectedImg, setSelectedImg] =  useState<string >(authUser?.image || "/avatar.png");
 
     const {
@@ -19,13 +19,9 @@ const AvatarUploadForm = () => {
     } = useForm<AvatarUploadSchemaType>({
       resolver: zodResolver(avatarUploadSchema),
     });
+
     const onSubmit = async (data: AvatarUploadSchemaType) => {
-      try {
-        await updateProfile({ image: data.image });
-        toast.success("Profile image updated successfully!");
-      } catch (error) {
-        toast.error("Failed to upload image.");
-      }
+           await uploadAvatar({ image: data.image });
     };
 
     const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,13 +35,17 @@ const AvatarUploadForm = () => {
     }
     setSelectedImg(URL.createObjectURL(file));
     setValue("image", file, { shouldValidate: true });
+      // ✅ Manually trigger form submission after file selection
+      
+      
+      handleSubmit(onSubmit)();
   };
 
   return (
 
     <div  className="flex flex-col items-center gap-4">
         <img
-          src={selectedImg || authUser?.image || "/avatar.png"}
+          src={selectedImg}
           alt="Profile image"
           className="size-32 rounded-full object-cover border-4 "
         />

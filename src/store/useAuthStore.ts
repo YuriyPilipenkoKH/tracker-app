@@ -1,5 +1,5 @@
 import {create} from 'zustand'
-import { img, User } from '../types/userTypes';
+import { img, profile, User } from '../types/userTypes';
 import { axios } from '../lib/axios';
 import { AxiosError } from 'axios';
 import toast from 'react-hot-toast';
@@ -7,8 +7,8 @@ import capitalize from '../lib/capitalize';
 import { wait } from '../lib/wait';
 import { signUpSchemaType } from '../models/signUpSchema';
 import { LoginSchemaType } from '../models/loginSchema';
-
-
+import Cookies from "js-cookie"; 
+import { dummyUser } from '../data/userProps';
 
 interface AuthStoreTypes {
   authUser: User | null 
@@ -18,7 +18,8 @@ interface AuthStoreTypes {
   login: (data: LoginSchemaType) => Promise<boolean | undefined>
   checkAuth: () => Promise<void>
   logOut: () => Promise<void>
-  updateProfile: (data: img) => Promise<void>
+  updateProfile: (data: profile) => Promise<void>
+  uploadAvatar: (data: img) => Promise<void>
 }
 
 export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
@@ -26,7 +27,11 @@ export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
   pending: false,
 
   checkAuth: async() =>{
-    set({ pending: true });
+    const token = Cookies.get("token"); // Read token from cookies
+    if (token) {
+      // Optimistically set a dummy user (optional, for better UX)
+      set({  authUser: dummyUser })
+      set({  pending: true })
     try {
       const response = await axios.get('/auth/check')
       // console.log('response',response.data);
@@ -39,6 +44,7 @@ export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
     finally{
       set({pending: false})
     }
+  }
   },
 
   signUp : async (data) => {
@@ -108,6 +114,9 @@ export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
     }
   },
   updateProfile: async (data) => {
+
+  },
+  uploadAvatar: async (data) => {
     set({ pending: true });
     try {
       const formData = new FormData();
@@ -126,7 +135,7 @@ export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
     } finally {
       set({ pending: false });
     }
-  },
+  }
 }))
 
 
