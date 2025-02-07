@@ -8,8 +8,8 @@ import { Eye, EyeOff} from "lucide-react";
 
 
 const LoginForm = () => {
-  const {login} = useAuthStore()
-  const [logError, setLogError] = useState<string>('')
+  const {login, logError, clearLogError} = useAuthStore()
+  // const [logError, setLogError] = useState<string>('')
   const [show, setShow] = useState<boolean>(false)
   console.log('logError',logError);
    const {
@@ -30,23 +30,23 @@ const LoginForm = () => {
 
     const onSubmit = async (data: LoginSchemaType) => {
       console.log(data);
-      const response = await login(data)
+      await login(data)
       // if(response?.success) reset()
-      if(!response?.success && response?.message) setLogError(response?.message)
+      // if(!response?.success && response?.message) setLogError(response?.message)
       }
 
     const handleInputChange =   () => {
-      if(logError) setLogError('')
+      clearLogError()
       }
 
-    useEffect(() => {
-      console.log("LoginForm mounted");
-      return () => console.log("LoginForm unmounted");
-    }, []);
+    // useEffect(() => {
+    //   console.log("LoginForm mounted");
+    //   return () => console.log("LoginForm unmounted");
+    // }, []);
 
   return (
      <form 
-      // onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(onSubmit)}
         className='flex flex-col gap-3 w-full p-5'
         autoComplete="off"
         noValidate>
@@ -84,8 +84,6 @@ const LoginForm = () => {
           {logError && <div  className='text-purple-900'>{logError}</div>}
           <button
             className='AuthFormSubmitBtn mt-auto btn btn-active btn-primary w-full'
-            type='button'
-            onClick={handleSubmit(onSubmit)}
             disabled={isSubmitting || !isDirty || !isValid || !!logError}
                 >
             { isLoading  ? "Sending.." :  "Log In.." }

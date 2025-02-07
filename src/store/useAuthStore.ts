@@ -21,6 +21,7 @@ interface AuthStoreTypes {
   logOut: () => Promise<void>
   updateProfile: (data: profileSchemaType) => Promise<boolean | undefined>
   uploadAvatar: (data: img) => Promise<void>
+  clearLogError: () => void
 }
 
 export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
@@ -78,11 +79,11 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
         set({authUser: response.data.user})
         set({userId: response.data.user._id})
         localStorage.setItem("tracker-userId",response.data.user._id)
+        set({logError: ''})
 
         await wait(1000)
         toast.success(`Hello, ${capitalize(response.data.user.name)} !`)
 
-        set({logError: ''})
 
       return {success: true, message: response.data?.message}
     } 
@@ -156,6 +157,9 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
     } finally {  set({ pending: false })  }
   },
 
+  clearLogError: () => {
+    set({logError: ''})
+  }
 }))
 
 
