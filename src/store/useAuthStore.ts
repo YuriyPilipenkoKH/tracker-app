@@ -121,7 +121,7 @@ export const useAuthStore = create<AuthStoreTypes>((set) => ({
       if (response.data) {
         set({ authUser: response.data.user });
 
-        await wait(1000)
+        await wait(1100)
         toast.success(`updated, ${capitalize(response.data.user.name)} info !`)
 
       return true

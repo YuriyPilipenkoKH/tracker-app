@@ -1,10 +1,11 @@
 import { useForm } from 'react-hook-form';
 import { useAuthStore } from '../../store/useAuthStore'
-import {  Building2, Mail, Phone, SquarePen, User } from "lucide-react";
+import {  Building2, Mail, Phone, SquarePen, SquareX, User } from "lucide-react";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { profileSchema, profileSchemaType } from '../../models/profileSchema';
 import { cn } from '../../lib/cn';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { wait } from '../../lib/wait';
 
 const ProfileForm = () => {
 
@@ -35,13 +36,23 @@ const ProfileForm = () => {
   const onSubmit = async (data: profileSchemaType) => {
     console.log(data);
     const response = await updateProfile(data)
-    if(response) reset({
-      name: authUser?.name,
-      email: authUser?.email,
-      phone: authUser?.phone,
-      city: authUser?.city 
-    })
+    setAnable(false)
+    if(response){
+      // wait(1000)
+      resetToDefault()
     }
+    }
+    const resetToDefault = () => {
+      reset({
+        name: authUser?.name || '',
+        email: authUser?.email || '',
+        phone: authUser?.phone || '',
+        city: authUser?.city || '',
+      });
+    }
+    useEffect(() => {
+      if (!anable)  resetToDefault() 
+    }, [anable]);
 
   const handleInputChange =   () => {
     if(logError) setLogError('')
@@ -57,7 +68,9 @@ const ProfileForm = () => {
           type='button' 
           className='absolute btn btn-ghost right-0 top-[-8px]'
           onClick={()=>setAnable(!anable)}>
-            <SquarePen className="w-4 h-4" />
+           { anable
+           ? <SquareX className="w-4 h-4" />
+           : <SquarePen  className="w-4 h-4" />}
           </button>
 
         <label className={cn('formLabel  flex flex-col  gap-1')}>
