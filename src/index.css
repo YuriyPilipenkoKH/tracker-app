@@ -16,16 +16,9 @@
   --vivid-green: #7CE3B3;
   --orange: #FB6D3A;
   --dark: #7772;
-
-
 }
 
 /* root[data-theme='light'] {
-  --background-color: #e5e5ab;
-  --text-color: #212121;
-  --card-color: #e3ecc0;
-  --accent-color: #888;
-  --hover: #3333f5;
 } */
 
 :root[data-theme='dark'] {
