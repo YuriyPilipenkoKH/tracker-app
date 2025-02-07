@@ -35,7 +35,12 @@ const ProfileForm = () => {
   const onSubmit = async (data: profileSchemaType) => {
     console.log(data);
     const response = await updateProfile(data)
-    if(response) reset()
+    if(response) reset({
+      name: authUser?.name,
+      email: authUser?.email,
+      phone: authUser?.phone,
+      city: authUser?.city 
+    })
     }
 
   const handleInputChange =   () => {
