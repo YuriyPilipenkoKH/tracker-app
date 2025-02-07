@@ -1,5 +1,5 @@
 import {create} from 'zustand'
-import { img, loginResponse, profile, User } from '../types/userTypes';
+import { img, loginResponse, User } from '../types/userTypes';
 import { axios } from '../lib/axios';
 import { AxiosError } from 'axios';
 import toast from 'react-hot-toast';
@@ -8,23 +8,21 @@ import { wait } from '../lib/wait';
 import { signUpSchemaType } from '../models/signUpSchema';
 import { LoginSchemaType } from '../models/loginSchema';
 import { profileSchemaType } from '../models/profileSchema';
-// import Cookies from "js-cookie"; 
-// import { dummyUser } from '../data/userProps';
 
 interface AuthStoreTypes {
   userId: string
   authUser: User | null 
   pending: boolean
 
+  checkAuth: () => Promise<void>
   signUp: (data: signUpSchemaType) => Promise<boolean | undefined>
   login: (data: LoginSchemaType) => Promise<loginResponse | undefined>
-  checkAuth: () => Promise<void>
   logOut: () => Promise<void>
   updateProfile: (data: profileSchemaType) => Promise<boolean | undefined>
   uploadAvatar: (data: img) => Promise<void>
 }
 
-export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
+export const useAuthStore = create<AuthStoreTypes>((set) => ({
   userId: localStorage.getItem("tracker-userId") || '',
   authUser:  null,
   pending: false,
@@ -122,6 +120,7 @@ export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
       set({pending: false})
     }
   },
+
   updateProfile: async (data) => {
 
     set({ pending: true });
@@ -142,6 +141,7 @@ export const useAuthStore = create<AuthStoreTypes>((set,get) => ({
       return false
     }
   },
+  
   uploadAvatar: async (data) => {
     set({ pending: true });
     try {

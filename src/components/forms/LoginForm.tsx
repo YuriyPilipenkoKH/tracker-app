@@ -11,6 +11,7 @@ const LoginForm = () => {
   const {login} = useAuthStore()
   const [logError, setLogError] = useState<string>('')
   const [show, setShow] = useState<boolean>(false)
+  console.log('logError',logError);
    const {
       register, 
       handleSubmit,
@@ -30,7 +31,8 @@ const LoginForm = () => {
     const onSubmit = async (data: LoginSchemaType) => {
       console.log(data);
       const response = await login(data)
-      if(response) reset()
+      if(response?.success) reset()
+      if(!response?.success && response?.message) setLogError(response?.message)
       }
 
     const handleInputChange =   () => {
@@ -73,6 +75,7 @@ const LoginForm = () => {
         </button>
           </label>
           {errors.password && <div className='text-purple-900'>{errors.password.message}</div>}
+          {logError && <div  className='text-purple-900'>{logError}</div>}
           <button
             className='AuthFormSubmitBtn mt-auto btn btn-active btn-primary w-full'
             type='submit'
