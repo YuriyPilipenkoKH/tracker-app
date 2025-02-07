@@ -116,21 +116,19 @@ export const useAuthStore = create<AuthStoreTypes>((set) => ({
         toast.error(error.response.data.message);
       }
     }
-    finally{
-      set({pending: false})
-    }
+    finally{set({pending: false})}
   },
 
   updateProfile: async (data) => {
 
     set({ pending: true });
       try {
-      const response = await axios.post('/auth/', data)
+      const response = await axios.patch('/auth/update-profile', data)
       if (response.data) {
 
 
         await wait(1000)
-        toast.success(`Hello, ${capitalize(response.data.user.name)} !`)
+        toast.success(`updated, ${capitalize(response.data.user.name)} info !`)
 
       return true
     } 
@@ -140,6 +138,7 @@ export const useAuthStore = create<AuthStoreTypes>((set) => ({
       }
       return false
     }
+    finally { set({ pending: false }) }
   },
   
   uploadAvatar: async (data) => {
