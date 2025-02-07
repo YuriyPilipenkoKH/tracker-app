@@ -119,7 +119,7 @@ export const useAuthStore = create<AuthStoreTypes>((set) => ({
       try {
       const response = await axios.patch('/auth/update-profile', data)
       if (response.data) {
-
+        set({ authUser: response.data.user });
 
         await wait(1000)
         toast.success(`updated, ${capitalize(response.data.user.name)} info !`)
