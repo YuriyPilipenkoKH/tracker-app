@@ -3,6 +3,7 @@ import { useAuthStore } from "../../store/useAuthStore";
 import { Link } from "react-router-dom";
 import ThemeChanger from "../button/ThemeChanger";
 import Logo from "./Logo";
+import UserButton from "./UserButton";
 
 
 
@@ -28,20 +29,10 @@ const Navbar = () => {
 
         <div className="flex items-center gap-2">
        < ThemeChanger/>
-          {/* <Link
-            to={"/login"}
-            className={`btn btn-sm gap-2 transition-colors `}
-          >
-         
-            <span className="hidden sm:inline">Login</span>
-          </Link> */}
 
           {authUser && (
-            <>
-              <Link to={"/profile"} className={`btn btn-sm gap-2`}>
-                <User className="size-5" />
-                <span className="hidden sm:inline">Profile</span>
-              </Link>
+            <div className="flex gap-4">
+            <UserButton/>
 
               <button 
               type="button"
@@ -49,9 +40,9 @@ const Navbar = () => {
               onClick={logOut}
               >
                 <LogOut className="size-5" />
-                <span className="hidden sm:inline">Logout</span>
+                <span className="hidden sm:inline"></span>
               </button>
-            </>
+            </div>
           )}
         </div>
       </div>

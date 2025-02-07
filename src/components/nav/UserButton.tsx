@@ -8,7 +8,7 @@ const UserButton = () => {
   return (
     <>
     <button 
-    className='w-20 h-20 rounded-full'
+    className='w-12 h-12 rounded-full bg-[var(--accent-color)] font-bold'
     onClick={() => navigate('/profile')}> 
       {userInitial}
     </button>

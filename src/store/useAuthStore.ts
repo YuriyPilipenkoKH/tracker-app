@@ -101,7 +101,7 @@ export const useAuthStore = create<AuthStoreTypes>((set) => ({
         set({authUser: null})
         set({userId: ''})
         localStorage.setItem("tracker-userId",'')
-        wait(500)
+        await wait(500)      
         toast.success(`Logout successful !`)
       }
 
@@ -114,16 +114,13 @@ export const useAuthStore = create<AuthStoreTypes>((set) => ({
   },
 
   updateProfile: async (data) => {
-
     set({ pending: true });
       try {
       const response = await axios.patch('/auth/update-profile', data)
       if (response.data) {
         set({ authUser: response.data.user });
-
-        await wait(1100)
-        toast.success(`updated, ${capitalize(response.data.user.name)} info !`)
-
+        await wait(1000)
+        toast.success(`Updated ${capitalize(response.data.user.name)} info !`)
       return true
     } 
     } catch (error: unknown) {
@@ -152,7 +149,8 @@ export const useAuthStore = create<AuthStoreTypes>((set) => ({
         toast.error(error.response.data.message);
       }
     } finally {  set({ pending: false })  }
-  }
+  },
+
 }))
 
 

@@ -38,7 +38,6 @@ const ProfileForm = () => {
     const response = await updateProfile(data)
     setAnable(false)
     if(response){
-      // wait(1000)
       resetToDefault()
     }
     }
