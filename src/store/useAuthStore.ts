@@ -22,7 +22,7 @@ interface AuthStoreTypes {
   uploadAvatar: (data: img) => Promise<void>
 }
 
-export const useAuthStore = create<AuthStoreTypes>((set) => ({
+export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
   userId: localStorage.getItem("tracker-userId") || '',
   authUser:  null,
   pending: false,
@@ -95,14 +95,14 @@ export const useAuthStore = create<AuthStoreTypes>((set) => ({
 
   logOut: async () => {
     set({ pending: true });
+    const { authUser } = get();
     try {
       const response = await axios.post('/auth/logout')
       if (response.status === 200) {
+        toast.success(`Logout successful ${authUser?.name}!`)
         set({authUser: null})
         set({userId: ''})
         localStorage.setItem("tracker-userId",'')
-        await wait(500)      
-        toast.success(`Logout successful !`)
       }
 
     }  catch (error: unknown) {
