@@ -30,9 +30,7 @@ function App() {
       <div className='container mx-auto'> 
         <Routes>
         <Route path="/"
-            element ={userId
-              ? <HomePage/>
-              : <Navigate to='/login'/>}/>
+            element ={<HomePage/>}/>
          <Route path="/signup"
               element ={!authUser
               ? <SignUpPage/>
