@@ -38,9 +38,7 @@ export const useAuthStore = create<AuthStoreTypes>((set) => ({
       set({authUser: null})
       console.log('error in checkAuth', error)
     }
-    finally{
-      set({pending: false})
-    }
+    finally{ set({pending: false}) }
   
   },
 
@@ -66,9 +64,7 @@ export const useAuthStore = create<AuthStoreTypes>((set) => ({
       console.log('error in signUp', error)
       return false
     }
-    finally{
-      set({pending: false})
-    }
+    finally{ set({pending: false}) }
   
   },
 
@@ -94,9 +90,7 @@ export const useAuthStore = create<AuthStoreTypes>((set) => ({
       }
       return { success: false, message: "An unexpected error occurred" };
     }
-    finally{
-      set({pending: false})
-    }
+    finally{ set({pending: false}) }
   },
 
   logOut: async () => {
@@ -157,9 +151,7 @@ export const useAuthStore = create<AuthStoreTypes>((set) => ({
       if (error instanceof AxiosError && error.response) {
         toast.error(error.response.data.message);
       }
-    } finally {
-      set({ pending: false });
-    }
+    } finally {  set({ pending: false })  }
   }
 }))
 
