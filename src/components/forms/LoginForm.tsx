@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import  { useState } from 'react'
+import  { useEffect, useState } from 'react'
 import { loginSchema, LoginSchemaType } from '../../models/loginSchema'
 import { useForm } from 'react-hook-form'
 import { cn } from '../../lib/cn'
@@ -31,7 +31,7 @@ const LoginForm = () => {
     const onSubmit = async (data: LoginSchemaType) => {
       console.log(data);
       const response = await login(data)
-      if(response?.success) reset()
+      // if(response?.success) reset()
       if(!response?.success && response?.message) setLogError(response?.message)
       }
 
@@ -39,8 +39,14 @@ const LoginForm = () => {
       if(logError) setLogError('')
       }
 
+    useEffect(() => {
+      console.log("LoginForm mounted");
+      return () => console.log("LoginForm unmounted");
+    }, []);
+
   return (
-     <form  onSubmit={handleSubmit(onSubmit)}
+     <form 
+      // onSubmit={handleSubmit(onSubmit)}
         className='flex flex-col gap-3 w-full p-5'
         autoComplete="off"
         noValidate>
@@ -78,7 +84,8 @@ const LoginForm = () => {
           {logError && <div  className='text-purple-900'>{logError}</div>}
           <button
             className='AuthFormSubmitBtn mt-auto btn btn-active btn-primary w-full'
-            type='submit'
+            type='button'
+            onClick={handleSubmit(onSubmit)}
             disabled={isSubmitting || !isDirty || !isValid || !!logError}
                 >
             { isLoading  ? "Sending.." :  "Log In.." }

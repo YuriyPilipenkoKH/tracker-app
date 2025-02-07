@@ -13,6 +13,7 @@ interface AuthStoreTypes {
   userId: string
   authUser: User | null 
   pending: boolean
+  logError: string
 
   checkAuth: () => Promise<void>
   signUp: (data: signUpSchemaType) => Promise<boolean | undefined>
@@ -26,6 +27,7 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
   userId: localStorage.getItem("tracker-userId") || '',
   authUser:  null,
   pending: false,
+  logError: '',
 
   checkAuth: async() =>{
     set({ pending: true });
@@ -80,12 +82,15 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
         await wait(1000)
         toast.success(`Hello, ${capitalize(response.data.user.name)} !`)
 
+        set({logError: ''})
+
       return {success: true, message: response.data?.message}
     } 
     } catch (error: unknown) {
       if (error instanceof AxiosError && error.response) {
 
         console.log(error.response.data.message);
+        set({logError: error.response.data.message})
         return { success: false, message: error.response.data.message };
       }
       return { success: false, message: "An unexpected error occurred" };
@@ -99,7 +104,7 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
     try {
       const response = await axios.post('/auth/logout')
       if (response.status === 200) {
-        toast.success(`Logout successful ${authUser?.name}!`)
+        toast.success(`Goodbye, ${authUser?.name}!`)
         set({authUser: null})
         set({userId: ''})
         localStorage.setItem("tracker-userId",'')
