@@ -16,7 +16,7 @@ import ProfilePage from './pages/ProfilePage';
 function App() {
   const {authUser, userId, checkAuth ,pending} = useAuthStore();
   useEffect(() => {
-    checkAuth(); // ✅ Safe to call here inside a React component
+    if (authUser === undefined) checkAuth() 
    if(!pending) console.log('authUser',authUser)
   }, []);
   if(pending ) return (
@@ -24,6 +24,8 @@ function App() {
       <Loader className="size-10 animate-spin"/>
     </div>
   )
+
+
   return (
     <div className='min-h-screen flex flex-col gap-12 items-center '>
       <Navbar/>

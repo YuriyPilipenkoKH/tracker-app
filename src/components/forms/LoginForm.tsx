@@ -8,22 +8,18 @@ import { Eye, EyeOff} from "lucide-react";
 
 
 const LoginForm = () => {
-  const logError = useAuthStore((state) => state.logError);
-  // const pending = useAuthStore((state) => state.pending);
-  const login = useAuthStore((state) => state.login);
-  const clearLogError = useAuthStore((state) => state.clearLogError);
+  const{ logError, clearLogError, login} = useAuthStore();
   const [show, setShow] = useState<boolean>(false)
   
    const {
       register, 
       handleSubmit,
-      reset,
       formState,
     } = useForm<LoginSchemaType >({
       mode:'all',
       defaultValues: {
-        email:'',
-        password:'',
+        email:localStorage.getItem('tracker-email') || '',
+        password:localStorage.getItem('tracker-pass') || '',
       },
     resolver: zodResolver(loginSchema), })
     const {
@@ -36,6 +32,8 @@ const LoginForm = () => {
 
     const onSubmit = async (data: LoginSchemaType) => {
       console.log('data',data);
+      localStorage.setItem('tracker-email', data.email)
+      localStorage.setItem('tracker-pass', data.password)
      await login(data)
       // if(response?.success) reset()
       // if(!response?.success && response?.message) setLogError(response?.message)

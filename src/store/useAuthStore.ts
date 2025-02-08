@@ -35,7 +35,9 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
 
     try {
       const response = await axios.get('/auth/check')
-      set({authUser: response.data})
+      if (response.status === 200 && response.data.user) {
+        set({authUser: response.data})
+      }
 
     } catch (error) {
       set({authUser: undefined})
