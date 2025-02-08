@@ -4,7 +4,7 @@ import {  useForm } from 'react-hook-form'
 import { signUpSchemaType ,signUpSchema} from '../../models/signUpSchema'
 import { cn } from '../../lib/cn'
 import { useAuthStore } from '../../store/useAuthStore'
-import { Eye, EyeOff, } from "lucide-react";
+import { Eye, EyeOff, RefreshCw, } from "lucide-react";
 
 
 export const SignUpForm = () => {
@@ -96,11 +96,12 @@ export const SignUpForm = () => {
       {errors.password && <div className='text-purple-900'>{errors.password.message}</div>}
       {logError && <div  className='text-purple-900'>{logError}</div>}
       <button
-        className='AuthFormSubmitBtn mt-auto btn btn-active btn-primary w-full'
+        className='flex gap-5 mt-auto btn btn-active btn-primary w-full'
         type='submit'
         disabled={isSubmitting || !isDirty || !isValid || !!logError}
             >
-        { isLoading  ? "Sending.." :  "Sign Up.." }
+      { isSubmitting &&  <RefreshCw className='size-6 animate-spin' />}      
+      { isLoading  ? "Sending.." :  "Sign Up" }
       </button>
 
     </form>
