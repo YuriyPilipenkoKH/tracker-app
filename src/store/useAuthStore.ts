@@ -36,10 +36,13 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
 
     try {
       const response = await axios.get('/auth/check')
-      if (response.status === 200 && response.data.user) {
-        set({authUser: response.data})
+      if (response.data) {
+        set((state) => ({
+          ...state,
+          authUser: response.data,
+          userId: response.data._id,
+        }));
       }
-
     } catch (error) {
       set({authUser: undefined})
       console.log('error in checkAuth', error)
