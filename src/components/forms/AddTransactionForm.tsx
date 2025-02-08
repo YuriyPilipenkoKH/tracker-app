@@ -50,6 +50,7 @@ const AddTransactionForm = () => {
           placeholder=	{( isSubmitting )? "Processing" : 'amount'}
           />
       </label>
+      {errors.amount && <div className='text-purple-900'>{errors.amount.message}</div>}
       <label className={cn('formLabel  flex items-center gap-1')}>
         <input 
           className={cn('grow input input-bordered' )}
@@ -59,6 +60,7 @@ const AddTransactionForm = () => {
           placeholder=	{( isSubmitting )? "Processing" : 'name'}
           />
       </label>
+      {errors.name && <div className='text-purple-900'>{errors.name.message}</div>}
       <label className={cn('formLabel  flex items-center gap-1')}>
         <input 
           className={cn('grow input input-bordered' )}
@@ -68,6 +70,7 @@ const AddTransactionForm = () => {
           placeholder=	{( isSubmitting )? "Processing" : 'dateTime'}
           />
       </label>
+      {errors.dateTime && <div className='text-purple-900'>{errors.dateTime.message}</div>}
       <label className={cn('formLabel  flex items-center gap-1')}>
         <input 
           className={cn('grow input input-bordered' )}
@@ -77,7 +80,7 @@ const AddTransactionForm = () => {
           placeholder=	{( isSubmitting )? "Processing" : 'description'}
           />
       </label>
-
+      {errors.description && <div className='text-purple-900'>{errors.description.message}</div>}
 
     </form>
   )
