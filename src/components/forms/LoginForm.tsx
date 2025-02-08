@@ -8,10 +8,9 @@ import { Eye, EyeOff} from "lucide-react";
 
 
 const LoginForm = () => {
-  const {login, logError, clearLogError} = useAuthStore()
-  // const [logError, setLogError] = useState<string>('')
+  const {login, logError, clearLogError,pending}= useAuthStore()
   const [show, setShow] = useState<boolean>(false)
-  console.log('logError',logError);
+  
    const {
       register, 
       handleSubmit,
@@ -19,6 +18,10 @@ const LoginForm = () => {
       formState,
     } = useForm<LoginSchemaType >({
       mode:'all',
+      defaultValues: {
+        email:'',
+        password:'',
+      },
     resolver: zodResolver(loginSchema), })
     const {
       errors,
@@ -30,7 +33,7 @@ const LoginForm = () => {
 
     const onSubmit = async (data: LoginSchemaType) => {
       console.log(data);
-      await login(data)
+      login(data)
       // if(response?.success) reset()
       // if(!response?.success && response?.message) setLogError(response?.message)
       }
@@ -39,10 +42,11 @@ const LoginForm = () => {
       clearLogError()
       }
 
-    // useEffect(() => {
-    //   console.log("LoginForm mounted");
-    //   return () => console.log("LoginForm unmounted");
-    // }, []);
+    useEffect(() => {
+      console.log("LoginForm mounted");
+      if(!pending) console.log('logError',logError)
+      return () => console.log("LoginForm unmounted");
+    }, []);
 
   return (
      <form 

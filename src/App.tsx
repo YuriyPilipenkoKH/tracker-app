@@ -17,7 +17,7 @@ function App() {
   const {authUser, userId, checkAuth ,pending} = useAuthStore();
   useEffect(() => {
     checkAuth(); // ✅ Safe to call here inside a React component
-    console.log('authUser',authUser)
+   if(!pending) console.log('authUser',authUser)
   }, []);
   if(pending && !authUser) return (
     <div className="flex items-center justify-center h-screen">
