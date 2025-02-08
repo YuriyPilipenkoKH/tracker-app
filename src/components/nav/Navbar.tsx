@@ -40,7 +40,7 @@ const Navbar = () => {
 
               <button 
               type="button"
-              className="flex gap-2 items-center" 
+              className="btn btn-ghost px-2 flex justify-center" 
               onClick={logOut}
               >
                 <LogOut className="size-5" />
