@@ -8,7 +8,10 @@ import { Eye, EyeOff} from "lucide-react";
 
 
 const LoginForm = () => {
-  const {login, logError, clearLogError,pending}= useAuthStore()
+  const logError = useAuthStore((state) => state.logError);
+  const pending = useAuthStore((state) => state.pending);
+  const login = useAuthStore((state) => state.login);
+  const clearLogError = useAuthStore((state) => state.clearLogError);
   const [show, setShow] = useState<boolean>(false)
   
    const {
@@ -32,8 +35,8 @@ const LoginForm = () => {
     } = formState
 
     const onSubmit = async (data: LoginSchemaType) => {
-      console.log(data);
-      login(data)
+      console.log('data',data);
+     await login(data)
       // if(response?.success) reset()
       // if(!response?.success && response?.message) setLogError(response?.message)
       }
