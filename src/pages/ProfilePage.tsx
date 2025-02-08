@@ -1,4 +1,3 @@
-
 import AvatarUploadForm from "../components/forms/AvatarUploadForm";
 import ProfileForm from "../components/forms/ProfileForm";
 import AccountInfo from "../components/profile/AccountInfo.orig";
@@ -6,8 +5,6 @@ import AccountInfo from "../components/profile/AccountInfo.orig";
 
 
 const ProfilePage = () => {
-
-
   return (
      <div className="grid pt-5 transition-all duration-800 ease-in-out">
       <div className=" mx-auto p-4 py-8 w-[320px] md:w-[500px]">
@@ -23,7 +20,6 @@ const ProfilePage = () => {
       </div>
     </div>
   );
-  
 }
 
 export default ProfilePage
