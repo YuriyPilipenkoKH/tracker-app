@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { Transaction, TransactionSchema } from '../../models/transaction'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { cn } from '../../lib/cn'
 
 const totalBalance = 1000
 const AddTransactionForm = () => {
@@ -13,7 +14,7 @@ const AddTransactionForm = () => {
   } = useForm<Transaction >({
     defaultValues: {  
       name: '',
-      price: 0 ,
+      amount: 0 ,
       dateTime: undefined,
       description: ''
        },
@@ -35,7 +36,48 @@ const AddTransactionForm = () => {
       }, [isSubmitSuccessful, reset])
       
   return (
-    <form >
+    <form  
+    // onSubmit={handleSubmit(onSubmit)}
+    className='flex flex-col gap-3 w-full p-5'
+    autoComplete="off"
+    noValidate>
+      <label className={cn('formLabel  flex items-center gap-1')}>
+        <input 
+          className={cn('grow input input-bordered' )}
+          {...register('amount', 
+          // { onChange: handleInputChange }
+        )}
+          placeholder=	{( isSubmitting )? "Processing" : 'amount'}
+          />
+      </label>
+      <label className={cn('formLabel  flex items-center gap-1')}>
+        <input 
+          className={cn('grow input input-bordered' )}
+          {...register('name', 
+          // { onChange: handleInputChange }
+        )}
+          placeholder=	{( isSubmitting )? "Processing" : 'name'}
+          />
+      </label>
+      <label className={cn('formLabel  flex items-center gap-1')}>
+        <input 
+          className={cn('grow input input-bordered' )}
+          {...register('dateTime', 
+          // { onChange: handleInputChange }
+        )}
+          placeholder=	{( isSubmitting )? "Processing" : 'dateTime'}
+          />
+      </label>
+      <label className={cn('formLabel  flex items-center gap-1')}>
+        <input 
+          className={cn('grow input input-bordered' )}
+          {...register('description', 
+          // { onChange: handleInputChange }
+        )}
+          placeholder=	{( isSubmitting )? "Processing" : 'description'}
+          />
+      </label>
+
 
     </form>
   )
