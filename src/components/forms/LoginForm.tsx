@@ -9,7 +9,7 @@ import { Eye, EyeOff} from "lucide-react";
 
 const LoginForm = () => {
   const logError = useAuthStore((state) => state.logError);
-  const pending = useAuthStore((state) => state.pending);
+  // const pending = useAuthStore((state) => state.pending);
   const login = useAuthStore((state) => state.login);
   const clearLogError = useAuthStore((state) => state.clearLogError);
   const [show, setShow] = useState<boolean>(false)
@@ -47,7 +47,7 @@ const LoginForm = () => {
 
     useEffect(() => {
       console.log("LoginForm mounted");
-      if(!pending) console.log('logError',logError)
+      console.log('logError',logError)
       return () => console.log("LoginForm unmounted");
     }, []);
 

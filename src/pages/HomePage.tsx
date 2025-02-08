@@ -1,10 +1,16 @@
 
+import { useEffect } from "react";
 import { useAuthStore } from "../store/useAuthStore"
 
 
 const HomePage = () => {
 const {authUser} = useAuthStore()
-console.log('authUser',authUser);
+useEffect(() => {
+  console.log("HomePage mounted");
+  console.log('authUser',authUser);
+
+        return () => console.log("HomePage unmounted");
+      }, []);
   return (
     <div className=" grid transition-all duration-800 ease-in-out">
     <div className="flex flex-col justify-center items-center ">

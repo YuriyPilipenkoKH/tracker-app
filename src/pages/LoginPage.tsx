@@ -1,12 +1,14 @@
-
-
 import { Link } from 'react-router-dom'
 import LoginForm from '../components/forms/LoginForm'
-
-
+import { useEffect } from 'react';
   
 
 const LoginPage = () => {
+      useEffect(() => {
+        console.log("LoginPage mounted");
+
+        return () => console.log("LoginPage unmounted");
+      }, []);
   return (
     <div className=" grid transition-all duration-800 ease-in-out">
     <div className="flex flex-col justify-center items-center ">
