@@ -3,9 +3,12 @@ import { useForm } from 'react-hook-form'
 import { Transaction, TransactionSchema } from '../../models/transaction'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { cn } from '../../lib/cn'
+import { RefreshCw } from 'lucide-react'
+import { useAuthStore } from '../../store/useAuthStore'
 
 const totalBalance = 1000
 const AddTransactionForm = () => {
+    const { logError, } = useAuthStore()
   const {
     register, 
     handleSubmit,
@@ -81,6 +84,14 @@ const AddTransactionForm = () => {
           />
       </label>
       {errors.description && <div className='text-purple-900'>{errors.description.message}</div>}
+      <button
+        className='flex gap-5 mt-auto btn btn-active btn-primary w-full'
+        type='submit'
+        disabled={isSubmitting || !isDirty || !isValid || !!logError}
+            >
+      { isSubmitting &&  <RefreshCw className='size-6 animate-spin' />}      
+      { isLoading  ? "Sending.." :  "Send" }
+      </button>
 
     </form>
   )
