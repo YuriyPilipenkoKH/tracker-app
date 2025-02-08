@@ -1,6 +1,8 @@
 import z from 'zod'
 
 export const primarySchema = z.object({
+   _id: z
+  .string(),
   name: z
   .string()
   .trim()
@@ -26,6 +28,17 @@ export const primarySchema = z.object({
   .regex(/^(?=.*[A-Za-z])(?=.*\d).+$/, {
     message: 'include numbers ',
   }),
+  image: z
+    .instanceof(File, { message: "Invalid file format." })
+    .refine((file) => file.size <= 5 * 1024 * 1024, {
+      message: "File size exceeds 5MB limit.",
+    })
+    .refine(
+      (file) => ["image/png", "image/jpeg", "image/webp"].includes(file.type),
+      { message: "Only PNG, JPG, and WEBP formats are allowed." }
+    ),
+  role: z
+  .enum(["admin", "user", "editor"]),
   phone: z
   .string()
   .trim()
@@ -36,7 +49,13 @@ export const primarySchema = z.object({
   city: z
   .string()
   .trim()
-  .optional()
+  .optional(),
+  createdAt: z
+  .date()
+  .optional(),
+  updatedAt: z
+  .date()
+  .optional(),
  })
 
 export type primarySchemaType =  z.infer<typeof primarySchema>

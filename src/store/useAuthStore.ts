@@ -61,7 +61,7 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
         localStorage.setItem("tracker-userId",response.data.user._id)
 
         toast.success('Account created!')
-        await wait(1000) 
+        // await wait(1000) 
         toast.success(`Welcome, ${capitalize(response.data.user.name)} !`)
 
         return {success: true, message: response.data?.message}
@@ -94,7 +94,7 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
         }));
         localStorage.setItem("tracker-userId",response.data.user._id)
 
-        await wait(1000)
+        // await wait(1000)
         toast.success(`Hello, ${capitalize(response.data.user.name)} !`)
 
       return {success: true, message: response.data?.message}

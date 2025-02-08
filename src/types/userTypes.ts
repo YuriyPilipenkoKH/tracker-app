@@ -23,11 +23,5 @@ export interface loginResponse {
 export interface profile {
   name: string
 }
-export interface dummyUserTypes {
-  _id:string
-  name: string
-  email: string
-  image: string
-  role: string
-}
+
 
