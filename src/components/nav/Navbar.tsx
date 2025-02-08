@@ -25,9 +25,9 @@ const Navbar = () => {
           </Link>
           <Link to='/dashboard'>
             <h1 className="text-lg font-bold">
-              {(path === '/' || path === '/profile') && userId
+              {(path === '/' || path === '/profile') 
               ? 'Dashboard'
-              : 'Login'}
+              :  userId ? 'Tracker' : 'Login' }
             </h1>
           </Link>
         </div>
