@@ -4,7 +4,7 @@ import { loginSchema, LoginSchemaType } from '../../models/loginSchema'
 import { useForm } from 'react-hook-form'
 import { cn } from '../../lib/cn'
 import { useAuthStore } from '../../store/useAuthStore'
-import { Eye, EyeOff} from "lucide-react";
+import { Eye, EyeOff, RefreshCw} from "lucide-react";
 
 
 const LoginForm = () => {
@@ -93,9 +93,10 @@ const LoginForm = () => {
           {errors.password && <div className='text-purple-900'>{errors.password.message}</div>}
           {logError && <div  className='text-purple-900'>{logError}</div>}
           <button
-            className='AuthFormSubmitBtn mt-auto btn btn-active btn-primary w-full'
+            className='flex gap-5 mt-auto btn btn-active btn-primary w-full'
             disabled={isSubmitting || !isDirty || !isValid || !!logError}
                 >
+            { isLoading &&  <RefreshCw className='size-6 animate-spin' />}
             { isLoading  ? "Sending.." :  "Log In.." }
           </button>
     
