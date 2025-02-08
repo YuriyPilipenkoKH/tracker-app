@@ -11,7 +11,7 @@ import { profileSchemaType } from '../models/profileSchema';
 
 interface AuthStoreTypes {
   userId: string
-  authUser: User | null 
+  authUser: User | undefined
   pending: boolean
   logError: string
 
@@ -26,7 +26,7 @@ interface AuthStoreTypes {
 
 export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
   userId: localStorage.getItem("tracker-userId") || '',
-  authUser:  null,
+  authUser:  undefined,
   pending: false,
   logError: '',
 
@@ -38,7 +38,7 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
       set({authUser: response.data})
 
     } catch (error) {
-      set({authUser: null})
+      set({authUser: undefined})
       console.log('error in checkAuth', error)
     }
     finally{ set({pending: false}) }
@@ -115,7 +115,7 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
       const response = await axios.post('/auth/logout')
       if (response.status === 200) {
         toast.success(`Goodbye, ${authUser?.name}!`)
-        set({authUser: null})
+        set({authUser: undefined})
         set({userId: ''})
         localStorage.setItem("tracker-userId",'')
       }
