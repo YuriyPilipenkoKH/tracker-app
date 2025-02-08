@@ -8,8 +8,8 @@ import { Eye, EyeOff, } from "lucide-react";
 
 
 export const SignUpForm = () => {
-  const {signUp} = useAuthStore()
-  const [logError, setLogError] = useState<string>('')
+  const {signUp, logError, clearLogError} = useAuthStore()
+
   const [show, setShow] = useState<boolean>(false)
   const {
     register, 
@@ -18,6 +18,11 @@ export const SignUpForm = () => {
     reset,
   } = useForm<signUpSchemaType >({
     mode:'all',
+    defaultValues: {
+      name:localStorage.getItem('tracker-signup-name') || '',
+      email:localStorage.getItem('tracker-signup-email') || '',
+      password:localStorage.getItem('tracker-signup-pass') || '',
+    },
     resolver: zodResolver(signUpSchema), })
   const {
     errors,
@@ -32,7 +37,7 @@ export const SignUpForm = () => {
     if(response)reset()
   }
   const handleInputChange =   (field: keyof signUpSchemaType) => {
-    if(logError) setLogError('')
+    if(logError) clearLogError()
   }
 
   return (
@@ -79,6 +84,7 @@ export const SignUpForm = () => {
         </button>
       </label>
       {errors.password && <div className='text-purple-900'>{errors.password.message}</div>}
+      {logError && <div  className='text-purple-900'>{logError}</div>}
       <button
         className='AuthFormSubmitBtn mt-auto btn btn-active btn-primary w-full'
         type='submit'

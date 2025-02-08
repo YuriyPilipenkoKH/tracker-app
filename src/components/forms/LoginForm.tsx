@@ -19,8 +19,8 @@ const LoginForm = () => {
     } = useForm<LoginSchemaType >({
       mode:'all',
       defaultValues: {
-        email:localStorage.getItem('tracker-email') || '',
-        password:localStorage.getItem('tracker-pass') || '',
+        email:localStorage.getItem('tracker-login-email') || '',
+        password:localStorage.getItem('tracker-login-pass') || '',
       },
     resolver: zodResolver(loginSchema), })
     const {
@@ -33,15 +33,15 @@ const LoginForm = () => {
 
     const onSubmit = async (data: LoginSchemaType) => {
       console.log('data',data);
-      localStorage.setItem('tracker-email', data.email)
-      localStorage.setItem('tracker-pass', data.password)
+      localStorage.setItem('tracker-login-email', data.email)
+      localStorage.setItem('tracker-login-pass', data.password)
       const response =  await login(data)
 
       if(response?.success){
-        localStorage.setItem('tracker-email', '')
-        localStorage.setItem('tracker-pass', '')
+        localStorage.setItem('tracker-login-email', '')
+        localStorage.setItem('tracker-login-pass', '')
+        reset()
       } 
-      // if(!response?.success && response?.message) setLogError(response?.message)
       }
 
     const handleInputChange =   () => {

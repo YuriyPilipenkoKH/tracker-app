@@ -14,7 +14,7 @@ import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
 
 function App() {
-  const {authUser, userId, checkAuth ,pending} = useAuthStore();
+  const {authUser, userId, checkAuth ,pending, } = useAuthStore();
   useEffect(() => {
     if (authUser === undefined) checkAuth() 
    if(!pending) console.log('authUser',authUser)
