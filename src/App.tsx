@@ -19,7 +19,7 @@ function App() {
     checkAuth(); // ✅ Safe to call here inside a React component
    if(!pending) console.log('authUser',authUser)
   }, []);
-  if(pending && !authUser) return (
+  if(pending ) return (
     <div className="flex items-center justify-center h-screen">
       <Loader className="size-10 animate-spin"/>
     </div>

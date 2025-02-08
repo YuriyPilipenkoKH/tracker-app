@@ -27,3 +27,17 @@ Open DevTools > Network tab.
 Click Preserve log.
 Submit the form.
 If you see a full-page request (not just /auth/login), something is forcing a reload.
+
+///==============
+logs
+LoginForm mounted — loginform
+logError — loginform
+LoginPage mounted — loginpage
+authUser null — App
+LoginPage unmounted — loginpage
+LoginForm unmounted — loginform
+GET http://localhost:5500/api/auth/check 401 (Unauthorized) — useauthstore
+error in checkAuth AxiosError {message: 'Request failed with status code 401', name: 'AxiosError', code: 'ERR_BAD_REQUEST', config: {…}, request: XMLHttpRequest, …}  — useauthstore
+LoginForm mounted — loginform
+logError — loginform
+LoginPage mounted — loginpage
