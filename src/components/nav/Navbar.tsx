@@ -1,6 +1,6 @@
-import { LogOut,  User ,} from "lucide-react";
+import { LogOut, } from "lucide-react";
 import { useAuthStore } from "../../store/useAuthStore";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ThemeChanger from "../button/ThemeChanger";
 import Logo from "./Logo";
 import UserButton from "./UserButton";
@@ -8,25 +8,29 @@ import UserButton from "./UserButton";
 
 
 const Navbar = () => {
-  const {  authUser, logOut } = useAuthStore();
-  //
+  const {  authUser, logOut , userId} = useAuthStore();
+  const location = useLocation()
+  const path = location.pathname
+
   return (
     <header
       className=" border-b border-base-300  w-full transition-all duration-800 ease-in-out" >
     <div className="container mx-auto px-4 h-16">
       <div className="flex items-center justify-between h-full">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <Link to="/" className="flex items-center gap-2.5 hover:opacity-80 transition-all">
             <div className="size-9 rounded-lg bg-primary/10 flex items-center justify-center">
             <Logo/>
             </div>
           </Link>
           <Link to='/dashboard'>
-            <h1 className="text-lg font-bold">Tracker</h1>
-
+            <h1 className="text-lg font-bold">
+              {(path === '/' || path === '/profile') && userId
+              ? 'Dashboard'
+              : 'Login'}
+            </h1>
           </Link>
         </div>
-
         <div className="flex items-center gap-2">
        < ThemeChanger/>
 

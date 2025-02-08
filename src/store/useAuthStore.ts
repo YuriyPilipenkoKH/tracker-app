@@ -1,5 +1,5 @@
 import {create} from 'zustand'
-import { img, loginResponse} from '../types/userTypes';
+import { img, loginResponse} from '../types';
 import { axios } from '../lib/axios';
 import { AxiosError } from 'axios';
 import toast from 'react-hot-toast';

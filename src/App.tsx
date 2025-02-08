@@ -19,14 +19,14 @@ function App() {
     async function check() {
       await checkAuth() 
     }
-  check().then(res => console.log('authUser',authUser))
+  check().then(() => console.log('authUser',authUser))
   }, [userId]);
+
   if(pending ) return (
     <div className="flex items-center justify-center h-screen">
       <Loader className="size-10 animate-spin"/>
     </div>
   )
-
 
   return (
     <div className='min-h-screen flex flex-col gap-12 items-center '>
