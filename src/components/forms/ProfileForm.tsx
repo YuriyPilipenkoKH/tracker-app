@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { profileSchema, profileSchemaType } from '../../models/profileSchema';
 import { cn } from '../../lib/cn';
 import { useEffect, useState } from 'react';
-import { wait } from '../../lib/wait';
+
 
 const ProfileForm = () => {
 

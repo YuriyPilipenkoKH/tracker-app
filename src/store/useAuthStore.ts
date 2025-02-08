@@ -1,5 +1,5 @@
 import {create} from 'zustand'
-import { img, loginResponse, User } from '../types/userTypes';
+import { img, loginResponse} from '../types/userTypes';
 import { axios } from '../lib/axios';
 import { AxiosError } from 'axios';
 import toast from 'react-hot-toast';
@@ -8,6 +8,7 @@ import { wait } from '../lib/wait';
 import { signUpSchemaType } from '../models/signUpSchema';
 import { LoginSchemaType } from '../models/loginSchema';
 import { profileSchemaType } from '../models/profileSchema';
+import { User } from '../models/UserSchema';
 
 interface AuthStoreTypes {
   userId: string
