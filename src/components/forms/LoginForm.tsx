@@ -13,6 +13,7 @@ const LoginForm = () => {
   
    const {
       register, 
+      reset,
       handleSubmit,
       formState,
     } = useForm<LoginSchemaType >({
@@ -34,8 +35,12 @@ const LoginForm = () => {
       console.log('data',data);
       localStorage.setItem('tracker-email', data.email)
       localStorage.setItem('tracker-pass', data.password)
-     await login(data)
-      // if(response?.success) reset()
+      const response =  await login(data)
+
+      if(response?.success){
+        localStorage.setItem('tracker-email', '')
+        localStorage.setItem('tracker-pass', '')
+      } 
       // if(!response?.success && response?.message) setLogError(response?.message)
       }
 
