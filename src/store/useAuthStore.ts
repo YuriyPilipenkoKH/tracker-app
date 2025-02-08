@@ -38,7 +38,7 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
       const response = await axios.get('/auth/check')
       if (response.data) {
         set((state) => ({
-          ...state,
+          // ...state,
           authUser: response.data,
           userId: response.data._id,
         }));
@@ -123,8 +123,11 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
       const response = await axios.post('/auth/logout')
       if (response.status === 200) {
         toast.success(`Goodbye, ${authUser?.name}!`)
-        set({authUser: undefined})
-        set({userId: ''})
+        set(() => ({
+          authUser: undefined,
+          userId: '',
+          logError: '',
+        }));
         localStorage.setItem("tracker-userId",'')
       }
 
