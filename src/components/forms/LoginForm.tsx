@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import  { useEffect, useState } from 'react'
+import  {  useState } from 'react'
 import { loginSchema, LoginSchemaType } from '../../models/loginSchema'
 import { useForm } from 'react-hook-form'
 import { cn } from '../../lib/cn'
@@ -31,28 +31,28 @@ const LoginForm = () => {
       isLoading 
     } = formState
 
-    const onSubmit = async (data: LoginSchemaType) => {
-      console.log('data',data);
-      localStorage.setItem('tracker-login-email', data.email)
-      localStorage.setItem('tracker-login-pass', data.password)
-      const response =  await login(data)
+  const onSubmit = async (data: LoginSchemaType) => {
+    console.log('data',data);
+    localStorage.setItem('tracker-login-email', data.email)
+    localStorage.setItem('tracker-login-pass', data.password)
+    const response =  await login(data)
 
-      if(response?.success){
-        localStorage.setItem('tracker-login-email', '')
-        localStorage.setItem('tracker-login-pass', '')
-        reset()
-      } 
-      }
+    if(response?.success){
+      localStorage.setItem('tracker-login-email', '')
+      localStorage.setItem('tracker-login-pass', '')
+      reset()
+    } 
+    }
 
     const handleInputChange =   () => {
-      clearLogError()
-      }
+      if(logError) clearLogError()
+    }
 
-    useEffect(() => {
-      console.log("LoginForm mounted");
-      console.log('logError',logError)
-      return () => console.log("LoginForm unmounted");
-    }, []);
+    // useEffect(() => {
+    //   console.log("LoginForm mounted");
+    //   console.log('logError',logError)
+    //   return () => console.log("LoginForm unmounted");
+    // }, []);
 
   return (
      <form 

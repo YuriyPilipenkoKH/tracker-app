@@ -33,10 +33,20 @@ export const SignUpForm = () => {
   } = formState
 
   const onSubmit = async (data: signUpSchemaType) => {
+
+    localStorage.setItem('tracker-signup-name', data.name)
+    localStorage.setItem('tracker-signup-email', data.email)
+    localStorage.setItem('tracker-signup-pass', data.password)
     const response = await signUp(data)
-    if(response)reset()
-  }
-  const handleInputChange =   (field: keyof signUpSchemaType) => {
+
+    if(response?.success){
+      localStorage.setItem('tracker-signup-name', '')
+      localStorage.setItem('tracker-signup-email', '')
+      localStorage.setItem('tracker-signup-pass', '')
+      reset()
+    } 
+    }
+  const handleInputChange =   () => {
     if(logError) clearLogError()
   }
 
