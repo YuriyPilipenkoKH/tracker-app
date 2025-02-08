@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { useAuthStore } from '../../store/useAuthStore'
-import {  Building2, Mail, Phone, SquarePen, SquareX, User } from "lucide-react";
+import {  Building2, Mail, Phone, RefreshCw, SquarePen, SquareX, User } from "lucide-react";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { profileSchema, profileSchemaType } from '../../models/profileSchema';
 import { cn } from '../../lib/cn';
@@ -125,12 +125,13 @@ const ProfileForm = () => {
           {errors.city && <div className='text-purple-900'>{errors.city.message}</div>}
       <button 
         type='submit'
-        className={cn('btn btn-primary mt-1',
+        className={cn('btn btn-primary mt-1 flex gap-5',
           !anable && 'visually-hidden'
         )} 
         disabled ={isSubmitting || !isDirty  } 
         >
-          Save
+        { isSubmitting &&  <RefreshCw className='size-6 animate-spin' />}
+        { isSubmitting  ? "Sending.." :  " Save" }
           </button>
     </form>
   </div>

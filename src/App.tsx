@@ -14,7 +14,7 @@ import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
 
 function App() {
-  const {authUser, userId, checkAuth ,pending, } = useAuthStore();
+  const {authUser, userId, checkAuth ,pending, ischeckingAuth} = useAuthStore();
   useEffect(() => {
     async function check() {
       await checkAuth() 
@@ -22,7 +22,7 @@ function App() {
   check().then(() => console.log('authUser',authUser))
   }, [userId]);
 
-  if(pending ) return (
+  if( ischeckingAuth ) return (
     <div className="flex items-center justify-center h-screen">
       <Loader className="size-10 animate-spin"/>
     </div>

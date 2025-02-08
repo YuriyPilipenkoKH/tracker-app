@@ -13,6 +13,7 @@ import { User } from '../models/UserSchema';
 interface AuthStoreTypes {
   userId: string
   authUser: User | undefined
+  ischeckingAuth: boolean
   pending: boolean
   logError: string
 
@@ -28,11 +29,12 @@ interface AuthStoreTypes {
 export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
   userId: localStorage.getItem("tracker-userId") || '',
   authUser:  undefined,
+  ischeckingAuth:false,
   pending: false,
   logError: '',
 
   checkAuth: async() =>{
-    set({ pending: true });
+    set({ ischeckingAuth: true });
 
     try {
       const response = await axios.get('/auth/check')
@@ -47,7 +49,7 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
       set({authUser: undefined})
       console.log('error in checkAuth', error)
     }
-    finally{ set({pending: false}) }
+    finally{ set({ischeckingAuth: false}) }
   
   },
 
