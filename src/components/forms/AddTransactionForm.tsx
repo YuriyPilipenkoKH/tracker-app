@@ -4,27 +4,24 @@ import { Transaction, TransactionSchema } from '../../models/transaction'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { cn } from '../../lib/cn'
 import { CircleMinus, CirclePlus, RefreshCw } from 'lucide-react'
-import { useAuthStore } from '../../store/useAuthStore'
+
 
 const totalBalance = 1000
 const AddTransactionForm = () => {
-    // const { logError, } = useAuthStore()
-
     const [sign, setSign] = useState<"+" | "-">("+");
 
   const {
     register, 
     handleSubmit,
     formState,
-    setValue,
     reset,
+    getValues
   } = useForm<Transaction >({
     defaultValues: {  
       name: '',
       amount: undefined ,
       dateTime: '' ,
       description: '',
-     
        },
         mode:'all',
         resolver: zodResolver(TransactionSchema(totalBalance)), })
@@ -36,6 +33,7 @@ const AddTransactionForm = () => {
       isSubmitSuccessful,
       isLoading 
     } = formState
+    const amountValue = getValues('amount')
 
     const onSubmit = async (data: Transaction) => {
     //  console.log(data);
@@ -73,8 +71,9 @@ const AddTransactionForm = () => {
           <label className="flex items-center justify-center gap-1 cursor-pointer">
             <input
               type="radio"
+              name='sign'
               // hidden
-            onChange={(e)=> changeSign(e)}
+            onChange= {changeSign}
             value={'+'}
             />
             <span className='p-0 bg-red'>
@@ -84,15 +83,17 @@ const AddTransactionForm = () => {
             <label className="flex items-center justify-center gap-1 cursor-pointer">
               <input
                 type="radio"
+                name='sign'
                 // hidden
-                onChange={(e)=> changeSign(e)}
+                onChange= {changeSign}
                 value={'-'}
               />
               <span><CircleMinus /></span>
             </label>
         </div>
 
-      <label className={cn('formLabel  flex items-center gap-1')}>
+      <label className={cn('relative  flex items-center gap-1')}>
+     {sign === '-' && !errors.amount &&  <span className='absolute left-2 text-[var(--orange)]' >-</span>}
         <input 
           type='number'
           className={cn('grow input input-bordered' ,
