@@ -43,6 +43,7 @@ const AddTransactionForm = () => {
     }
     const changeSign = (e: React.ChangeEvent<HTMLInputElement>) => {
       setValue("sign", e.target.value as "+" | "-")
+      setSign(e.target.value as "+" | "-")
     }
 
     useEffect(() => {
@@ -85,7 +86,11 @@ const AddTransactionForm = () => {
       <label className={cn('formLabel  flex items-center gap-1')}>
         <input 
           type='number'
-          className={cn('grow input input-bordered' )}
+          className={cn('grow input input-bordered' ,
+            sign === '+'
+            ? 'text-[var(--vivid-green)]' 
+            : 'text-[var(--orange)]'
+          )}
           {...register('amount', 
             { valueAsNumber: true }
           // { onChange: handleInputChange }
