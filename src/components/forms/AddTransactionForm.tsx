@@ -1,4 +1,4 @@
-import React ,{ useEffect, useState } from 'react'
+import React ,{  useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Transaction, TransactionSchema } from '../../models/transaction'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -15,6 +15,7 @@ const AddTransactionForm = () => {
     handleSubmit,
     formState,
     reset,
+    setValue
   } = useForm<Transaction >({
     defaultValues: {  
       name: '',
@@ -42,15 +43,20 @@ const AddTransactionForm = () => {
         amount:finalAmount
       }
       console.log('finalAmount',obj)
+
+      
       reset()
     }
     const changeSign = (e: React.ChangeEvent<HTMLInputElement>) => {
       // setValue("sign", e.target.value as "+" | "-")
       setSign(e.target.value as "+" | "-")
       console.log(sign);
-
     }
-
+    const onAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      if(sign === '-'){
+        setValue('amount', Number(e.target.value) * -1)
+      }
+    }
       
   return (
     <form  
@@ -88,8 +94,8 @@ const AddTransactionForm = () => {
         </div>
 
       <label className={cn('relative  flex items-center gap-1')}>
-      {sign === '-' && !errors.amount && isDirty && 
-      <span className='absolute left-2 text-[var(--orange)]' >-</span>}
+      {/* {sign === '-' && !errors.amount && isDirty && 
+      <span className='absolute left-2 text-[var(--orange)]' >-</span>} */}
         <input 
           type='number'
           className={cn('grow input input-bordered' ,
@@ -97,8 +103,10 @@ const AddTransactionForm = () => {
             ? 'text-[var(--vivid-green)]' 
             : 'text-[var(--orange)]'
           )}
-          {...register('amount', 
-            { valueAsNumber: true }          
+          {...register('amount', { 
+            valueAsNumber: true ,
+              onChange:onAmountChange
+            }          
         )}
           placeholder=	{( isSubmitting )? "Processing" : 'amount'}
           />

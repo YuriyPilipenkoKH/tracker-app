@@ -3,7 +3,6 @@ import HomePage from './pages/HomePage'
 import { Toaster } from 'react-hot-toast';
 import { options } from "./lib/hotToast"
 import NotFoundPage from './pages/NotFoundPage';
-
 import { useAuthStore } from './store/useAuthStore';
 import { useEffect } from 'react';
 import { Loader } from 'lucide-react';
@@ -26,7 +25,7 @@ function App() {
 
 
   return (
-    <div className='min-h-screen flex flex-col gap-12 items-center '>
+    <div className='min-h-screen flex flex-col gap-4 items-center '>
       <Navbar/>
       <div className='container mx-auto'> 
         <Routes>

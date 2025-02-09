@@ -14,10 +14,11 @@ export const TransactionSchema = (totalBalance :number) => z.object({
       }),
     amount: z
     .number()
-    .refine((val) => val !== 0, { message: "Amount cannot be 0" })
-    .refine((val) => (val * -1) < totalBalance, {
-        message: 'You haven`t got enough money'
-      }),
+    .refine((val) => !isNaN(val), { message: "Must be a valid number" }) // Ensures it's a number
+    .refine((val) => val !== 0, { message: "Amount cannot be 0" }) // Disallow zero
+    .refine((val) => Math.abs(val*-1 ) < totalBalance, { 
+      message: "You haven't got enough money" 
+    }), // Checks if within balance range,
     dateTime: z
     .string()
     .optional(),
