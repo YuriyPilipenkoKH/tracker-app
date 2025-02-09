@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { Transaction, TransactionSchema } from '../../models/transaction'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { cn } from '../../lib/cn'
-import { RefreshCw } from 'lucide-react'
+import { CircleMinus, CirclePlus, RefreshCw } from 'lucide-react'
 import { useAuthStore } from '../../store/useAuthStore'
 
 const totalBalance = 1000
@@ -59,26 +59,26 @@ const AddTransactionForm = () => {
     noValidate>
 
 
-<div className="flex gap-6">
+<div className="flex gap-6 items-center justify-center">
+            <label className="flex items-center justify-center gap-1 cursor-pointer">
+              <input
+                type="radio"
+                {...register("sign", {
+                  onChange: changeSign,
+                  value:"-",
+                })}
+              />
+              <span><CircleMinus /></span>
+            </label>
           <label className="flex items-center justify-center gap-1 cursor-pointer">
             <input
               type="radio"
-              value="+"
               {...register("sign", {
                 onChange: changeSign,
+                value:"+",
               })}
             />
-            <span>+</span>
-          </label>
-          <label className="flex items-center justify-center gap-1 cursor-pointer">
-            <input
-              type="radio"
-              value="-"
-              {...register("sign", {
-                onChange: changeSign,
-              })}
-            />
-            <span>-</span>
+            <span><CirclePlus /></span>
           </label>
         </div>
 
