@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import React ,{ useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Transaction, TransactionSchema } from '../../models/transaction'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -9,17 +9,20 @@ import { useAuthStore } from '../../store/useAuthStore'
 const totalBalance = 1000
 const AddTransactionForm = () => {
     const { logError, } = useAuthStore()
+    const [sign, setSign] = useState<"+" | "-">("+");
   const {
     register, 
     handleSubmit,
     formState,
+    setValue,
     reset,
   } = useForm<Transaction >({
     defaultValues: {  
       name: '',
       amount: undefined ,
       dateTime: '' ,
-      description: ''
+      description: '',
+      sign: "+",
        },
         mode:'all',
         resolver: zodResolver(TransactionSchema(totalBalance)), })
@@ -33,7 +36,13 @@ const AddTransactionForm = () => {
     } = formState
 
     const onSubmit = async (data: Transaction) => {
-      console.log(data);
+     console.log(data);
+      // const finalAmount = sign === "-" ? -data.amount : data.amount;
+      // console.log("Final Transaction:", finalAmount);
+
+    }
+    const changeSign = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setValue("sign", e.target.value as "+" | "-")
     }
 
     useEffect(() => {
@@ -48,6 +57,31 @@ const AddTransactionForm = () => {
     className='flex flex-col gap-3 w-full p-5'
     autoComplete="off"
     noValidate>
+
+
+<div className="flex gap-6">
+          <label className="flex items-center justify-center gap-1 cursor-pointer">
+            <input
+              type="radio"
+              value="+"
+              {...register("sign", {
+                onChange: changeSign,
+              })}
+            />
+            <span>+</span>
+          </label>
+          <label className="flex items-center justify-center gap-1 cursor-pointer">
+            <input
+              type="radio"
+              value="-"
+              {...register("sign", {
+                onChange: changeSign,
+              })}
+            />
+            <span>-</span>
+          </label>
+        </div>
+
       <label className={cn('formLabel  flex items-center gap-1')}>
         <input 
           type='number'
