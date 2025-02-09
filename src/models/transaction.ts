@@ -18,7 +18,6 @@ export const TransactionSchema = (totalBalance :number) => z.object({
     .refine((val) => (val * -1) < totalBalance, {
         message: 'You haven`t got enough money'
       }),
-    sign: z.enum(["+", "-"]),
     dateTime: z
     .string()
     .optional(),

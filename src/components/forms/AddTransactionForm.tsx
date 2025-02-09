@@ -8,8 +8,10 @@ import { useAuthStore } from '../../store/useAuthStore'
 
 const totalBalance = 1000
 const AddTransactionForm = () => {
-    const { logError, } = useAuthStore()
+    // const { logError, } = useAuthStore()
+
     const [sign, setSign] = useState<"+" | "-">("+");
+
   const {
     register, 
     handleSubmit,
@@ -22,7 +24,7 @@ const AddTransactionForm = () => {
       amount: undefined ,
       dateTime: '' ,
       description: '',
-      sign: "+",
+     
        },
         mode:'all',
         resolver: zodResolver(TransactionSchema(totalBalance)), })
@@ -36,21 +38,28 @@ const AddTransactionForm = () => {
     } = formState
 
     const onSubmit = async (data: Transaction) => {
-     console.log(data);
-      // const finalAmount = sign === "-" ? -data.amount : data.amount;
-      // console.log("Final Transaction:", finalAmount);
+    //  console.log(data);
+      const finalAmount = sign === "-" ? -data.amount : data.amount;
+      console.log("Final Transaction:", finalAmount);
+      const obj = {
+        ...data,
+        amount:finalAmount
+      }
+      console.log('finalAmount',obj)
 
     }
     const changeSign = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setValue("sign", e.target.value as "+" | "-")
+      // setValue("sign", e.target.value as "+" | "-")
       setSign(e.target.value as "+" | "-")
+      console.log(sign);
     }
 
     useEffect(() => {
-      if(isSubmitSuccessful) {
-          reset()
-      }
-      }, [isSubmitSuccessful, reset])
+      if(isSubmitSuccessful){
+        setSign("+")
+         reset()
+        }
+      }, [isSubmitSuccessful])
       
   return (
     <form  
@@ -64,20 +73,20 @@ const AddTransactionForm = () => {
           <label className="flex items-center justify-center gap-1 cursor-pointer">
             <input
               type="radio"
-              {...register("sign", {
-                onChange: changeSign,
-                value:"+",
-              })}
+              // hidden
+            onChange={(e)=> changeSign(e)}
+            value={'+'}
             />
-            <span><CirclePlus /></span>
+            <span className='p-0 bg-red'>
+              <CirclePlus className='bg-transparent'/>
+            </span>
           </label>
             <label className="flex items-center justify-center gap-1 cursor-pointer">
               <input
                 type="radio"
-                {...register("sign", {
-                  onChange: changeSign,
-                  value:"-",
-                })}
+                // hidden
+                onChange={(e)=> changeSign(e)}
+                value={'-'}
               />
               <span><CircleMinus /></span>
             </label>
@@ -141,7 +150,7 @@ const AddTransactionForm = () => {
       <button
         className='flex gap-5 mt-auto btn btn-active btn-primary w-full'
         type='submit'
-        disabled={isSubmitting || !isDirty || !isValid || !!logError}
+        disabled={isSubmitting || !isDirty || !isValid }
             >
       { isSubmitting &&  <RefreshCw className='size-6 animate-spin' />}      
       { isLoading  ? "Sending.." :  "Send" }
