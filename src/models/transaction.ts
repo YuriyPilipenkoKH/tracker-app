@@ -18,7 +18,13 @@ export const TransactionSchema = (totalBalance :number) => z.object({
         message: 'You haven`t got enough money'
       }),
     dateTime: z
-    .date() ,
+    .string()
+    .min(1, { message: "Date is required" }) // Ensure it's not empty
+    .refine((val) => !isNaN(Date.parse(val)), {
+      message: "Invalid date format",
+    })
+    .transform((val) => new Date(val)), // Convert to Date
+
     description: z
     .string()
     .trim()

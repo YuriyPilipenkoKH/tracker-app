@@ -75,8 +75,10 @@ const AddTransactionForm = () => {
         <input 
           type='datetime-local'
           className={cn('input input-bordered   peer w-full  placeholder-transparent' )}
-          {...register('dateTime', 
-            { valueAsDate: true }
+          {...register('dateTime', {
+            setValueAs: (val) => (val ? String(val) : ""),
+          }
+            // { valueAsDate: true }
           // { onChange: handleInputChange }
         )}
              // placeholder=	{( isSubmitting )? "Processing" : 'dateTime'}
