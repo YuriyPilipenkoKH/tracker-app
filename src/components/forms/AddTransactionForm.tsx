@@ -17,8 +17,8 @@ const AddTransactionForm = () => {
   } = useForm<Transaction >({
     defaultValues: {  
       name: '',
-      amount: 0 ,
-      dateTime: undefined,
+      amount: undefined ,
+      dateTime: undefined ,
       description: ''
        },
         mode:'all',
@@ -32,6 +32,10 @@ const AddTransactionForm = () => {
       isLoading 
     } = formState
 
+    const onSubmit = async (data: Transaction) => {
+      console.log(data);
+    }
+
     useEffect(() => {
       if(isSubmitSuccessful) {
           reset()
@@ -40,14 +44,16 @@ const AddTransactionForm = () => {
       
   return (
     <form  
-    // onSubmit={handleSubmit(onSubmit)}
+    onSubmit={handleSubmit(onSubmit)}
     className='flex flex-col gap-3 w-full p-5'
     autoComplete="off"
     noValidate>
       <label className={cn('formLabel  flex items-center gap-1')}>
         <input 
+          type='number'
           className={cn('grow input input-bordered' )}
           {...register('amount', 
+            { valueAsNumber: true }
           // { onChange: handleInputChange }
         )}
           placeholder=	{( isSubmitting )? "Processing" : 'amount'}
@@ -64,16 +70,23 @@ const AddTransactionForm = () => {
           />
       </label>
       {errors.name && <div className='text-purple-900'>{errors.name.message}</div>}
-      <label className={cn('formLabel  flex items-center gap-1')}>
+
+      <label className={cn('relative  w-full  flex items-center gap-1')}>
         <input 
-          className={cn('grow input input-bordered' )}
+          type='datetime-local'
+          className={cn('input input-bordered   peer w-full  placeholder-transparent' )}
           {...register('dateTime', 
+            { valueAsDate: true }
           // { onChange: handleInputChange }
         )}
-          placeholder=	{( isSubmitting )? "Processing" : 'dateTime'}
+             // placeholder=	{( isSubmitting )? "Processing" : 'dateTime'}
           />
+      <span className="absolute left-2 text-gray-400 peer-focus:hidden peer-valid:hidden">
+          {isSubmitting ? "Processing" : "Select Date & Time"}
+        </span>
       </label>
       {errors.dateTime && <div className='text-purple-900'>{errors.dateTime.message}</div>}
+
       <label className={cn('formLabel  flex items-center gap-1')}>
         <input 
           className={cn('grow input input-bordered' )}

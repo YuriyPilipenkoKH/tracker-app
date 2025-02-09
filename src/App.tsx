@@ -14,19 +14,16 @@ import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
 
 function App() {
-  const {authUser, userId, checkAuth ,pending, ischeckingAuth} = useAuthStore();
+  const {authUser, userId, checkAuth , ischeckingAuth} = useAuthStore();
   useEffect(() => {
     async function check() {
       await checkAuth() 
     }
-  check().then(() => console.log('authUser',authUser))
+  check().then(() =>{
+   if(!ischeckingAuth)  console.log('authUser',authUser)
+    })
   }, [userId]);
 
-  if( ischeckingAuth ) return (
-    <div className="flex items-center justify-center h-screen">
-      <Loader className="size-10 animate-spin"/>
-    </div>
-  )
 
   return (
     <div className='min-h-screen flex flex-col gap-12 items-center '>
@@ -36,29 +33,36 @@ function App() {
         <Route path="/"
             element ={<HomePage/>}/>
          <Route path="/signup"
-              element ={!authUser
-              ? <SignUpPage/>
-              : <Navigate to='/dashboard'/>}/>
+            element ={!authUser
+            ? <SignUpPage/>
+            : <Navigate to='/dashboard'/>}/>
         <Route path="/login"
-              element ={!authUser
-              ? <LoginPage/>
-              : <Navigate to='/dashboard'/>}/>
+            element ={!authUser
+            ? <LoginPage/>
+            : <Navigate to='/dashboard'/>}/>
         <Route path="dashboard"
-              element ={ userId
-              ? <DashboardPage/>
-              : <Navigate to='/login'/>}/>
+            element ={ userId
+            ? <DashboardPage/>
+            : <Navigate to='/login'/>}/>
         <Route path="/profile"
-          element={ userId
-              ? <ProfilePage /> 
-              : <Navigate to='/login' />}
+            element={ userId
+            ? <ProfilePage /> 
+            : <Navigate to='/login' />}
           />
-        <Route path="*" element={<NotFoundPage />} />
+        <Route path="*" 
+            element={<NotFoundPage />} />
         </Routes>
       </div>
 
       <Toaster
-       position="top-center" 
-      toastOptions={options} />
+        position="top-center" 
+        toastOptions={options} />
+
+      {ischeckingAuth && (
+      <div className="flex items-center justify-center h-screen bg-transparent absolute">
+        <Loader className="size-10 animate-spin"/>
+      </div>
+      )}
     
     </div>
   )
