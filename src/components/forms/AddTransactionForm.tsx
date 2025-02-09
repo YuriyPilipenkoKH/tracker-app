@@ -59,17 +59,7 @@ const AddTransactionForm = () => {
     noValidate>
 
 
-<div className="flex gap-6 items-center justify-center">
-            <label className="flex items-center justify-center gap-1 cursor-pointer">
-              <input
-                type="radio"
-                {...register("sign", {
-                  onChange: changeSign,
-                  value:"-",
-                })}
-              />
-              <span><CircleMinus /></span>
-            </label>
+      <div className="flex gap-6 items-center justify-center">
           <label className="flex items-center justify-center gap-1 cursor-pointer">
             <input
               type="radio"
@@ -80,6 +70,16 @@ const AddTransactionForm = () => {
             />
             <span><CirclePlus /></span>
           </label>
+            <label className="flex items-center justify-center gap-1 cursor-pointer">
+              <input
+                type="radio"
+                {...register("sign", {
+                  onChange: changeSign,
+                  value:"-",
+                })}
+              />
+              <span><CircleMinus /></span>
+            </label>
         </div>
 
       <label className={cn('formLabel  flex items-center gap-1')}>
