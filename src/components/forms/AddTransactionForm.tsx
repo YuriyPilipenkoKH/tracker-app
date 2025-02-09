@@ -8,14 +8,13 @@ import { CircleMinus, CirclePlus, RefreshCw } from 'lucide-react'
 
 const totalBalance = 1000
 const AddTransactionForm = () => {
-    const [sign, setSign] = useState<"+" | "-">("+");
+    const [sign, setSign] = useState<"+" | "-" >("+");
 
   const {
     register, 
     handleSubmit,
     formState,
     reset,
-    getValues
   } = useForm<Transaction >({
     defaultValues: {  
       name: '',
@@ -30,10 +29,9 @@ const AddTransactionForm = () => {
       isDirty,
       isValid ,
       isSubmitting,
-      isSubmitSuccessful,
       isLoading 
     } = formState
-    const amountValue = getValues('amount')
+
 
     const onSubmit = async (data: Transaction) => {
     //  console.log(data);
@@ -44,56 +42,54 @@ const AddTransactionForm = () => {
         amount:finalAmount
       }
       console.log('finalAmount',obj)
-
+      reset()
     }
     const changeSign = (e: React.ChangeEvent<HTMLInputElement>) => {
       // setValue("sign", e.target.value as "+" | "-")
       setSign(e.target.value as "+" | "-")
       console.log(sign);
+
     }
 
-    useEffect(() => {
-      if(isSubmitSuccessful){
-        setSign("+")
-         reset()
-        }
-      }, [isSubmitSuccessful])
       
   return (
     <form  
     onSubmit={handleSubmit(onSubmit)}
-    className='flex flex-col gap-3 w-full p-5'
+    className='relative flex flex-col gap-3 w-full p-5'
     autoComplete="off"
     noValidate>
 
 
-      <div className="flex gap-6 items-center justify-center">
+      <div className="absolute right-9 top-[32px] z-50 flex gap-6 items-center justify-center">
           <label className="flex items-center justify-center gap-1 cursor-pointer">
             <input
               type="radio"
               name='sign'
-              // hidden
+              hidden
             onChange= {changeSign}
             value={'+'}
             />
             <span className='p-0 bg-red'>
-              <CirclePlus className='bg-transparent'/>
+              <CirclePlus className={cn('', sign === '+'  && 'text-[var(--vivid-green)]')}/>
             </span>
           </label>
             <label className="flex items-center justify-center gap-1 cursor-pointer">
               <input
                 type="radio"
                 name='sign'
-                // hidden
+                hidden
                 onChange= {changeSign}
                 value={'-'}
               />
-              <span><CircleMinus /></span>
+              <span>
+                <CircleMinus className={cn('', sign === '-'  && 'text-[var(--orange)]')}/>
+                </span>
             </label>
         </div>
 
       <label className={cn('relative  flex items-center gap-1')}>
-     {sign === '-' && !errors.amount &&  <span className='absolute left-2 text-[var(--orange)]' >-</span>}
+      {sign === '-' && !errors.amount && isDirty && 
+      <span className='absolute left-2 text-[var(--orange)]' >-</span>}
         <input 
           type='number'
           className={cn('grow input input-bordered' ,
@@ -102,8 +98,7 @@ const AddTransactionForm = () => {
             : 'text-[var(--orange)]'
           )}
           {...register('amount', 
-            { valueAsNumber: true }
-          // { onChange: handleInputChange }
+            { valueAsNumber: true }          
         )}
           placeholder=	{( isSubmitting )? "Processing" : 'amount'}
           />
@@ -112,9 +107,7 @@ const AddTransactionForm = () => {
       <label className={cn('formLabel  flex items-center gap-1')}>
         <input 
           className={cn('grow input input-bordered' )}
-          {...register('name', 
-          // { onChange: handleInputChange }
-        )}
+          {...register('name', )}
           placeholder=	{( isSubmitting )? "Processing" : 'name'}
           />
       </label>
@@ -125,12 +118,8 @@ const AddTransactionForm = () => {
           type='datetime-local'
           className={cn('input input-bordered  peer w-full  ' )}
           {...register('dateTime', {
-     
-          }
-            // { valueAsDate: true }
-          // { onChange: handleInputChange }
-        )}
-             // placeholder=	{( isSubmitting )? "Processing" : 'dateTime'}
+            // valueAsDate:true
+          })}
           />
       <span className="absolute left-2 text-gray-400 peer-focus:hidden peer-valid:hidden">
           {isSubmitting ? "Processing" : "Select Date & Time"}
@@ -141,9 +130,7 @@ const AddTransactionForm = () => {
       <label className={cn('formLabel  flex items-center gap-1')}>
         <input 
           className={cn('grow input input-bordered' )}
-          {...register('description', 
-          // { onChange: handleInputChange }
-        )}
+          {...register('description', )}
           placeholder=	{( isSubmitting )? "Processing" : 'description'}
           />
       </label>
