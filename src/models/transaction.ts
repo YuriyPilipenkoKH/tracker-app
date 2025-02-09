@@ -14,16 +14,14 @@ export const TransactionSchema = (totalBalance :number) => z.object({
       }),
     amount: z
     .number()
+    .refine((val) => val !== 0, { message: "Amount cannot be 0" })
     .refine((val) => (val * -1) < totalBalance, {
         message: 'You haven`t got enough money'
       }),
+    sign: z.enum(["+", "-"]),
     dateTime: z
     .string()
-    .min(1, { message: "Date is required" }) // Ensure it's not empty
-    .refine((val) => !isNaN(Date.parse(val)), {
-      message: "Invalid date format",
-    })
-    .transform((val) => new Date(val)), // Convert to Date
+    .optional(),
 
     description: z
     .string()

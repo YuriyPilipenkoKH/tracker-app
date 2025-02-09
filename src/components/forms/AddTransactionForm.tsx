@@ -18,7 +18,7 @@ const AddTransactionForm = () => {
     defaultValues: {  
       name: '',
       amount: undefined ,
-      dateTime: undefined ,
+      dateTime: '' ,
       description: ''
        },
         mode:'all',
@@ -74,9 +74,9 @@ const AddTransactionForm = () => {
       <label className={cn('relative  w-full  flex items-center gap-1')}>
         <input 
           type='datetime-local'
-          className={cn('input input-bordered   peer w-full  placeholder-transparent' )}
+          className={cn('input input-bordered  peer w-full  ' )}
           {...register('dateTime', {
-            setValueAs: (val) => (val ? String(val) : ""),
+     
           }
             // { valueAsDate: true }
           // { onChange: handleInputChange }
