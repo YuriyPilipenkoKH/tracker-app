@@ -1,6 +1,7 @@
 import React from "react"
 import { Transaction } from "../../models/transaction"
 import { format } from "date-fns";
+import { cn } from "../../lib/cn";
 
 interface TransactionCardProps{
 transaction: Transaction
@@ -21,8 +22,13 @@ const TransactionCard:React.FC<TransactionCardProps> = ({transaction}) => {
         <h2 className="font-semibold">{name}</h2>
         {createdAt && <p className="text-sm text-gray-500">{format(new Date(createdAt), "dd-MM-yyyy HH:mm")}</p>}
       </div>
-      <div className={`font-bold ${amount < 0 ? "text-red-500" : "text-green-500"}`}>
-        <p>{Math.abs(amount)}</p>
+      <div 
+      className ={cn('font-bold text-xl', 
+        amount < 0 
+        ? "text-red-500" : "text-green-500"
+      )}
+      >
+        <p>{'$'}{' '}{Math.abs(amount)}</p>
       </div>
     </div>
 
