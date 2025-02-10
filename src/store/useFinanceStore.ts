@@ -47,6 +47,8 @@ export const useFinanceStore = create<FinanceStoreTypes>((set, get) => ({
        const response = await axios.post('/transaction/new', data)
       set ({ transactions:[...transactions, response.data.payload,] })
       
+      return { success: true, message:  response.data.message} 
+      
      } catch (error) {
       if (error instanceof AxiosError && error.response) {
         console.log(error.response.data.message);
