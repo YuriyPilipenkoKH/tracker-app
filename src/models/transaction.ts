@@ -19,10 +19,9 @@ export const TransactionSchema = (totalBalance :number) => z.object({
     .refine((val) => Math.abs(val*-1 ) < totalBalance, { 
       message: "You haven't got enough money" 
     }), // Checks if within balance range,
-    dateTime: z
-    .string()
-    .optional(),
-
+    // dateTime: z
+    // .string()
+    // .optional(),
     description: z
     .string()
     .trim()
@@ -30,7 +29,13 @@ export const TransactionSchema = (totalBalance :number) => z.object({
         message: 'Enter a different description'
       })
     .optional(),   
-       
+    createdAt: z
+    .date()
+    .optional(),
+    updatedAt: z
+    .date()
+    .optional(),
+
 })
 
 export type Transaction = z.infer<ReturnType<typeof TransactionSchema>>;
