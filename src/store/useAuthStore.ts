@@ -192,8 +192,11 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
     set({ pending: true });
     try {
       const response = await axios.put('/auth/update-balance', data)
-      set({ authUser: response.data.user })
-      toast.success(response.data.message)
+      if(response.data){
+        set({ authUser: response.data.user })
+        setTotalBalance(balance)
+        toast.success(response.data.message)
+      }
     } catch (error) {
       if (error instanceof AxiosError && error.response) {
         console.log(error.response.data.message);

@@ -15,7 +15,7 @@ interface AddTransactionFormProps {
 const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
   setOpen
 }) => {
- const {totalBalance, setTotalBalance, newTransaction} = useFinanceStore()
+ const {totalBalance,  newTransaction} = useFinanceStore()
   const {updateBalance } = useAuthStore() 
     const [sign, setSign] = useState<"+" | "-" >("+");
     console.log('totalBalance', totalBalance);
@@ -58,12 +58,13 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
       const response = await newTransaction(finalData)
 
       if(response?.success){
-        const newBalance = refreshTotalBalance(finalData.amount)
-        
-        const updateresponse = await updateBalance({
-          balance: newBalance
-        })
-        setTotalBalance(newBalance)
+         const newBalance = refreshTotalBalance(finalData.amount)
+         if(response.id) {
+           await updateBalance({
+            balance: newBalance,
+            id: response.id
+          })
+         }
         
         console.log(response.message);
         clearErrors()

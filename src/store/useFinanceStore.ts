@@ -24,8 +24,6 @@ export const useFinanceStore = create<FinanceStoreTypes>((set, get) => ({
     set({ totalBalance: value });
   },
 
-
-
   grabTransactions: async() => {
     set({ pending: true });
     try {
@@ -54,7 +52,11 @@ export const useFinanceStore = create<FinanceStoreTypes>((set, get) => ({
        const response = await axios.post('/transaction/new', data)
       set ({ transactions:[...transactions, response.data.payload,] })
 
-      return { success: true, message:  response.data.message} 
+      return { 
+        success: true, 
+        message:  response.data.message,
+        id: response.data.payload._id
+      } 
       
      } catch (error) {
       if (error instanceof AxiosError && error.response) {

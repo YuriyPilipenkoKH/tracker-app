@@ -4,12 +4,14 @@ export interface img {
 export interface loginResponse {
   success: boolean
   message: string
+  id?: string
 }
 export interface profile {
   name: string
 }
 export interface bal {
   balance: number
+  id: string
 }
 
 
