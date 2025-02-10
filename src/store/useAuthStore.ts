@@ -134,6 +134,7 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
           logError: '',
         }));
         localStorage.setItem("tracker-userId",'')
+        localStorage.setItem("tracker-totalBalance", '')
       }
 
     }  catch (error: unknown) {
