@@ -1,4 +1,4 @@
-import React ,{  useState } from 'react'
+import React ,{  useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Transaction, TransactionSchema } from '../../models/transaction'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -6,9 +6,14 @@ import { cn } from '../../lib/cn'
 import { CircleMinus, CirclePlus, CircleX, RefreshCw } from 'lucide-react'
 import { useFinanceStore } from '../../store/useFinanceStore'
 
+interface AddTransactionFormProps {
+  setOpen: React.Dispatch<boolean>
+}
 
 const totalBalance = 1000
-const AddTransactionForm = () => {
+const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
+  setOpen
+}) => {
   const {newTransaction} = useFinanceStore() 
     const [sign, setSign] = useState<"+" | "-" >("+");
 
@@ -18,7 +23,6 @@ const AddTransactionForm = () => {
     formState,
     reset,
     clearErrors,
-    setValue
   } = useForm<Transaction >({
     defaultValues: {  
       name: '',
@@ -36,6 +40,8 @@ const AddTransactionForm = () => {
       isLoading 
     } = formState
 
+    useEffect(() => clearErrors(), [])
+    
 
     const onSubmit = async (data: Transaction) => {
 
@@ -51,7 +57,9 @@ const AddTransactionForm = () => {
       if(response?.success){
         // localStorage.setItem('tracker-login-email', '')
         console.log(response.message);
+        clearErrors()
         reset()
+        setOpen(false)
       } 
     }
     const changeSign = (e: React.ChangeEvent<HTMLInputElement>) => {

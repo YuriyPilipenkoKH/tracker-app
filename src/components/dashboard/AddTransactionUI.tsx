@@ -24,7 +24,7 @@ const AddTransactionUI = () => {
       <div className= {cn('w-full overflow-hidden transition-all duration-1000 ease-in-out ' ,
               open ? 'max-h-screen opacity-100 py-2' : 'max-h-0 opacity-0'
             )}>
-        <AddTransactionForm/>
+        <AddTransactionForm setOpen={setOpen}/>
       </div>
     </div>
   )
