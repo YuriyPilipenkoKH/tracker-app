@@ -29,7 +29,8 @@ export const TransactionSchema = (totalBalance :number) => z.object({
     .refine((val) => !val.toLowerCase().startsWith('qwe'), {
         message: 'Enter a different description'
       })
-    .optional(),      
+    .optional(),   
+       
 })
 
 export type Transaction = z.infer<ReturnType<typeof TransactionSchema>>;

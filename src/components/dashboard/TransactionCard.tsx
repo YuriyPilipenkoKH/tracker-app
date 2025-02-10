@@ -15,18 +15,18 @@ const TransactionCard:React.FC<TransactionCardProps> = ({transaction}) => {
   } = transaction
   return (
 
-    <div className="card   w-96">
-  <div className="card-body flex justify-beteen">
-    <div>
+
+  <div className=" flex justify-between items-center w-64 p-4 ">
+    <div className="flex flex-col gap-2">
       <h2 className="card-title">{name}</h2>
       <p>{dateTime}</p>
-      <p>{description}</p>
+      {/* <p>{description}</p> */}
     </div>
-    <div className=" justify-end">
+    <div className=" ">
       <p>{amount}</p>
     </div>
   </div>
-</div>
+
         // <div  className="flex gap-4 p-4 items-center justify-between ">
         //   <div>
         //     <p>{name}</p>
