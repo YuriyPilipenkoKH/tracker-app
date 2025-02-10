@@ -6,6 +6,7 @@ import { Transaction } from '../models/transaction'
 
 interface FinanceStoreTypes {
   totalBalance: number | undefined
+  transactions: [Transaction] | undefined
   pending: boolean
 
   grabTransactions: () => Promise<loginResponse | undefined>
@@ -14,12 +15,19 @@ interface FinanceStoreTypes {
 }
 export const useFinanceStore = create<FinanceStoreTypes>((set, get) => ({
   totalBalance: Number(localStorage.getItem("tracker-totalBalance")) || undefined,
+  transactions: undefined,
   pending: false,
 
   grabTransactions: async() => {
-
+    set({ pending: true });
     try {
-      const response = await axios.post('/auth/signup')
+      const response = await axios.get('/transaction/grab')
+      set(() => ({
+        // ...state,
+        transactions: response.data,
+        // userId: response.data._id,
+      }));
+      return { success: true, message:  'Transactions`re grabbed '} //response.data.message
       
     } catch (error) {
       if (error instanceof AxiosError && error.response) {
@@ -28,12 +36,13 @@ export const useFinanceStore = create<FinanceStoreTypes>((set, get) => ({
      } 
      return { success: false, message: "An unexpected error occurred" };
     }
+    finally{  set({ pending: false }) }
   },
 
   newTransaction: async(data) => {
      set({ pending: true });
      try {
-       const response = await axios.post('/auth/signup', data)
+       const response = await axios.post('/transaction/new', data)
       
      } catch (error) {
       if (error instanceof AxiosError && error.response) {
