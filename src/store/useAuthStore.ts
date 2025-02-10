@@ -38,15 +38,17 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
 
   checkAuth: async() =>{
     set({ ischeckingAuth: true });
-
+    const setTotalBalance = useFinanceStore.getState().setTotalBalance
     try {
       const response = await axios.get('/auth/check')
       if (response.data) {
-        set((state) => ({
+        set(() => ({
           // ...state,
           authUser: response.data,
           userId: response.data._id,
         }));
+        setTotalBalance(response.data.balance)
+        localStorage.setItem("tracker-totalBalance", response.data.balance)
       }
     } catch (error) {
       set({authUser: undefined})

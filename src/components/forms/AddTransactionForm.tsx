@@ -1,4 +1,4 @@
-import React ,{  useEffect, useState } from 'react'
+import React ,{ useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Transaction, TransactionSchema } from '../../models/transaction'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -11,14 +11,12 @@ interface AddTransactionFormProps {
   setOpen: React.Dispatch<boolean>
 }
 
-
 const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
   setOpen
 }) => {
- const {totalBalance,  newTransaction} = useFinanceStore()
-  const {updateBalance } = useAuthStore() 
+ const {totalBalance,  newTransaction, withdrawalsEerror, clearWithdrawalsEerror} = useFinanceStore()
+  const { updateBalance } = useAuthStore() 
     const [sign, setSign] = useState<"+" | "-" >("+");
-    console.log('totalBalance', totalBalance);
 
   const {
     register, 
@@ -42,8 +40,6 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
       isLoading 
     } = formState
 
-    useEffect(() => clearErrors(), [])
-    
 
     const onSubmit = async (data: Transaction) => {
 
@@ -82,6 +78,9 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
      localStorage.setItem("tracker-totalBalance", result.toString())
      return result
     }
+    const handleInputChange =   () => {
+      if(withdrawalsEerror) clearWithdrawalsEerror()
+    }
 
       
   return (
@@ -90,8 +89,6 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
     className='relative flex flex-col gap-3 w-full px-1  py-12'
     autoComplete="off"
     noValidate>
-
-
       <div className="absolute right-9 top-[60px] z-50 flex gap-6 items-center justify-center">
           <label className="flex items-center justify-center gap-1 cursor-pointer">
             <input
@@ -130,6 +127,7 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
             : 'text-[var(--orange)]'
           )}
           {...register('amount', { 
+            onChange:handleInputChange,
             valueAsNumber: true ,           
             }          
         )}
@@ -137,6 +135,7 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
           />
       </label>
       {errors.amount && <div className='text-purple-900'>{errors.amount.message}</div>}
+      {withdrawalsEerror && <div  className='text-purple-900'>{withdrawalsEerror}</div>}
       <label className={cn('formLabel  flex items-center gap-1')}>
         <input 
           className={cn('grow input input-bordered focus:ring focus:border-blue-500' )}
