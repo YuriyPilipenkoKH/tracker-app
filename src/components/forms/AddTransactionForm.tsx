@@ -59,11 +59,7 @@ const AddTransactionForm = () => {
       setSign(e.target.value as "+" | "-")
       console.log(sign);
     }
-    const onAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      if(sign === '-'){
-        setValue('amount', Number(e.target.value) * -1)
-      }
-    }
+
       
   return (
     <form  
@@ -111,8 +107,7 @@ const AddTransactionForm = () => {
             : 'text-[var(--orange)]'
           )}
           {...register('amount', { 
-            valueAsNumber: true ,
-              // onChange:onAmountChange
+            valueAsNumber: true ,           
             }          
         )}
           placeholder=	{( isSubmitting )? "Processing" : 'amount'}
@@ -127,20 +122,6 @@ const AddTransactionForm = () => {
           />
       </label>
       {errors.name && <div className='text-purple-900'>{errors.name.message}</div>}
-
-      {/* <label className={cn('relative  w-full  flex items-center gap-1')}>
-        <input 
-          type='datetime-local'
-          className={cn('input input-bordered  peer w-full focus:ring focus:border-blue-500 ' )}
-          {...register('dateTime', {
-            // valueAsDate:true
-          })}
-          />
-      <span className="absolute left-2 text-gray-400 peer-focus:hidden peer-valid:hidden">
-          {isSubmitting ? "Processing" : "Select Date & Time"}
-        </span>
-      </label>
-      {errors.dateTime && <div className='text-purple-900'>{errors.dateTime.message}</div>} */}
 
       <label className={cn('formLabel  flex items-center gap-1')}>
         <input 

@@ -17,7 +17,7 @@ const TransactionList = () => {
   }, [userId])
   
   return (
-    <div className='flex flex-col gap-3 '>
+    <div className='flex flex-col gap-3 py-2'>
       {transactions.map ((item, id) => (
      <TransactionCard key={id} transaction={item}/> 
 
