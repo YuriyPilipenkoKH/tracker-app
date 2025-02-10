@@ -4,10 +4,12 @@ import { Transaction, TransactionSchema } from '../../models/transaction'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { cn } from '../../lib/cn'
 import { CircleMinus, CirclePlus, RefreshCw } from 'lucide-react'
+import { useFinanceStore } from '../../store/useFinanceStore'
 
 
 const totalBalance = 1000
 const AddTransactionForm = () => {
+  const {newTransaction} = useFinanceStore() 
     const [sign, setSign] = useState<"+" | "-" >("+");
 
   const {
@@ -35,17 +37,20 @@ const AddTransactionForm = () => {
 
 
     const onSubmit = async (data: Transaction) => {
-    //  console.log(data);
+
       const finalAmount = sign === "-" ? -data.amount : data.amount;
       console.log("Final Transaction:", finalAmount);
-      const obj = {
+      const finalData = {
         ...data,
         amount:finalAmount
       }
-      console.log('finalAmount',obj)
+      console.log('finalAmount',finalData)
+      const response = await newTransaction(finalData)
 
-
-      reset()
+      if(response?.success){
+        // localStorage.setItem('tracker-login-email', '')
+        reset()
+      } 
     }
     const changeSign = (e: React.ChangeEvent<HTMLInputElement>) => {
       // setValue("sign", e.target.value as "+" | "-")
