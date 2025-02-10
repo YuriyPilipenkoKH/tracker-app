@@ -8,6 +8,9 @@ export interface loginResponse {
 export interface profile {
   name: string
 }
+export interface bal {
+  balance: number
+}
 
 
 // export interface User {

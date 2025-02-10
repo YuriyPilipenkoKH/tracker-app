@@ -1,5 +1,5 @@
 import {create} from 'zustand'
-import { img, loginResponse} from '../types';
+import { bal, img, loginResponse} from '../types';
 import { axios } from '../lib/axios';
 import { AxiosError } from 'axios';
 import toast from 'react-hot-toast';
@@ -24,6 +24,8 @@ interface AuthStoreTypes {
   updateProfile: (data: profileSchemaType) => Promise<boolean | undefined>
   uploadAvatar: (data: img) => Promise<void>
   clearLogError: () => void
+  updateBalance: (data: bal) =>Promise<void>
+
 }
 
 export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
@@ -181,7 +183,22 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
 
   clearLogError: () => {
     set({logError: ''})
-  }
+  },
+
+  updateBalance: async(data) => {
+    // const {balance} = data
+    set({ pending: true });
+    try {
+      const response = await axios.put('/auth/update-balance', data)
+      set({ authUser: response.data.user })
+      toast.success(response.data.message)
+    } catch (error) {
+      if (error instanceof AxiosError && error.response) {
+        console.log(error.response.data.message);
+     } 
+    }
+    finally{  set({ pending: false }) }
+  },
 }))
 
 

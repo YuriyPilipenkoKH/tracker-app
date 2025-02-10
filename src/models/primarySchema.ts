@@ -36,7 +36,7 @@ export const primarySchema = z.object({
   .string()
   .trim()
   .regex(/^0\d{9}$/, {
-    message: 'orrect format: 0985551204 ',
+    message: 'Correct format: 0985551204 ',
   })
   .optional(),
   city: z

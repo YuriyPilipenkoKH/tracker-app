@@ -1,6 +1,6 @@
 import  { AxiosError } from 'axios'
 import {create} from 'zustand'
-import { loginResponse } from '../types'
+import {  loginResponse } from '../types'
 import { axios } from '../lib/axios'
 import { Transaction } from '../models/transaction'
 
@@ -11,6 +11,7 @@ interface FinanceStoreTypes {
   pending: boolean
 
   setTotalBalance: (data: number) => void
+
   grabTransactions: () => Promise<loginResponse | undefined>
   newTransaction: (data:Transaction) => Promise<loginResponse | undefined>
 
@@ -23,6 +24,8 @@ export const useFinanceStore = create<FinanceStoreTypes>((set, get) => ({
   setTotalBalance: (value) => {
     set({ totalBalance: value });
   },
+
+
 
   grabTransactions: async() => {
     set({ pending: true });
