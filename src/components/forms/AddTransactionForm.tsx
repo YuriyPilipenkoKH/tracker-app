@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { Transaction, TransactionSchema } from '../../models/transaction'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { cn } from '../../lib/cn'
-import { CircleMinus, CirclePlus, RefreshCw } from 'lucide-react'
+import { CircleMinus, CirclePlus, CircleX, RefreshCw } from 'lucide-react'
 import { useFinanceStore } from '../../store/useFinanceStore'
 
 
@@ -17,6 +17,7 @@ const AddTransactionForm = () => {
     handleSubmit,
     formState,
     reset,
+    clearErrors,
     setValue
   } = useForm<Transaction >({
     defaultValues: {  
@@ -156,6 +157,13 @@ const AddTransactionForm = () => {
             >
       { isSubmitting &&  <RefreshCw className='size-6 animate-spin' />}      
       { isLoading  ? "Sending.." :  "Send" }
+      </button>
+
+      <button 
+      type='button'
+      onClick ={() => clearErrors()}
+      className='absolute top-[-9px] right-9 ' >
+            <CircleX  />
       </button>
 
     </form>

@@ -3,7 +3,7 @@ import {create} from 'zustand'
 import { loginResponse } from '../types'
 import { axios } from '../lib/axios'
 import { Transaction } from '../models/transaction'
-import toast from 'react-hot-toast'
+
 
 interface FinanceStoreTypes {
   totalBalance: number | undefined
@@ -46,7 +46,7 @@ export const useFinanceStore = create<FinanceStoreTypes>((set, get) => ({
      try {
        const response = await axios.post('/transaction/new', data)
       set ({ transactions:[...transactions, response.data.payload,] })
-      
+
       return { success: true, message:  response.data.message} 
       
      } catch (error) {
