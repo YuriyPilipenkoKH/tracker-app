@@ -49,6 +49,7 @@ const AddTransactionForm = () => {
 
       if(response?.success){
         // localStorage.setItem('tracker-login-email', '')
+        console.log(response.message);
         reset()
       } 
     }

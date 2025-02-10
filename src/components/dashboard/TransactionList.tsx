@@ -16,7 +16,16 @@ const TransactionList = () => {
   }, [userId])
   
   return (
-    <div>TransactionList</div>
+    <div>
+      {transactions.map((item, id) =>(
+        <div key={id}>
+          <p>{item.name}</p>
+          <p>{item.amount}</p>
+          <p>{item.dateTime}</p>
+          <p>{item.description}</p>
+        </div>
+     ))}
+    </div>
   )
 }
 

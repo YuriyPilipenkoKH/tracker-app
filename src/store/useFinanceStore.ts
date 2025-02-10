@@ -3,10 +3,11 @@ import {create} from 'zustand'
 import { loginResponse } from '../types'
 import { axios } from '../lib/axios'
 import { Transaction } from '../models/transaction'
+import toast from 'react-hot-toast'
 
 interface FinanceStoreTypes {
   totalBalance: number | undefined
-  transactions: [Transaction] | undefined
+  transactions: Transaction[]
   pending: boolean
 
   grabTransactions: () => Promise<loginResponse | undefined>
@@ -15,18 +16,19 @@ interface FinanceStoreTypes {
 }
 export const useFinanceStore = create<FinanceStoreTypes>((set, get) => ({
   totalBalance: Number(localStorage.getItem("tracker-totalBalance")) || undefined,
-  transactions: undefined,
+  transactions: [],
   pending: false,
 
   grabTransactions: async() => {
     set({ pending: true });
     try {
       const response = await axios.get('/transaction/grab')
-      set(() => ({
-        // ...state,
-        transactions: response.data.payload,
-        // userId: response.data._id,
-      }));
+      if(response.data){
+        set((state) => ({
+          ...state,
+          transactions: response.data.payload,
+          }));
+     }
       return { success: true, message:  response.data.message} //
     } catch (error) {
       if (error instanceof AxiosError && error.response) {
@@ -40,9 +42,10 @@ export const useFinanceStore = create<FinanceStoreTypes>((set, get) => ({
 
   newTransaction: async(data) => {
      set({ pending: true });
+     const { transactions } = get();
      try {
        const response = await axios.post('/transaction/new', data)
-       
+      set ({ transactions:[...transactions, response.data.payload,] })
       
      } catch (error) {
       if (error instanceof AxiosError && error.response) {
