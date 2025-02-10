@@ -68,12 +68,12 @@ const AddTransactionForm = () => {
   return (
     <form  
     onSubmit={handleSubmit(onSubmit)}
-    className='relative flex flex-col gap-3 w-full p-5'
+    className='relative flex flex-col gap-3 w-full px-5 py-12'
     autoComplete="off"
     noValidate>
 
 
-      <div className="absolute right-9 top-[32px] z-50 flex gap-6 items-center justify-center">
+      <div className="absolute right-9 top-[60px] z-50 flex gap-6 items-center justify-center">
           <label className="flex items-center justify-center gap-1 cursor-pointer">
             <input
               type="radio"
@@ -163,7 +163,7 @@ const AddTransactionForm = () => {
       <button 
       type='button'
       onClick ={() => clearErrors()}
-      className='absolute top-[-9px] right-9 ' >
+      className='btn btn-ghost absolute top-[-8px] right-5 ' >
             <CircleX  />
       </button>)
       }
