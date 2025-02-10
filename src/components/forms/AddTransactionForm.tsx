@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { cn } from '../../lib/cn'
 import { CircleMinus, CirclePlus, CircleX, RefreshCw } from 'lucide-react'
 import { useFinanceStore } from '../../store/useFinanceStore'
+import { number } from 'zod'
 
 interface AddTransactionFormProps {
   setOpen: React.Dispatch<boolean>
@@ -14,7 +15,7 @@ interface AddTransactionFormProps {
 const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
   setOpen
 }) => {
- const {totalBalance} = useFinanceStore()
+ const {totalBalance, setTotalBalance} = useFinanceStore()
   const {newTransaction} = useFinanceStore() 
     const [sign, setSign] = useState<"+" | "-" >("+");
     console.log('totalBalance', totalBalance);
@@ -58,7 +59,8 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
 
       if(response?.success){
         // localStorage.setItem('tracker-login-email', '')
-        refreshTotalBalance(finalData.amount)
+        setTotalBalance(refreshTotalBalance(finalData.amount))
+        
         console.log(response.message);
         clearErrors()
         reset()
@@ -70,9 +72,10 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
       setSign(e.target.value as "+" | "-")
       console.log(sign);
     }
-    const refreshTotalBalance =(value: number) => {
+    const refreshTotalBalance =(value: number) =>  {
      const result =  totalBalance + value
      localStorage.setItem("tracker-totalBalance", result.toString())
+     return result
     }
 
       
