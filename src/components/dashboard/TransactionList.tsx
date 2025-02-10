@@ -2,6 +2,7 @@
 import { useEffect } from 'react'
 import { useFinanceStore } from '../../store/useFinanceStore'
 import { useAuthStore } from '../../store/useAuthStore';
+import TransactionCard from './TransactionCard';
 
 const TransactionList = () => {
   const {grabTransactions, pending, transactions } = useFinanceStore()
@@ -16,15 +17,11 @@ const TransactionList = () => {
   }, [userId])
   
   return (
-    <div>
-      {transactions.map((item, id) =>(
-        <div key={id}>
-          <p>{item.name}</p>
-          <p>{item.amount}</p>
-          <p>{item.dateTime}</p>
-          <p>{item.description}</p>
-        </div>
-     ))}
+    <div className='flex flex-col gap-3 '>
+      {transactions.map ((item, id) => (
+     <TransactionCard key={id} transaction={item}/> 
+
+      ))}
     </div>
   )
 }
