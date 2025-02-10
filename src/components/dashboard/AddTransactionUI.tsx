@@ -9,7 +9,7 @@ const AddTransactionUI = () => {
     setOpen(!open)
   }
   return (
-    <div className='flex flex-col justify-center items-center w-full  border-b border-base-300 p-6'>
+    <div className='flex flex-col justify-center items-center w-full   p-6'>
       <button 
         className='flex gap-8'
         onClick={click}

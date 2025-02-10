@@ -44,7 +44,7 @@ const AddTransactionForm = () => {
       }
       console.log('finalAmount',obj)
 
-      
+
       reset()
     }
     const changeSign = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -105,7 +105,7 @@ const AddTransactionForm = () => {
           )}
           {...register('amount', { 
             valueAsNumber: true ,
-              onChange:onAmountChange
+              // onChange:onAmountChange
             }          
         )}
           placeholder=	{( isSubmitting )? "Processing" : 'amount'}
