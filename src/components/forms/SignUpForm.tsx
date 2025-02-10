@@ -57,7 +57,7 @@ export const SignUpForm = () => {
     noValidate>
       <label className={cn('formLabel  flex items-center gap-1')}>
         <input 
-          className={cn('grow input input-bordered' )}
+          className={cn('grow input input-bordered focus:ring focus:border-blue-500' )}
           {...register('name', 
           { onChange: handleInputChange })}
           placeholder=	{( isSubmitting )? "Processing" : 'name'}
@@ -66,7 +66,7 @@ export const SignUpForm = () => {
       {errors.name && <div className='text-purple-900'>{errors.name.message}</div>}
       <label className={cn('formLabel  flex items-center gap-1')}>
         <input 
-          className={cn('grow input input-bordered' )}
+          className={cn('grow input input-bordered focus:ring focus:border-blue-500' )}
           {...register('email', 
           { onChange: handleInputChange })}
           placeholder=	{( isSubmitting )? "Processing" : 'email'}
@@ -75,7 +75,7 @@ export const SignUpForm = () => {
       {errors.email && <div className='text-purple-900'>{errors.email.message}</div>}
       <label className={cn('formLabel  flex items-center gap-1 relative')}>
         <input 
-          className={cn('grow input input-bordered' )}
+          className={cn('grow input input-bordered focus:ring focus:border-blue-500' )}
           {...register('password', 
           { onChange: handleInputChange })}
           placeholder=	{( isSubmitting )? "Processing" : "•••••"}

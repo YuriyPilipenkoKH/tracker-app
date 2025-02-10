@@ -63,7 +63,7 @@ const LoginForm = () => {
          
           <label className={cn('formLabel  flex items-center gap-1')}>
             <input 
-              className={cn('grow input input-bordered' )}
+              className={cn('grow input input-bordered focus:ring focus:border-blue-500' )}
               {...register('email', 
               { onChange: handleInputChange } )}
               placeholder=	{( isSubmitting )? "Processing" : 'email'}
@@ -72,7 +72,7 @@ const LoginForm = () => {
           {errors.email && <div className='text-purple-900'>{errors.email.message}</div>}
           <label className={cn('formLabel  flex items-center gap-1 relative')}>
             <input 
-              className={cn('grow input input-bordered' )}
+              className={cn('grow input input-bordered focus:ring focus:border-blue-500' )}
               {...register('password', 
               { onChange: handleInputChange } )}
               placeholder=	{( isSubmitting )? "Processing" : "•••••"}

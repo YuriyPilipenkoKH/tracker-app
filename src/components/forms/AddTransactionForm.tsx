@@ -105,7 +105,7 @@ const AddTransactionForm = () => {
       <span className='absolute left-2 text-[var(--orange)]' >-</span>} */}
         <input 
           type='number'
-          className={cn('grow input input-bordered' ,
+          className={cn('grow input input-bordered focus:ring focus:border-blue-500' ,
             sign === '+'
             ? 'text-[var(--vivid-green)]' 
             : 'text-[var(--orange)]'
@@ -121,7 +121,7 @@ const AddTransactionForm = () => {
       {errors.amount && <div className='text-purple-900'>{errors.amount.message}</div>}
       <label className={cn('formLabel  flex items-center gap-1')}>
         <input 
-          className={cn('grow input input-bordered' )}
+          className={cn('grow input input-bordered focus:ring focus:border-blue-500' )}
           {...register('name', )}
           placeholder=	{( isSubmitting )? "Processing" : 'name'}
           />
@@ -131,7 +131,7 @@ const AddTransactionForm = () => {
       <label className={cn('relative  w-full  flex items-center gap-1')}>
         <input 
           type='datetime-local'
-          className={cn('input input-bordered  peer w-full  ' )}
+          className={cn('input input-bordered  peer w-full focus:ring focus:border-blue-500 ' )}
           {...register('dateTime', {
             // valueAsDate:true
           })}
@@ -144,7 +144,7 @@ const AddTransactionForm = () => {
 
       <label className={cn('formLabel  flex items-center gap-1')}>
         <input 
-          className={cn('grow input input-bordered' )}
+          className={cn('grow input input-bordered focus:ring focus:border-blue-500' )}
           {...register('description', )}
           placeholder=	{( isSubmitting )? "Processing" : 'description'}
           />
