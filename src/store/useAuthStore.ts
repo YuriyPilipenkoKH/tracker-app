@@ -9,6 +9,7 @@ import { signUpSchemaType } from '../models/signUpSchema';
 import { LoginSchemaType } from '../models/loginSchema';
 import { profileSchemaType } from '../models/profileSchema';
 import { User } from '../models/UserSchema';
+import { useFinanceStore } from './useFinanceStore';
 
 interface AuthStoreTypes {
   userId: string
@@ -186,7 +187,8 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
   },
 
   updateBalance: async(data) => {
-    // const {balance} = data
+    const {balance} = data
+    const setTotalBalance = useFinanceStore.getState().setTotalBalance
     set({ pending: true });
     try {
       const response = await axios.put('/auth/update-balance', data)

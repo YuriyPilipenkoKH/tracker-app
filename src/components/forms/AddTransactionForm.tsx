@@ -50,7 +50,8 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
       console.log("Final Transaction:", finalAmount);
       const finalData = {
         ...data,
-        amount:finalAmount
+        amount:finalAmount,
+        total: refreshTotalBalance(finalAmount)
       }
       console.log('finalAmount',finalData)
       const response = await newTransaction(finalData)

@@ -11,7 +11,6 @@ interface FinanceStoreTypes {
   pending: boolean
 
   setTotalBalance: (data: number) => void
-
   grabTransactions: () => Promise<loginResponse | undefined>
   newTransaction: (data:Transaction) => Promise<loginResponse | undefined>
 

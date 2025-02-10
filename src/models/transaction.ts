@@ -19,7 +19,9 @@ export const TransactionSchema = (totalBalance :number ) => z.object({
     .refine((val) => (val*-1 ) < totalBalance, { 
       message: "You haven't got enough money" 
     }), // Checks if within balance range,
-
+    total: z
+    .number()
+    .optional(),  
     description: z
     .string()
     .trim()

@@ -13,6 +13,7 @@ const TransactionCard:React.FC<TransactionCardProps> = ({transaction}) => {
     name,
     amount,
     createdAt,
+    total,
     description
   } = transaction
   return (
@@ -22,24 +23,19 @@ const TransactionCard:React.FC<TransactionCardProps> = ({transaction}) => {
         <h2 className="font-semibold">{name}</h2>
         {createdAt && <p className="text-sm text-gray-500">{format(new Date(createdAt), "dd-MM-yyyy HH:mm")}</p>}
       </div>
-      <div 
-      className ={cn('font-bold text-xl', 
+      <div className="flex flex-col gap-2 items-end">
+        <p   className ={cn('font-bold text-xl', 
         amount < 0 
-        ? "text-red-500" : "text-green-500"
+        ? "text-[orange]" : "text-green-500"
       )}
-      >
-        <p>{'$'}{' '}{Math.abs(amount)}</p>
+        > {'$'}{' '}{Math.abs(amount)}</p>
+        <div className="flex gap-1 text-sm text-gray-500">
+          <p>total:</p>
+          <p>{total}</p>
+        </div>
       </div>
     </div>
 
-        // <div  className="flex gap-4 p-4 items-center justify-between ">
-        //   <div>
-        //     <p>{name}</p>
-        //     <p>{dateTime}</p>
-        //   </div>
-        //   <p>{amount}</p>
-        //   {/* <p>{description}</p> */}
-        // </div>
   )
 }
 
