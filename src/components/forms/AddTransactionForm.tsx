@@ -159,12 +159,14 @@ const AddTransactionForm = () => {
       { isLoading  ? "Sending.." :  "Send" }
       </button>
 
+      { (errors.name || errors.amount || errors.dateTime || errors.description)  &&  (
       <button 
       type='button'
       onClick ={() => clearErrors()}
       className='absolute top-[-9px] right-9 ' >
             <CircleX  />
-      </button>
+      </button>)
+      }
 
     </form>
   )
