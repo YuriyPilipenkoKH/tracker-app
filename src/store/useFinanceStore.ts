@@ -6,18 +6,23 @@ import { Transaction } from '../models/transaction'
 
 
 interface FinanceStoreTypes {
-  totalBalance: number | undefined
+  totalBalance: number 
   transactions: Transaction[]
   pending: boolean
 
+  setTotalBalance: (data: number) => void
   grabTransactions: () => Promise<loginResponse | undefined>
   newTransaction: (data:Transaction) => Promise<loginResponse | undefined>
 
 }
 export const useFinanceStore = create<FinanceStoreTypes>((set, get) => ({
-  totalBalance: Number(localStorage.getItem("tracker-totalBalance")) || undefined,
+  totalBalance: Number(localStorage.getItem("tracker-totalBalance")) || 0,
   transactions: [],
   pending: false,
+
+  setTotalBalance: (value) => {
+    set({ totalBalance: value });
+  },
 
   grabTransactions: async() => {
     set({ pending: true });

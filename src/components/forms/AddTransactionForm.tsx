@@ -10,12 +10,14 @@ interface AddTransactionFormProps {
   setOpen: React.Dispatch<boolean>
 }
 
-const totalBalance = 1000
+
 const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
   setOpen
 }) => {
+ const {totalBalance} = useFinanceStore()
   const {newTransaction} = useFinanceStore() 
     const [sign, setSign] = useState<"+" | "-" >("+");
+    console.log('totalBalance', totalBalance);
 
   const {
     register, 
@@ -56,6 +58,7 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
 
       if(response?.success){
         // localStorage.setItem('tracker-login-email', '')
+        refreshTotalBalance(finalData.amount)
         console.log(response.message);
         clearErrors()
         reset()
@@ -66,6 +69,10 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
       // setValue("sign", e.target.value as "+" | "-")
       setSign(e.target.value as "+" | "-")
       console.log(sign);
+    }
+    const refreshTotalBalance =(value: number) => {
+     const result =  totalBalance + value
+     localStorage.setItem("tracker-totalBalance", result.toString())
     }
 
       
