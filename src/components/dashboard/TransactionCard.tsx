@@ -1,5 +1,6 @@
 import React from "react"
 import { Transaction } from "../../models/transaction"
+import { format } from "date-fns";
 
 interface TransactionCardProps{
 transaction: Transaction
@@ -10,22 +11,20 @@ const TransactionCard:React.FC<TransactionCardProps> = ({transaction}) => {
   const {
     name,
     amount,
-    dateTime,
+    createdAt,
     description
   } = transaction
   return (
 
-
-  <div className=" flex justify-between items-center w-64 p-4 ">
-    <div className="flex flex-col gap-2">
-      <h2 className="card-title">{name}</h2>
-      <p>{dateTime}</p>
-      {/* <p>{description}</p> */}
+<div className="flex justify-between items-center w-64 md:w-96 p-4 border rounded-md shadow">
+      <div className="flex flex-col gap-2">
+        <h2 className="font-semibold">{name}</h2>
+        {createdAt && <p className="text-sm text-gray-500">{format(new Date(createdAt), "dd-MM-yyyy HH:mm")}</p>}
+      </div>
+      <div className={`font-bold ${amount < 0 ? "text-red-500" : "text-green-500"}`}>
+        <p>{Math.abs(amount)}</p>
+      </div>
     </div>
-    <div className=" ">
-      <p>{amount}</p>
-    </div>
-  </div>
 
         // <div  className="flex gap-4 p-4 items-center justify-between ">
         //   <div>

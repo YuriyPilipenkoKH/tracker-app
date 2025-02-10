@@ -23,7 +23,7 @@ const AddTransactionForm = () => {
     defaultValues: {  
       name: '',
       amount: undefined ,
-      dateTime: '' ,
+      // dateTime: '' ,
       description: '',
        },
         mode:'all',
@@ -68,7 +68,7 @@ const AddTransactionForm = () => {
   return (
     <form  
     onSubmit={handleSubmit(onSubmit)}
-    className='relative flex flex-col gap-3 w-full px-5 py-12'
+    className='relative flex flex-col gap-3 w-full px-1  py-12'
     autoComplete="off"
     noValidate>
 
@@ -128,7 +128,7 @@ const AddTransactionForm = () => {
       </label>
       {errors.name && <div className='text-purple-900'>{errors.name.message}</div>}
 
-      <label className={cn('relative  w-full  flex items-center gap-1')}>
+      {/* <label className={cn('relative  w-full  flex items-center gap-1')}>
         <input 
           type='datetime-local'
           className={cn('input input-bordered  peer w-full focus:ring focus:border-blue-500 ' )}
@@ -140,7 +140,7 @@ const AddTransactionForm = () => {
           {isSubmitting ? "Processing" : "Select Date & Time"}
         </span>
       </label>
-      {errors.dateTime && <div className='text-purple-900'>{errors.dateTime.message}</div>}
+      {errors.dateTime && <div className='text-purple-900'>{errors.dateTime.message}</div>} */}
 
       <label className={cn('formLabel  flex items-center gap-1')}>
         <input 
@@ -159,7 +159,7 @@ const AddTransactionForm = () => {
       { isLoading  ? "Sending.." :  "Send" }
       </button>
 
-      { (errors.name || errors.amount || errors.dateTime || errors.description)  &&  (
+      { (errors.name || errors.amount  || errors.description)  &&  (
       <button 
       type='button'
       onClick ={() => clearErrors()}
