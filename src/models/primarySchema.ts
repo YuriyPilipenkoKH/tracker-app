@@ -43,6 +43,9 @@ export const primarySchema = z.object({
   .string()
   .trim()
   .optional(),
+  balance: z
+  .number()
+  .optional(),
   createdAt: z
   .date()
   .optional(),

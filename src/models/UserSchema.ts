@@ -11,6 +11,7 @@ export const UserSchema = primarySchema.pick({
   role: true,
   phone: true,
   city: true,
+  balance:true,
   createdAt:true,
   updatedAt:true,
 
