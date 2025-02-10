@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { cn } from '../../lib/cn'
 import { CircleMinus, CirclePlus, CircleX, RefreshCw } from 'lucide-react'
 import { useFinanceStore } from '../../store/useFinanceStore'
+import { useAuthStore } from '../../store/useAuthStore'
 
 interface AddTransactionFormProps {
   setOpen: React.Dispatch<boolean>
@@ -14,8 +15,8 @@ interface AddTransactionFormProps {
 const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
   setOpen
 }) => {
- const {totalBalance, setTotalBalance} = useFinanceStore()
-  const {newTransaction} = useFinanceStore() 
+ const {totalBalance, setTotalBalance, newTransaction} = useFinanceStore()
+  const {updateBalance } = useAuthStore() 
     const [sign, setSign] = useState<"+" | "-" >("+");
     console.log('totalBalance', totalBalance);
 
@@ -57,8 +58,12 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
       const response = await newTransaction(finalData)
 
       if(response?.success){
-
-        setTotalBalance(refreshTotalBalance(finalData.amount))
+        const newBalance = refreshTotalBalance(finalData.amount)
+        
+        const updateresponse = await updateBalance({
+          balance: newBalance
+        })
+        setTotalBalance(newBalance)
         
         console.log(response.message);
         clearErrors()
