@@ -42,6 +42,7 @@ export const useFinanceStore = create<FinanceStoreTypes>((set, get) => ({
      set({ pending: true });
      try {
        const response = await axios.post('/transaction/new', data)
+       
       
      } catch (error) {
       if (error instanceof AxiosError && error.response) {
