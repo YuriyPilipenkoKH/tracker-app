@@ -17,6 +17,10 @@ export interface err {
   error: 'amountError' |'nameError'
 
 }
+export interface pagination {
+  page: number
+  limit: number
+}
 
 
 // export interface User {

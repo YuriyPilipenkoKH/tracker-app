@@ -1,6 +1,6 @@
 import  { AxiosError } from 'axios'
 import {create} from 'zustand'
-import {  err,  loginResponse } from '../types'
+import {  err,  loginResponse, pagination } from '../types'
 import { axios } from '../lib/axios'
 import { Transaction } from '../models/transaction'
 
@@ -11,10 +11,11 @@ interface FinanceStoreTypes {
   pending: boolean
   amountError:string
   nameError:string
-
+  totalPages: number,
+  currentPage: number,
 
   setTotalBalance: (data: number) => void
-  grabTransactions: () => Promise<loginResponse | undefined>
+  grabTransactions: (data: pagination) => Promise<loginResponse | undefined>
   newTransaction: (data:Transaction) => Promise<loginResponse | undefined>
   clearAnyError: (data: err) => void
 
@@ -25,20 +26,23 @@ export const useFinanceStore = create<FinanceStoreTypes>((set, get) => ({
   pending: false,
   amountError: '',
   nameError:'',
+  totalPages: 1,
+  currentPage: 1,
 
   setTotalBalance: (value) => {
     set({ totalBalance: value });
   },
 
-  grabTransactions: async() => {
+  grabTransactions: async({page = 1, limit = 10}) => {
     set({ pending: true });
     try {
-      const response = await axios.get('/transaction/grab')
+      const response = await axios.get(`/transaction/grab?page=${page}&limit=${limit}`);
       if(response.data){
-        set((state) => ({
-          ...state,
+        set({
           transactions: response.data.payload,
-          }));
+          totalPages: response.data.pagination.totalPages,
+          currentPage: response.data.pagination.currentPage,
+        });
      }
       return { success: true, message:  response.data.message} //
     } catch (error) {
