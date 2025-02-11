@@ -140,6 +140,7 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
       </label>
       {errors.amount && <div className='text-purple-900'>{errors.amount.message}</div>}
       {amountError && <div  className='text-purple-900'>{amountError}</div>}
+
       <label className={cn('formLabel  flex items-center gap-1')}>
         <input 
           className={cn('grow input input-bordered focus:ring focus:border-blue-500' )}
@@ -150,6 +151,7 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
           />
       </label>
       {errors.name && <div className='text-purple-900'>{errors.name.message}</div>}
+      {nameError && <div  className='text-purple-900'>{nameError}</div>}
 
       <label className={cn('formLabel  flex items-center gap-1')}>
         <input 
