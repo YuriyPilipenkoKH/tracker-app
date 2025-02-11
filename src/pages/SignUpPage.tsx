@@ -4,8 +4,8 @@ import { Link } from "react-router-dom"
 
 const SignUpPage = () => {
   return (
-    <div className=" grid transition-all duration-800 ease-in-out">
-      <div className="flex flex-col justify-center items-center  ">
+    <div className="grid transition-all ease-in-out  duration-800">
+      <div className="flex flex-col items-center justify-center ">
         <div className="w-full max-w-md space-y-8">
         <SignUpForm />
         <div className="text-center">
@@ -18,7 +18,6 @@ const SignUpPage = () => {
           </div>
         </div>
       </div>
-
     </div>
   )
 }
