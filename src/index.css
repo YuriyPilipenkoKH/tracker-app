@@ -58,6 +58,16 @@ body {
   }
 }
 
+.g11{
+  background-color: #4545f8;
+  border-radius:  12px 0 0 12px;
+}
+.g12{
+  background-color: #957a05;
+  border-radius: 0 12px 12px 0;
+}
+
+
 /* Hide arrows in Chrome, Safari, Edge, and Opera */
 /* input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {

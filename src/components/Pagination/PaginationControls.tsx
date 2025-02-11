@@ -15,7 +15,7 @@ const PaginationControls:React.FC = () => {
       <button
         onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="px-4 py-2 border rounded-[8px] disabled:opacity-50"
+        className="px-4 py-2 border rounded-[8px] disabled:opacity-50 bg-base-300"
       >
         Previous
       </button>
@@ -25,7 +25,7 @@ const PaginationControls:React.FC = () => {
       <button
         onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="px-4 py-2 border rounded-[8px] disabled:opacity-50"
+        className="px-4 py-2 border rounded-[8px] disabled:opacity-50 bg-base-300"
       >
         Next
       </button>

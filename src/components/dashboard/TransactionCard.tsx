@@ -18,7 +18,7 @@ const TransactionCard:React.FC<TransactionCardProps> = ({transaction}) => {
   } = transaction
   return (
 
-<div className="flex items-center justify-between w-64 p-4 border rounded-[12px] shadow md:w-96">
+<div className="flex items-center justify-between bg-base-300 w-64 p-4 border rounded-[12px] shadow md:w-96">
       <div className="flex flex-col gap-2">
         <h2 className="font-semibold">{name}</h2>
         {createdAt && <p className="text-sm text-gray-500">{format(new Date(createdAt), "dd-MM-yyyy HH:mm")}</p>}

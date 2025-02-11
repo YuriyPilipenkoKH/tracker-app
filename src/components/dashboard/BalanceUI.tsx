@@ -5,9 +5,9 @@ const BalanceUI = () => {
   const {totalBalance} = useFinanceStore()
   return (
     <div 
-    className='p-2 text-xl flex gap-8'>
-      <p>      Balance</p>
-      <span className='flex items-center jusify-center px-5 bordered bg-yellow-800 text-xl font-bold'>
+    className='flex items-center p-2 text-xl font-bold'>
+      <p className='g11 px-5 py-1 rounded-[8px]'>Balance</p>
+      <span className='g12  flex items-center jusify-center px-5 py-1 rounded-[8px]  bg-yellow-800 text-xl '>
         {'$'}{' '}
         {totalBalance}
       </span>
