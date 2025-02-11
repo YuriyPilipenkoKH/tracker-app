@@ -24,7 +24,7 @@ const TransactionList = () => {
   });
   
   return (
-    <div className='flex flex-col gap-3 py-2'>
+    <div className='flex flex-col items-center gap-3 py-2'>
       {sortedTransactions.map ((item, id) => (
         <TransactionCard key={id} transaction={item}/> 
       ))}

@@ -7,14 +7,14 @@ import TransactionList from "../components/dashboard/TransactionList"
 const DashboardPage = () => {
 
   return (
-    <div className=" grid w-full transition-all duration-800 ease-in-out ">
-    <div className="flex flex-col justify-center items-center ">
+    <div className="grid min-h-screen transition-all ease-in-out lg:grid-cols-2 duration-800">
+    <div className="flex flex-col items-center justify-top ">
       {/* <div className="w-full  md:w-[600px] space-y-8 flex flex-col justify-center items-center"> */}
      <BalanceUI/>
      <AddTransactionUI/>
-     <TransactionList/>
         {/* </div> */}
         </div>
+     <TransactionList/>
     </div>
   )
 }
