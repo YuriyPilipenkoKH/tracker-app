@@ -1,12 +1,7 @@
 import React from "react"
 import { useFinanceStore } from "../../store/useFinanceStore"
 
-// interface PaginationControlsProps{
-//   page: number
-//   setPage: React.Dispatch<React.SetStateAction<number>>
-//   totalPages: number
 
-// }
 
 const PaginationControls:React.FC = () => {
   const { currentPage, totalPages, grabTransactions } = useFinanceStore()
@@ -16,7 +11,7 @@ const PaginationControls:React.FC = () => {
   }
 
   return (
-    <div className="flex gap-3 mt-4">
+    <div className="flex items-center gap-6 mt-4">
       <button
         onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useFinanceStore } from '../../store/useFinanceStore'
 import { useAuthStore } from '../../store/useAuthStore';
 import TransactionCard from './TransactionCard';
@@ -11,8 +11,6 @@ const TransactionList = () => {
   useEffect(() => {
     grabTransactions({ page: currentPage, limit: 5 });
   }, [userId, currentPage]);
-
-
 
   
   return (
