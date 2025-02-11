@@ -66,7 +66,7 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
         // console.log(response.message);
         clearErrors()
         reset()
-        setOpen(false)
+        // setOpen(false)
       } 
     }
     const changeSign = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -90,7 +90,7 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
   return (
     <form  
     onSubmit={handleSubmit(onSubmit)}
-    className='relative flex flex-col w-full gap-3 px-1 py-12'
+    className='relative flex flex-col w-full gap-3 px-1 pt-12 pb-6'
     autoComplete="off"
     noValidate>
       <div className="absolute right-9 top-[60px] z-50 flex gap-6 items-center justify-center">
