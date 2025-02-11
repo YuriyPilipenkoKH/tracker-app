@@ -6,6 +6,7 @@ import { cn } from '../../lib/cn'
 import { CircleMinus, CirclePlus, CircleX, RefreshCw } from 'lucide-react'
 import { useFinanceStore } from '../../store/useFinanceStore'
 import { useAuthStore } from '../../store/useAuthStore'
+import toast from 'react-hot-toast'
 
 interface AddTransactionFormProps {
   setOpen: React.Dispatch<boolean>
@@ -14,7 +15,7 @@ interface AddTransactionFormProps {
 const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
   setOpen
 }) => {
- const {totalBalance,  newTransaction, withdrawalsEerror, clearWithdrawalsEerror} = useFinanceStore()
+ const {totalBalance,  newTransaction, withdrawalsError, clearWithdrawalsError} = useFinanceStore()
   const { updateBalance } = useAuthStore() 
     const [sign, setSign] = useState<"+" | "-" >("+");
 
@@ -61,8 +62,8 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
             id: response.id
           })
          }
-        
-        console.log(response.message);
+        toast.success(response.message)
+        // console.log(response.message);
         clearErrors()
         reset()
         setOpen(false)
@@ -79,14 +80,14 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
      return result
     }
     const handleInputChange =   () => {
-      if(withdrawalsEerror) clearWithdrawalsEerror()
+      if(withdrawalsError) clearWithdrawalsError()
     }
 
       
   return (
     <form  
     onSubmit={handleSubmit(onSubmit)}
-    className='relative flex flex-col gap-3 w-full px-1  py-12'
+    className='relative flex flex-col w-full gap-3 px-1 py-12'
     autoComplete="off"
     noValidate>
       <div className="absolute right-9 top-[60px] z-50 flex gap-6 items-center justify-center">
@@ -135,7 +136,7 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
           />
       </label>
       {errors.amount && <div className='text-purple-900'>{errors.amount.message}</div>}
-      {withdrawalsEerror && <div  className='text-purple-900'>{withdrawalsEerror}</div>}
+      {withdrawalsError && <div  className='text-purple-900'>{withdrawalsError}</div>}
       <label className={cn('formLabel  flex items-center gap-1')}>
         <input 
           className={cn('grow input input-bordered focus:ring focus:border-blue-500' )}
@@ -154,7 +155,7 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
       </label>
       {errors.description && <div className='text-purple-900'>{errors.description.message}</div>}
       <button
-        className='flex gap-5 mt-auto btn btn-active btn-primary w-full'
+        className='flex w-full gap-5 mt-auto btn btn-active btn-primary'
         type='submit'
         disabled={isSubmitting || !isDirty || !isValid }
             >

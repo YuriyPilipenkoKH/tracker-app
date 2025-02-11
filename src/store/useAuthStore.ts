@@ -198,7 +198,7 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
       if(response.data){
         set({ authUser: response.data.user })
         setTotalBalance(balance)
-        toast.success(response.data.message)
+        // toast.success(response.data.message)
       }
     } catch (error) {
       if (error instanceof AxiosError && error.response) {

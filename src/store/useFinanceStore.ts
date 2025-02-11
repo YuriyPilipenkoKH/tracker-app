@@ -9,18 +9,18 @@ interface FinanceStoreTypes {
   totalBalance: number 
   transactions: Transaction[]
   pending: boolean
-  withdrawalsEerror:string
+  withdrawalsError:string
 
   setTotalBalance: (data: number) => void
   grabTransactions: () => Promise<loginResponse | undefined>
   newTransaction: (data:Transaction) => Promise<loginResponse | undefined>
-  clearWithdrawalsEerror: () => void
+  clearWithdrawalsError: () => void
 }
 export const useFinanceStore = create<FinanceStoreTypes>((set, get) => ({
   totalBalance: Number(localStorage.getItem("tracker-totalBalance")) || 0,
   transactions: [],
   pending: false,
-  withdrawalsEerror: '',
+  withdrawalsError: '',
 
   setTotalBalance: (value) => {
     set({ totalBalance: value });
@@ -63,8 +63,8 @@ export const useFinanceStore = create<FinanceStoreTypes>((set, get) => ({
      } catch (error) {
       if (error instanceof AxiosError && error.response) {
         console.log(error.response.data.message);
-        if (error.response.status === 400){
-          set({withdrawalsEerror:  error.response.data.message})
+        if (error.response.data.withdrawalsError){
+          set({withdrawalsError:  error.response.data.message})
         }
         return { success: false, message: error.response.data.message };
      } 
@@ -73,8 +73,8 @@ export const useFinanceStore = create<FinanceStoreTypes>((set, get) => ({
      finally{  set({ pending: false }) }
   },
 
-  clearWithdrawalsEerror: () =>{
-    set({withdrawalsEerror: ''})
+  clearWithdrawalsError: () =>{
+    set({withdrawalsError: ''})
   }
 
 }))
