@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useFinanceStore } from '../../store/useFinanceStore'
 import { useAuthStore } from '../../store/useAuthStore';
 import TransactionCard from './TransactionCard';
+import PaginationControls from '../Pagination/PaginationControls';
 
 const TransactionList = () => {
   const {grabTransactions,  transactions, totalPages, currentPage } = useFinanceStore()
@@ -15,6 +16,11 @@ const TransactionList = () => {
   
   return (
     <div className='flex flex-col items-center gap-3 py-2'>
+      <PaginationControls
+      page={page}
+      setPage={setPage}
+      totalPages={totalPages}
+      />
       {transactions.map ((item, id) => (
         <TransactionCard key={id} transaction={item}/> 
       ))}
