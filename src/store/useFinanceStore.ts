@@ -33,7 +33,7 @@ export const useFinanceStore = create<FinanceStoreTypes>((set, get) => ({
     set({ totalBalance: value });
   },
 
-  grabTransactions: async({page = 1, limit = 10}) => {
+  grabTransactions: async({page = 1, limit = 5}) => {
     set({ pending: true });
     try {
       const response = await axios.get(`/transaction/grab?page=${page}&limit=${limit}`);
@@ -41,7 +41,7 @@ export const useFinanceStore = create<FinanceStoreTypes>((set, get) => ({
         set({
           transactions: response.data.payload,
           totalPages: response.data.pagination.totalPages,
-          currentPage: response.data.pagination.currentPage,
+          currentPage: page,
         });
      }
       return { success: true, message:  response.data.message} //
@@ -57,11 +57,17 @@ export const useFinanceStore = create<FinanceStoreTypes>((set, get) => ({
 
   newTransaction: async(data) => {
      set({ pending: true });
-     const { transactions } = get();
+     const { grabTransactions } = get();
      try {
        const response = await axios.post('/transaction/new', data)
-      set ({ transactions:[...transactions, response.data.payload,] })
-
+      // set ({ transactions:[...transactions, response.data.payload,] })
+      if (response.data) {
+      await grabTransactions({ page: get().currentPage, limit: 5 });
+      // ✅ 2. Update state immediately (optional: avoids small delay in UI update)
+      set((state) => ({
+        transactions: [ ...state.transactions.slice(0, 5)], // Keep max 5 items
+      }));
+      }
       return { 
         success: true, 
         message:  response.data.message,

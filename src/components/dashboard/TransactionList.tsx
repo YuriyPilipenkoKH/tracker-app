@@ -5,22 +5,19 @@ import TransactionCard from './TransactionCard';
 import PaginationControls from '../Pagination/PaginationControls';
 
 const TransactionList = () => {
-  const {grabTransactions,  transactions, totalPages, currentPage } = useFinanceStore()
-  const {userId} = useAuthStore();
-  const [page, setPage] = useState<number>(1);
+  const { grabTransactions, transactions,  currentPage } = useFinanceStore();
+  const { userId } = useAuthStore();
+
   useEffect(() => {
-    grabTransactions({page:page, limit: 5});
-  }, [page, userId]);
+    grabTransactions({ page: currentPage, limit: 5 });
+  }, [userId, currentPage]);
+
 
 
   
   return (
     <div className='flex flex-col items-center gap-3 py-2'>
-      <PaginationControls
-      page={page}
-      setPage={setPage}
-      totalPages={totalPages}
-      />
+      <PaginationControls />
       {transactions.map ((item, id) => (
         <TransactionCard key={id} transaction={item}/> 
       ))}
