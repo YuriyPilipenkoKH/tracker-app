@@ -129,7 +129,7 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
     try {
       const response = await axios.post('/auth/logout')
       if (response.status === 200) {
-        toast.success(`Goodbye, ${authUser?.name}!`)
+        toast.success(`Goodbye, ${capitalize(authUser?.name)}!`)
         set(() => ({
           authUser: undefined,
           userId: '',
