@@ -15,7 +15,7 @@ interface AddTransactionFormProps {
 const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
   setOpen
 }) => {
- const {totalBalance,  newTransaction, withdrawalsError, clearWithdrawalsError} = useFinanceStore()
+ const {totalBalance,  newTransaction, amountError, nameError, clearAnyError} = useFinanceStore()
   const { updateBalance } = useAuthStore() 
     const [sign, setSign] = useState<"+" | "-" >("+");
 
@@ -79,8 +79,11 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
      localStorage.setItem("tracker-totalBalance", result.toString())
      return result
     }
-    const handleInputChange =   () => {
-      if(withdrawalsError) clearWithdrawalsError()
+    const handleAmountChange =   () => {
+      if( amountError ) clearAnyError({error: 'amountError'})
+    }
+    const handleNameChange =   () => {
+      if( nameError ) clearAnyError({error: 'nameError'})
     }
 
       
@@ -128,7 +131,7 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
             : 'text-[var(--orange)]'
           )}
           {...register('amount', { 
-            onChange:handleInputChange,
+            onChange: handleAmountChange,
             valueAsNumber: true ,           
             }          
         )}
@@ -136,11 +139,13 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
           />
       </label>
       {errors.amount && <div className='text-purple-900'>{errors.amount.message}</div>}
-      {withdrawalsError && <div  className='text-purple-900'>{withdrawalsError}</div>}
+      {amountError && <div  className='text-purple-900'>{amountError}</div>}
       <label className={cn('formLabel  flex items-center gap-1')}>
         <input 
           className={cn('grow input input-bordered focus:ring focus:border-blue-500' )}
-          {...register('name', )}
+          {...register('name', {
+            onChange: handleNameChange
+          } )}
           placeholder=	{( isSubmitting )? "Processing" : 'name'}
           />
       </label>

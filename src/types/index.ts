@@ -13,6 +13,10 @@ export interface bal {
   balance: number
   id: string
 }
+export interface err {
+  error: 'amountError' |'nameError'
+
+}
 
 
 // export interface User {

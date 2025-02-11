@@ -1,6 +1,6 @@
 import  { AxiosError } from 'axios'
 import {create} from 'zustand'
-import {  loginResponse } from '../types'
+import {  err,  loginResponse } from '../types'
 import { axios } from '../lib/axios'
 import { Transaction } from '../models/transaction'
 
@@ -9,18 +9,22 @@ interface FinanceStoreTypes {
   totalBalance: number 
   transactions: Transaction[]
   pending: boolean
-  withdrawalsError:string
+  amountError:string
+  nameError:string
+
 
   setTotalBalance: (data: number) => void
   grabTransactions: () => Promise<loginResponse | undefined>
   newTransaction: (data:Transaction) => Promise<loginResponse | undefined>
-  clearWithdrawalsError: () => void
+  clearAnyError: (data: err) => void
+
 }
 export const useFinanceStore = create<FinanceStoreTypes>((set, get) => ({
   totalBalance: Number(localStorage.getItem("tracker-totalBalance")) || 0,
   transactions: [],
   pending: false,
-  withdrawalsError: '',
+  amountError: '',
+  nameError:'',
 
   setTotalBalance: (value) => {
     set({ totalBalance: value });
@@ -63,9 +67,13 @@ export const useFinanceStore = create<FinanceStoreTypes>((set, get) => ({
      } catch (error) {
       if (error instanceof AxiosError && error.response) {
         console.log(error.response.data.message);
-        if (error.response.data.withdrawalsError){
-          set({withdrawalsError:  error.response.data.message})
-        }
+      if (error.response.data.amountError){
+        set({amountError:  error.response.data.message})
+      }
+        
+      if (error.response.data.nameError){
+        set({nameError:  error.response.data.message})
+      }
         return { success: false, message: error.response.data.message };
      } 
      return { success: false, message: "An unexpected error occurred" };
@@ -73,8 +81,14 @@ export const useFinanceStore = create<FinanceStoreTypes>((set, get) => ({
      finally{  set({ pending: false }) }
   },
 
-  clearWithdrawalsError: () =>{
-    set({withdrawalsError: ''})
+  clearAnyError: (data) =>{
+    const{error} = data
+    if(error === 'amountError') {
+      set({amountError: '',})
+    }
+    if(error === 'nameError') {
+      set({nameError: '',})
+    }
   }
 
 }))
