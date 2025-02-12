@@ -1,5 +1,4 @@
 import axiosInstance  from 'axios'
-import { Transaction } from '../models/transaction';
 
 const HOST = import.meta.env.VITE_HOST
 

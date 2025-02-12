@@ -10,7 +10,7 @@ async function renderApp() {
 
   root.render(
     <StrictMode>
-        <BrowserRouter basename = '/tracker-app'>
+        <BrowserRouter>
           <App />
         </BrowserRouter>
      </StrictMode>

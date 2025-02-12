@@ -43,7 +43,6 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
       const response = await axios.get('/auth/check')
       if (response.data) {
         set(() => ({
-          // ...state,
           authUser: response.data,
           userId: response.data._id,
         }));
@@ -63,8 +62,7 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
     try {
       const response = await axios.post('/auth/signup', data)
       if (response.data) {
-        set((state) => ({
-          ...state,
+        set(() => ({
           authUser: response.data.user,
           userId: response.data.user._id,
           logError: '',
