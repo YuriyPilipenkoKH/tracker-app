@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const TransactionSchema = (totalBalance :number ) => z.object({
+export const transactionSchema = z.object({
     name: z
     .string()
     .trim()
@@ -16,9 +16,7 @@ export const TransactionSchema = (totalBalance :number ) => z.object({
     .number()
     .refine((val) => !isNaN(val), { message: "Must be a valid number" }) // Ensures it's a number
     .refine((val) => val !== 0, { message: "Amount cannot be 0" }) // Disallow zero
-    .refine((val) => (val*-1 ) < totalBalance, { 
-      message: "You haven't got enough money" 
-    }), // Checks if within balance range,
+   , 
     total: z
     .number()
     .optional(),  
@@ -38,4 +36,4 @@ export const TransactionSchema = (totalBalance :number ) => z.object({
 
 })
 
-export type Transaction = z.infer<ReturnType<typeof TransactionSchema>>;
+export type Transaction = z.infer<typeof transactionSchema>

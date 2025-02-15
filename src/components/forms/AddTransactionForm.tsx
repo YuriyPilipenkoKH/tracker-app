@@ -1,6 +1,6 @@
 import React ,{ useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Transaction, TransactionSchema } from '../../models/transaction'
+import { Transaction, transactionSchema, } from '../../models/transaction'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { cn } from '../../lib/cn'
 import { CircleMinus, CirclePlus, CircleX, RefreshCw } from 'lucide-react'
@@ -25,14 +25,14 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
     formState,
     reset,
     clearErrors,
-  } = useForm<Transaction >({
+  } = useForm<Transaction>({
     defaultValues: {  
       name: '',
       amount: undefined ,
       description: '',
        },
         mode:'all',
-        resolver: zodResolver(TransactionSchema(totalBalance)), })
+        resolver: zodResolver(transactionSchema), })
     const {
       errors,
       isDirty,
