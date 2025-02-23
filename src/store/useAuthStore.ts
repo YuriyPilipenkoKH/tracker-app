@@ -1,6 +1,6 @@
 import {create} from 'zustand'
-import { bal, img, loginResponse} from '../types';
-import { axios } from '../lib/axios';
+import { AuthResponse, bal, img, loginResponse} from '../types';
+import { axios, setAuthHeader } from '../lib/axios';
 import { AxiosError } from 'axios';
 import toast from 'react-hot-toast';
 import capitalize from '../lib/capitalize';
@@ -28,9 +28,6 @@ interface AuthStoreTypes {
   uploadAvatar: (data: img) => Promise<void>
   clearLogError: () => void
   updateBalance: (data: bal) =>Promise<void>
-
-
-
 }
 
 export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
@@ -51,14 +48,17 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
       return 
       }
     try {
+      setAuthHeader(persistedToken);
       const response = await axios.get('/auth/check')
       if (response.data) {
         set(() => ({
-          authUser: response.data,
-          userId: response.data._id,
+          authUser: response.data.user,
+          userId: response.data.user._id,
+          isAdmin: response.data.user.role === 'admin'
+            ? true : false
         }));
-        setTotalBalance(response.data.balance)
-        localStorage.setItem("tracker-totalBalance", response.data.balance)
+        setTotalBalance(response.data.user.balance)
+        localStorage.setItem("tracker-totalBalance", response.data.user.balance)
       }
     } catch (error) {
       set({authUser: undefined})

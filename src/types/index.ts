@@ -1,3 +1,5 @@
+import { User } from "../models/UserSchema"
+
 export interface img {
   image: File
 }
@@ -22,7 +24,12 @@ export interface pagination {
   limit: number
 }
 
-
+export interface AuthResponse {
+  user: User; 
+  message:string
+  token: string;
+  success: boolean
+ }
 // export interface User {
 //   _id:string
 //   name: string
