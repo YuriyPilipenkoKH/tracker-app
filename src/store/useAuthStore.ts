@@ -1,6 +1,6 @@
 import {create} from 'zustand'
 import { AuthResponse, bal, img, loginResponse} from '../types';
-import { axios, setAuthHeader } from '../lib/axios';
+import { axios, clearAuthHeader, setAuthHeader } from '../lib/axios';
 import { AxiosError } from 'axios';
 import toast from 'react-hot-toast';
 import capitalize from '../lib/capitalize';
@@ -71,7 +71,7 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
   signUp : async (data) => {
     set({ pending: true });
     try {
-      const response = await axios.post('/auth/signup', data)
+      const response = await axios.post<AuthResponse>('/auth/signup', data)
       if (response.data) {
         set(() => ({
           authUser: response.data.user,
@@ -104,15 +104,20 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
   login : async (data) => {
     set({ pending: true });
     try {
-      const response = await axios.post('/auth/login', data)
+      const response = await axios.post<AuthResponse>('/auth/login', data)
+      setAuthHeader(response.data.token);
+      localStorage.setItem("tracker-userId",response.data.user._id)
+      localStorage.setItem("tracker-token",response.data.token)
+
       if (response.data) {
         set((state) => ({
           ...state,
           authUser: response.data.user,
           userId: response.data.user._id,
+          token: response.data.token,
+          isAdmin: response.data.user.role === 'admin',
           logError: '',
         }));
-        localStorage.setItem("tracker-userId",response.data.user._id)
 
         // await wait(1000)
         toast.success(`Hello, ${capitalize(response.data.user.name)} !`)
@@ -136,15 +141,20 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
     set({ pending: true });
     const { authUser } = get();
     try {
-      const response = await axios.post('/auth/logout')
-      if (response.status === 200) {
+      const response = await axios.post<AuthResponse>('/auth/logout')
+      if (response.data.success) {
         toast.success(`Goodbye, ${capitalize(authUser?.name)}!`)
         set(() => ({
           authUser: undefined,
+          token: null,
+          isAdmin: false,
           userId: '',
           logError: '',
         }));
+
+        clearAuthHeader();
         localStorage.setItem("tracker-userId",'')
+        localStorage.setItem("tracker-token",'')
         localStorage.setItem("tracker-totalBalance", '')
       }
 
