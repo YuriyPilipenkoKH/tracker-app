@@ -6,7 +6,7 @@ import { Transaction } from '../models/transaction'
 
 
 interface FinanceStoreTypes {
-  totalBalance: number 
+  totalBalance: number | null
   transactions: Transaction[]
   pending: boolean
   amountError:string
@@ -14,7 +14,7 @@ interface FinanceStoreTypes {
   totalPages: number,
   currentPage: number,
 
-  setTotalBalance: (data: number) => void
+  setTotalBalance: (data: number| null) => void
   grabTransactions: (data: pagination) => Promise<loginResponse | undefined>
   newTransaction: (data:Transaction) => Promise<loginResponse | undefined>
   clearAnyError: (data: err) => void

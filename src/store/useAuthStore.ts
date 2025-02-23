@@ -103,6 +103,7 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
 
   login : async (data) => {
     set({ pending: true });
+    const setTotalBalance = useFinanceStore.getState().setTotalBalance
     try {
       const response = await axios.post<AuthResponse>('/auth/login', data)
       setAuthHeader(response.data.token);
@@ -118,6 +119,9 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
           isAdmin: response.data.user.role === 'admin',
           logError: '',
         }));
+
+        setTotalBalance(response.data.user.balance ||  0)
+        localStorage.setItem("tracker-totalBalance", response.data.user.balance?.toString() || '' )
 
         // await wait(1000)
         toast.success(`Hello, ${capitalize(response.data.user.name)} !`)
@@ -140,6 +144,7 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
   logOut: async () => {
     set({ pending: true });
     const { authUser } = get();
+    const setTotalBalance = useFinanceStore.getState().setTotalBalance
     try {
       const response = await axios.post<AuthResponse>('/auth/logout')
       if (response.data.success) {
@@ -151,7 +156,8 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
           userId: '',
           logError: '',
         }));
-
+        setTotalBalance(null)
+        localStorage.setItem("tracker-totalBalance", '' )
         clearAuthHeader();
         localStorage.setItem("tracker-userId",'')
         localStorage.setItem("tracker-token",'')
