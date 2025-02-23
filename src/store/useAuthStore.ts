@@ -29,8 +29,7 @@ interface AuthStoreTypes {
   clearLogError: () => void
   updateBalance: (data: bal) =>Promise<void>
 
-  setAuthHeader: (token:string ) => void
-  clearAuthHeader: () => void
+
 
 }
 
@@ -217,8 +216,7 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
     }
     finally{  set({ pending: false }) }
   },
-  setAuthHeader: (token:string ) => {},
-  clearAuthHeader: () => {},
+
 }))
 
 

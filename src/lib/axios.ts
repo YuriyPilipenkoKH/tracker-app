@@ -9,3 +9,10 @@ export const axios = axiosInstance.create({
   headers: { "Content-Type": "application/json" }
 })
 
+export const setAuthHeader = (token:string ) => {
+  axios.defaults.headers.common.Authorization = `Bearer ${token}`
+}
+
+export const clearAuthHeader =  () =>  {
+  axios.defaults.headers.common.Authorization = '';
+}
