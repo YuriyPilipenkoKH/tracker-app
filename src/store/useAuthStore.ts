@@ -49,16 +49,16 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
       }
     try {
       setAuthHeader(persistedToken);
-      const response = await axios.get('/auth/check')
-      if (response.data) {
+      const response = await axios.get<AuthResponse>('/auth/check')
+      if (response.data.user) {
         set(() => ({
           authUser: response.data.user,
           userId: response.data.user._id,
-          isAdmin: response.data.user.role === 'admin'
-            ? true : false
+          isAdmin: response.data.user.role === 'admin',
         }));
-        setTotalBalance(response.data.user.balance)
-        localStorage.setItem("tracker-totalBalance", response.data.user.balance)
+
+        setTotalBalance(response.data.user.balance ||  0)
+        localStorage.setItem("tracker-totalBalance", response.data.user.balance?.toString() || '' )
       }
     } catch (error) {
       set({authUser: undefined})
