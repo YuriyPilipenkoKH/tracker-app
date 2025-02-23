@@ -3,6 +3,8 @@ import { useFinanceStore } from '../../store/useFinanceStore'
 import { useAuthStore } from '../../store/useAuthStore';
 import TransactionCard from './TransactionCard';
 import PaginationControls from '../Pagination/PaginationControls';
+import Message from './Message';
+import { messageProps } from '../../data/messageProps';
 
 const TransactionList = () => {
   const { grabTransactions, transactions,  currentPage } = useFinanceStore();
@@ -24,7 +26,7 @@ const TransactionList = () => {
        </>
     ) : (
       <>
-      {/* <Message text={message || ''}/> */}
+      <Message text={messageProps.noitems}/>
       </>
     )}
     </div>
