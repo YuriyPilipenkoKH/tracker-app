@@ -14,9 +14,11 @@ import { useFinanceStore } from './useFinanceStore';
 interface AuthStoreTypes {
   userId: string
   authUser: User | undefined
+  token: string | null;
+  isAdmin: boolean
   ischeckingAuth: boolean
   pending: boolean
-  logError: string
+  logError: string | null;
 
   checkAuth: () => Promise<void>
   signUp: (data: signUpSchemaType) => Promise<loginResponse | undefined>
@@ -27,18 +29,28 @@ interface AuthStoreTypes {
   clearLogError: () => void
   updateBalance: (data: bal) =>Promise<void>
 
+  setAuthHeader: (token:string ) => void
+  clearAuthHeader: () => void
+
 }
 
 export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
   userId: localStorage.getItem("tracker-userId") || '',
   authUser:  undefined,
-  ischeckingAuth:false,
+  token: null,
+  isAdmin: false,
+  ischeckingAuth: false,
   pending: false,
   logError: '',
 
   checkAuth: async() =>{
     set({ ischeckingAuth: true });
     const setTotalBalance = useFinanceStore.getState().setTotalBalance
+      const { token: persistedToken } = get()
+    if (persistedToken === null) {
+      console.log('Unable to fetch user');
+      return 
+      }
     try {
       const response = await axios.get('/auth/check')
       if (response.data) {
@@ -205,6 +217,8 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
     }
     finally{  set({ pending: false }) }
   },
+  setAuthHeader: (token:string ) => {},
+  clearAuthHeader: () => {},
 }))
 
 
