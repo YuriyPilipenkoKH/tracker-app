@@ -31,9 +31,9 @@ interface AuthStoreTypes {
 }
 
 export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
-  userId: localStorage.getItem("tracker-userId") || '',
+  userId: '',
   authUser:  undefined,
-  token: null,
+  token: localStorage.getItem('tracker-token') || null,
   isAdmin: false,
   ischeckingAuth: false,
   pending: false,
