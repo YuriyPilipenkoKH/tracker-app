@@ -35,11 +35,11 @@ const Navbar = () => {
             </div>
           </Link>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center max-sm:gap-1 gap-4">
        < ThemeChanger/>
 
           {token && (
-            <div className="flex gap-4">
+            <div className="flex max-sm:gap-1 gap-4 ">
             <UserButton/>
 
               <button 
