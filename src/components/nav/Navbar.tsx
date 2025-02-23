@@ -8,7 +8,7 @@ import UserButton from "./UserButton";
 
 
 const Navbar = () => {
-  const {  authUser, logOut , userId} = useAuthStore();
+  const {  authUser, logOut , userId, token} = useAuthStore();
   const location = useLocation()
   const path = location.pathname
 
@@ -34,7 +34,7 @@ const Navbar = () => {
         <div className="flex items-center gap-2">
        < ThemeChanger/>
 
-          {authUser && (
+          {token && (
             <div className="flex gap-4">
             <UserButton/>
 

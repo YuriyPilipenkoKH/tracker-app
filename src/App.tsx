@@ -13,14 +13,9 @@ import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
 
 function App() {
-  const {authUser, userId, checkAuth , ischeckingAuth} = useAuthStore();
+  const {authUser, userId, checkAuth , token} = useAuthStore();
   useEffect(() => {
-    async function check() {
-      await checkAuth() 
-    }
-  check().then(() =>{
-   if(!ischeckingAuth)  console.log('authUser',authUser)
-    })
+    checkAuth() 
   }, [userId]);
 
 
@@ -32,19 +27,19 @@ function App() {
         <Route path="/"
             element ={<HomePage/>}/>
          <Route path="/signup"
-            element ={!authUser
+            element ={!token
             ? <SignUpPage/>
             : <Navigate to='/dashboard'/>}/>
         <Route path="/login"
-            element ={!authUser
+            element ={!token
             ? <LoginPage/>
             : <Navigate to='/dashboard'/>}/>
         <Route path="dashboard"
-            element ={ userId
+            element ={ token
             ? <DashboardPage/>
             : <Navigate to='/login'/>}/>
         <Route path="/profile"
-            element={ userId
+            element={ token
             ? <ProfilePage /> 
             : <Navigate to='/login' />}
           />
@@ -57,11 +52,11 @@ function App() {
         position="top-center" 
         toastOptions={options} />
 
-      {ischeckingAuth && (
+      {/* {ischeckingAuth && (
       <div className="flex items-center justify-center h-screen bg-transparent absolute">
         <Loader className="size-10 animate-spin"/>
       </div>
-      )}
+      )} */}
     
     </div>
   )

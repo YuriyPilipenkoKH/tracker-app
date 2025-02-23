@@ -8,7 +8,7 @@ import { Eye, EyeOff, RefreshCw} from "lucide-react";
 
 
 const LoginForm = () => {
-  const{ logError, clearLogError, login} = useAuthStore();
+  const{ logError, clearLogError, login, authUser} = useAuthStore();
   const [show, setShow] = useState<boolean>(false)
   
    const {
@@ -19,8 +19,8 @@ const LoginForm = () => {
     } = useForm<LoginSchemaType >({
       mode:'all',
       defaultValues: {
-        email:localStorage.getItem('tracker-login-email') || '',
-        password:localStorage.getItem('tracker-login-pass') || '',
+        email: authUser?.email || '',
+        password:'',
       },
     resolver: zodResolver(loginSchema), })
     const {

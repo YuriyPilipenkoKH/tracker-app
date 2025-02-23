@@ -5,11 +5,12 @@ import { signUpSchemaType ,signUpSchema} from '../../models/signUpSchema'
 import { cn } from '../../lib/cn'
 import { useAuthStore } from '../../store/useAuthStore'
 import { Eye, EyeOff, RefreshCw, } from "lucide-react";
+import { useNavigate } from 'react-router-dom'
 
 
 export const SignUpForm = () => {
   const {signUp, logError, clearLogError} = useAuthStore()
-
+  const navigate = useNavigate();
   const [show, setShow] = useState<boolean>(false)
   const {
     register, 
@@ -43,6 +44,7 @@ export const SignUpForm = () => {
       localStorage.setItem('tracker-signup-name', '')
       localStorage.setItem('tracker-signup-email', '')
       localStorage.setItem('tracker-signup-pass', '')
+      navigate('/login')
       reset()
     } 
     }
