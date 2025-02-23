@@ -1,10 +1,9 @@
-import { LogOut, } from "lucide-react";
+import { DollarSign, LayoutDashboard, LogIn, LogOut, } from "lucide-react";
 import { useAuthStore } from "../../store/useAuthStore";
 import { Link, useLocation } from "react-router-dom";
 import ThemeChanger from "../button/ThemeChanger";
 import Logo from "./Logo";
 import UserButton from "./UserButton";
-
 
 
 const Navbar = () => {
@@ -23,12 +22,17 @@ const Navbar = () => {
             <Logo/>
             </div>
           </Link>
-          <Link to='/dashboard'>
-            <h1 className="text-lg font-bold">
+          <Link to='/dashboard' className="btn btn-ghost">
+            <div className="text-lg font-bold max-sm:hidden">
               {(path === '/' || path === '/profile') 
               ? 'Dashboard'
               :  userId ? 'Tracker' : 'Login' }
-            </h1>
+            </div>
+            <div className="MobileWrap gap-8 sm:hidden">
+            {(path === '/' || path === '/profile') 
+              ? <LayoutDashboard />
+              :  userId ? <DollarSign />: <LogIn /> }
+            </div>
           </Link>
         </div>
         <div className="flex items-center gap-2">
