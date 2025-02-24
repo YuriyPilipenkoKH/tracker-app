@@ -29,14 +29,22 @@ const Navbar = () => {
           >
             <div 
             className="text-lg font-bold max-sm:hidden" >
-              {(path === '/' || path === '/profile') 
-              ? 'Login'
-              :  userId ? 'Tracker' : undefined }
+             {token 
+             ? (path === '/' ) 
+              ? 'Dashboard' 
+              : (path === '/profile' ) 
+                ? 'Dashboard'
+                : (path === '/dashboard' ) && 'Tracker' 
+             : 'Login' }
             </div>
             <div className="MobileWrap gap-8 sm:hidden">
-            {(path === '/' || path === '/profile') 
-              ? <LogIn />
-              :  userId ? <ChartColumnBig />: undefined }
+            {token 
+             ? (path === '/' ) 
+              ? <LayoutDashboard /> 
+              : (path === '/profile' ) 
+                ? <LayoutDashboard />
+                : (path === '/dashboard' ) && <ChartColumnBig />
+             : <LogIn /> }
             </div>
           </Link>
         </div>
