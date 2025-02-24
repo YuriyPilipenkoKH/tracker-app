@@ -68,10 +68,27 @@ body {
 }
 .n12{
   display: grid;
-  grid-template-columns: 70%  30%;
+
+  grid-template-columns: 70% auto 25%;
+  grid-template-rows: repeat(3, 24px);
+  grid-template-areas:
+  'name edit amount'
+  'des . .'
+  'cat . total'  ;
+  grid-row-gap: 8px;
   @media screen and (min-width: 768px) {
-    grid-template-columns: 80%  20%;
-}
+    /* grid-template-columns: 70% 10% 20%; */
+  }
+  &>.name{grid-area: name;}
+  &>.edit{grid-area: edit;}
+  &>.des{grid-area: des;}
+  &>.cat{grid-area: cat;}
+  &>.total{grid-area: total;}
+  &>.amount{
+    grid-area: amount;
+    justify-self: end;
+  }
+
 }
 
 /* Hide arrows in Chrome, Safari, Edge, and Opera */
