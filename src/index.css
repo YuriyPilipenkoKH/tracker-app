@@ -69,13 +69,13 @@ body {
 .n12{
   display: grid;
 
-  grid-template-columns: 65% auto 25%;
+  grid-template-columns: 65% auto ;
   grid-template-rows: repeat(3, 24px);
   grid-template-areas:
-  'name edit amount'
-  'des . .'
+  'name . amount'
+  'des . zoom '
   'cat . total'  ;
-  grid-row-gap: 8px;
+  grid-row-gap: 12px;
   grid-column-gap: 2px;
 
   &>.name{
@@ -93,6 +93,10 @@ body {
     overflow: hidden;
     text-overflow: ellipsis; 
     white-space: nowrap; 
+  }
+  &>.zoom{
+    grid-area: zoom;
+    justify-self: end;
   }
   &>.cat{grid-area: cat;}
   &>.total{
