@@ -43,7 +43,7 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
 
 
     const onSubmit = async (data: Transaction) => {
-
+      console.log(data);
       const finalAmount = sign === "-" ? -data.amount : data.amount;
       console.log("Final Transaction:", finalAmount);
       const finalData = {

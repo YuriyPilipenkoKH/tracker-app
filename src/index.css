@@ -69,21 +69,36 @@ body {
 .n12{
   display: grid;
 
-  grid-template-columns: 70% auto 25%;
+  grid-template-columns: 65% auto 25%;
   grid-template-rows: repeat(3, 24px);
   grid-template-areas:
   'name edit amount'
   'des . .'
   'cat . total'  ;
   grid-row-gap: 8px;
-  @media screen and (min-width: 768px) {
-    /* grid-template-columns: 70% 10% 20%; */
+  grid-column-gap: 2px;
+
+  &>.name{
+    grid-area: name;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
   }
-  &>.name{grid-area: name;}
-  &>.edit{grid-area: edit;}
-  &>.des{grid-area: des;}
+  &>.edit{
+    grid-area: edit;
+    justify-self: center;
+  }
+  &>.des{
+    grid-area: des;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+  }
   &>.cat{grid-area: cat;}
-  &>.total{grid-area: total;}
+  &>.total{
+    grid-area: total;
+    justify-self: end;
+  }
   &>.amount{
     grid-area: amount;
     justify-self: end;
