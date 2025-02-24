@@ -5,7 +5,7 @@ import { options } from "./lib/hotToast"
 import NotFoundPage from './pages/NotFoundPage';
 import { useAuthStore } from './store/useAuthStore';
 import { useEffect } from 'react';
-// import { Loader } from 'lucide-react';
+import { Loader } from 'lucide-react';
 import Navbar from './components/nav/Navbar';
 import DashboardPage from './pages/DashboardPage';
 import SignUpPage from './pages/SignUpPage';
@@ -13,7 +13,7 @@ import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
 
 function App() {
-  const { userId, checkAuth , token} = useAuthStore();
+  const { userId, checkAuth , token, ischeckingAuth} = useAuthStore();
   useEffect(() => {
     checkAuth() 
   }, [userId]);
@@ -52,11 +52,11 @@ function App() {
         position="top-center" 
         toastOptions={options} />
 
-      {/* {ischeckingAuth && (
+      {ischeckingAuth && (
       <div className="flex items-center justify-center h-screen bg-transparent absolute">
         <Loader className="size-10 animate-spin"/>
       </div>
-      )} */}
+      )}
     
     </div>
   )
