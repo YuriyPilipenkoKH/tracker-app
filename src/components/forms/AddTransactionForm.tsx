@@ -44,7 +44,11 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
 
     const onSubmit = async (data: Transaction) => {
       console.log(data);
-      const finalAmount = sign === "-" ? -data.amount : data.amount;
+      const sanitizedData = {
+        ...data,
+        amount: Math.abs(data.amount), // Convert to absolute value
+      };
+      const finalAmount = sign === "-" ? -sanitizedData.amount : sanitizedData.amount;
       console.log("Final Transaction:", finalAmount);
       const finalData = {
         ...data,
