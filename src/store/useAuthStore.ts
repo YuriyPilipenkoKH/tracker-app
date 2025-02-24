@@ -156,7 +156,7 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
           userId: '',
           logError: '',
         }));
-        setTotalBalance(null)
+        setTotalBalance(0)
         localStorage.setItem("tracker-totalBalance", '' )
         clearAuthHeader();
         localStorage.setItem("tracker-userId",'')

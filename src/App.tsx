@@ -5,7 +5,7 @@ import { options } from "./lib/hotToast"
 import NotFoundPage from './pages/NotFoundPage';
 import { useAuthStore } from './store/useAuthStore';
 import { useEffect } from 'react';
-import { Loader } from 'lucide-react';
+// import { Loader } from 'lucide-react';
 import Navbar from './components/nav/Navbar';
 import DashboardPage from './pages/DashboardPage';
 import SignUpPage from './pages/SignUpPage';
@@ -13,7 +13,7 @@ import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
 
 function App() {
-  const {authUser, userId, checkAuth , token} = useAuthStore();
+  const { userId, checkAuth , token} = useAuthStore();
   useEffect(() => {
     checkAuth() 
   }, [userId]);
