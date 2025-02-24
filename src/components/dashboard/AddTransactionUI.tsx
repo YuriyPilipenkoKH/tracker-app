@@ -10,6 +10,7 @@ const AddTransactionUI = () => {
   }
   return (
     <div className='flex flex-col items-center justify-center w-64 md:w-96 '>
+
       <button 
         className='flex gap-8'
         onClick={click}
@@ -19,11 +20,12 @@ const AddTransactionUI = () => {
         className={cn('transition-transform duration-1000 ease-in-out',
           open ? 'rotate-180' : 'rotate-0'
         )}   />
-    
-    </button>
-      <div className= {cn('w-full overflow-hidden transition-all duration-1000 ease-in-out ' ,
-              open ? 'max-h-screen opacity-100 py-2' : 'max-h-0 opacity-0'
-            )}>
+      </button>
+
+      <div
+      className= {cn('w-full overflow-hidden transition-all duration-1000 ease-in-out ' ,
+          open ? 'max-h-screen opacity-100 py-2' : 'max-h-0 opacity-0'
+      )}>
         <AddTransactionForm setOpen={setOpen}/>
       </div>
     </div>
