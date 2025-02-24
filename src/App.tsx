@@ -13,7 +13,7 @@ import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
 
 function App() {
-  const { userId, checkAuth , token, ischeckingAuth} = useAuthStore();
+  const { userId, checkAuth , token, pending } = useAuthStore();
   useEffect(() => {
     checkAuth() 
   }, [userId]);
@@ -52,7 +52,7 @@ function App() {
         position="top-center" 
         toastOptions={options} />
 
-      {ischeckingAuth && (
+      {pending && (
       <div className="flex items-center justify-center h-screen bg-transparent absolute">
         <Loader className="size-10 animate-spin"/>
       </div>
