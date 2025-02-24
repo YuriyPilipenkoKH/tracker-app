@@ -1,15 +1,16 @@
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
+import { useModalStore } from "../../store/useModalStore";
+import { Transaction } from "../../models/transaction";
 
 
 interface MainModalProps {
-//  contact?: Contact
-id?:string
+ transaction: Transaction
 }
 const modalRoot = document.getElementById('modal-root');
 
 const MainModal: React.FC<MainModalProps> = () => {
-
+  const {modalIsOpen} = useModalStore()
   useEffect(() => {
     const handleBackdropClick =( e:MouseEvent ) => {
       if ((e.target as HTMLElement).classList.contains("modal-backdrop")) {
