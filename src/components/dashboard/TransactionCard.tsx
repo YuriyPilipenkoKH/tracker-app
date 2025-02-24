@@ -27,7 +27,7 @@ const TransactionCard:React.FC<TransactionCardProps> = ({transaction}) => {
       className="n12  items-center  bg-base-300 w-64 p-4 border rounded-[12px] shadow md:w-96">
       <div className="flex flex-col gap-2">
         <div className="flex gap-1 justify-between">
-          <h2 className="font-semibold">{name}</h2>
+          <div className="font-semibold h-6 overflow-hidden">{name}</div>
         { description &&  ( 
           <button
           className='flex gap-2'
