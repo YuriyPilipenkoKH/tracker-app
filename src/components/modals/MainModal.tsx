@@ -5,14 +5,13 @@ import { ModalContainer, ModalOverlay } from './MainModal.styled';
 import { Transaction } from '../../models/transaction';
 
 
-
 interface MainModalProps {
   transaction?: Transaction
 }
 const modalRoot = document.getElementById('modal-root');
 
-const MainModal: React.FC<MainModalProps> = () => {
-  const {modalIsOpen, onModalClose} = useModalStore()
+const MainModal: React.FC<MainModalProps> = ({transaction}) => {
+  const {modalIsOpen, onModalClose, selectedTransaction} = useModalStore()
 
   useEffect(() => {
     const handleBackdropClick =( e:MouseEvent ) => {
@@ -36,7 +35,7 @@ const MainModal: React.FC<MainModalProps> = () => {
         document.removeEventListener('click', handleBackdropClick);
         document.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [modalIsOpen]);
 
 
     if (!modalRoot) return null;
@@ -49,8 +48,8 @@ const MainModal: React.FC<MainModalProps> = () => {
             : 'modal-backdrop'
             }`}>
           <ModalContainer  className=''>
-            <p> {'lang.appTitle' } </p>
-            <p> {'lang.updateInfo'} </p>
+            <p> {transaction?._id } </p>
+            <p>amount {selectedTransaction?.amount} </p>
 
           </ModalContainer>
         </ModalOverlay>
