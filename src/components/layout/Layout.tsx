@@ -1,6 +1,7 @@
 import { Suspense } from 'react'
 import { MainFooter, MainHeader } from './Layout.styled'
 import { Outlet } from 'react-router-dom'
+import Navbar from '../nav/Navbar'
 // import Navbar from '../nav/Navbar'
 
 
@@ -12,7 +13,7 @@ const Layout = () => {
     return (
     <>
       <MainHeader  className="main-header" >
-        {/* <Navbar/> */}
+        <Navbar/>
       </MainHeader>
         <Suspense >
             <Outlet />
