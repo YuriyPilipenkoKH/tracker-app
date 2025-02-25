@@ -8,6 +8,7 @@ import { FaSackDollar } from "react-icons/fa6";
 import UserButton from "./UserButton";
 import { cn } from "../../lib/cn";
 import ThemeChanger from "../button/ThemeChanger";
+import Logo from "./Logo";
 
 
 const Navbar = () => {
@@ -16,12 +17,14 @@ const Navbar = () => {
   const path = location.pathname
 
   return (
-
+    <header
+      className="w-full transition-all ease-in-out  duration-800" >
+    <div className="h-16 px-4 mx-auto ">
       <div className="flex items-center justify-between h-full">
         <div className="flex items-center gap-3">
           <Link to="/" className="flex items-center gap-2.5 hover:opacity-80 transition-all">
             <div className="flex items-center justify-center rounded-lg size-9 bg-primary/10">
-            {/* <Logo/> */}
+            <Logo/>
             </div>
           </Link>
           <Link to='/dashboard' 
@@ -68,7 +71,8 @@ const Navbar = () => {
           )}
         </div>
     </div>
-
+    </div>
+  </header>
 );
 };
 
