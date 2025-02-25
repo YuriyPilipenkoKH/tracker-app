@@ -1,7 +1,7 @@
-// import { LampDesk, Moon } from 'lucide-react';
+import { MdOutlineNightlight } from "react-icons/md";
 import { useState, useEffect } from 'react';
 import { LuLampDesk } from "react-icons/lu";
-import { GiMoonClaws } from "react-icons/gi";
+
 
 export default function ThemeChanger() {
   const [mounted, setMounted] = useState<boolean>(false);
@@ -42,7 +42,7 @@ export default function ThemeChanger() {
       onClick={toggleTheme}
       aria-label="Toggle Theme"
     >
-      {theme === 'light' ? <LuLampDesk /> : <GiMoonClaws />}
+      {theme === 'light' ? <LuLampDesk size={25}/> : <MdOutlineNightlight  size={25}/>}
     </button>
   );
 }

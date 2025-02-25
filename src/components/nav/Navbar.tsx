@@ -44,11 +44,11 @@ const Navbar = () => {
             <div className="gap-8 MobileWrap sm:hidden">
             {token 
              ? (path === '/' ) 
-              ? <MdOutlineDashboardCustomize />
+              ? <MdOutlineDashboardCustomize size={25}/>
               : (path === '/profile' ) 
-                ? <MdOutlineDashboardCustomize />
-                : (path === '/dashboard' ) && <FaSackDollar />
-             : <MdOutlineLogin /> }
+                ? <MdOutlineDashboardCustomize size={25}/>
+                : (path === '/dashboard' ) && <FaSackDollar size={25}/>
+             : <MdOutlineLogin size={25}/> }
             </div>
           </Link>
         </div>
