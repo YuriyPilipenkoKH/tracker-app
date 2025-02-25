@@ -1,8 +1,9 @@
 import  { AxiosError } from 'axios'
 import {create} from 'zustand'
-import {  err,  loginResponse, pagination } from '../types'
-import { axios } from '../lib/axios'
 import { Transaction } from '../models/transaction'
+import { err, loginResponse, pagination } from '../types'
+import { axios } from '../lib/axios'
+
 
 
 interface FinanceStoreTypes {

@@ -1,15 +1,15 @@
 import {create} from 'zustand'
-import { AuthResponse, bal, img, loginResponse} from '../types';
-import { axios, clearAuthHeader, setAuthHeader } from '../lib/axios';
 import { AxiosError } from 'axios';
 import toast from 'react-hot-toast';
-import capitalize from '../lib/capitalize';
-import { wait } from '../lib/wait';
+import { useFinanceStore } from './useFinanceStore';
+import { User } from '../models/UserSchema';
 import { signUpSchemaType } from '../models/signUpSchema';
+import { AuthResponse, bal, img, loginResponse } from '../types';
 import { LoginSchemaType } from '../models/loginSchema';
 import { profileSchemaType } from '../models/profileSchema';
-import { User } from '../models/UserSchema';
-import { useFinanceStore } from './useFinanceStore';
+import { axios, clearAuthHeader, setAuthHeader } from '../lib/axios';
+import capitalize from '../lib/capitalize';
+import { wait } from '../lib/wait';
 
 interface AuthStoreTypes {
   userId: string
