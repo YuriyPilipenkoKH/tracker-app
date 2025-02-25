@@ -1,6 +1,12 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import Layout from './components/layout/Layout'
 import { Container } from './components/container/Container'
+import HomePage from './pages/HomePage'
+import SignUpPage from './pages/SignUpPage'
+import LoginPage from './pages/LoginPage'
+import DashboardPage from './pages/DashboardPage'
+import ProfilePage from './pages/ProfilePage'
+import NotFoundPage from './pages/NotFoundPage'
 
 
 function App() {
