@@ -5,7 +5,7 @@ interface useModalStoreprops{
   modalIsOpen:boolean
   selectedTransaction: Transaction | null;
 
-  onModalOpen: (data: Transaction) => void
+  onModalOpen: () => void  
   onModalClose: () => void
 }
 
@@ -14,10 +14,10 @@ export const useModalStore = create<useModalStoreprops>((set,) => ({
   modalIsOpen:false,
   selectedTransaction:null,
 
-  onModalOpen: (payload) => {
+  onModalOpen: () => {
     set({ 
       modalIsOpen: true,
-      selectedTransaction: payload
+      // selectedTransaction: payload
      });
   },
   onModalClose: () => {

@@ -9,9 +9,11 @@ import UserButton from "./UserButton";
 import { cn } from "../../lib/cn";
 import ThemeChanger from "../button/ThemeChanger";
 import Logo from "./Logo";
+import { useModalStore } from "../../store/useModalStore";
 
 
 const Navbar = () => {
+  const {onModalOpen} = useModalStore()
   const {   logOut ,  token} = useAuthStore();
   const location = useLocation()
   const path = location.pathname
@@ -53,6 +55,10 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="flex items-center gap-4 max-sm:gap-1">
+          <button
+          type="button"
+          onClick={onModalOpen}
+          >Mo</button>
        < ThemeChanger/>
 
           {token && (
