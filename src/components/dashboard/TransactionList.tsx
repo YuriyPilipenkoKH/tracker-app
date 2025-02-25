@@ -5,11 +5,13 @@ import TransactionCard from './TransactionCard';
 import PaginationControls from '../Pagination/PaginationControls';
 import Message from './Message';
 import { messageProps } from '../../data/messageProps';
+import { useModalStore } from '../../store/useModalStore';
+import MainModal from '../modals/MainModal';
 
 const TransactionList = () => {
   const { grabTransactions, transactions,  currentPage } = useFinanceStore();
   const { userId } = useAuthStore();
-
+  const {modalIsOpen,  selectedTransaction} = useModalStore()
   useEffect(() => {
     grabTransactions({ page: currentPage, limit: 5 });
   }, [userId, currentPage]);
@@ -29,6 +31,9 @@ const TransactionList = () => {
       <Message text={messageProps.noitems}/>
       </>
     )}
+    { modalIsOpen && selectedTransaction && (
+    <MainModal transaction={selectedTransaction}/>
+      ) }
     </div>
   )
 }

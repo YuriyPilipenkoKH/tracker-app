@@ -10,17 +10,17 @@ interface MainModalProps {
 const modalRoot = document.getElementById('modal-root');
 
 const MainModal: React.FC<MainModalProps> = () => {
-  const {modalIsOpen} = useModalStore()
+  const {modalIsOpen, onModalClose} = useModalStore()
   useEffect(() => {
     const handleBackdropClick =( e:MouseEvent ) => {
       if ((e.target as HTMLElement).classList.contains("modal-backdrop")) {
-        // dispatch(onModalClose())
+        onModalClose()
       }
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        // dispatch(onModalClose())
+        onModalClose()
         }
     };
 

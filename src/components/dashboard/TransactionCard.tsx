@@ -2,7 +2,8 @@ import React, { useState } from "react"
 import { Transaction } from "../../models/transaction"
 import { format } from "date-fns";
 import { cn } from "../../lib/cn";
-import { ChevronDown, SquarePen, ZoomIn } from "lucide-react";
+import {  ZoomIn } from "lucide-react";
+import { useModalStore } from "../../store/useModalStore";
 
 interface TransactionCardProps{
 transaction: Transaction
@@ -18,8 +19,10 @@ const TransactionCard:React.FC<TransactionCardProps> = ({transaction}) => {
     description
   } = transaction
     const [open, setOpen] = useState<boolean>(false)
+    const {modalIsOpen, onModalClose,onModalOpen} = useModalStore()
+
     const click = () => {
-      setOpen(!open)
+      onModalOpen(transaction)
     }
   return (
 
