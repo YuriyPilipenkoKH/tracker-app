@@ -1,68 +1,192 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  --background-color: #738260;
+  --text-color: #212121;
+  --card-color: #e3ecc0;
+  --accent-color: #555;
+  --hover: #3333f5;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  --grey: #293138;
+  --blue: #2C70DA;
+  --white: #EDF3F8;
+  --soft-green: #9DB88F;
+  --vivid-green: #7CE3B3;
+  --orange: #FB6D3A;
+  --dark: #7772;
+  --modal-bg: #A4C495;
+}
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
+/* root[data-theme='light'] {
+} */
+
+:root[data-theme='dark'] {
+  --background-color: #000916;
+  --text-color: #f5f6f7;
+  --card-color: #293138;
+  --accent-color: #777;
+  --hover: #7CE3B3;
+  --modal-bg: #12141c;
+}
+
+body {
+  color: var(--text-color);
+  background: var(--background-color);
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  transition: all 1s ease-in-out;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  clip: rect(0 0 0 0);
 }
-a:hover {
-  color: #535bf2;
-}
+*{
+  box-sizing: border-box;
+} 
 
-body {
+
+h1,h2,h3,h4,h5,h6,p {
   margin: 0;
-  display: flex;
+}
+
+ul {
+list-style: none;
+  padding: 0;
+}
+
+li{
+  padding: 0;
+}
+
+img {
+  display: block;
+  width: 100%;
+}
+.hidden{
+  display: none;
+}
+
+/* Hide arrows*/
+@layer base {
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    @apply appearance-none;
+  }
+  input[type="number"] {
+    @apply [appearance:textfield];
+  }
+}
+
+.g11{
+  background-color: #0172b8;
+  border-radius:  12px 0 0 12px;
+}
+.g12{
+  background-color: #957a05;
+  border-radius: 0 12px 12px 0;
+}
+.n12{
+  display: grid;
+
+  grid-template-columns: 65% auto ;
+  grid-template-rows: repeat(3, 24px);
+  grid-template-areas:
+  'name . amount'
+  'des . zoom '
+  'cat . total'  ;
+  grid-row-gap: 12px;
+  grid-column-gap: 2px;
+
+  &>.name{
+    grid-area: name;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+  }
+  &>.edit{
+    grid-area: edit;
+    justify-self: center;
+  }
+  &>.des{
+    grid-area: des;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+  }
+  &>.zoom{
+    grid-area: zoom;
+    justify-self: end;
+  }
+  &>.cat{grid-area: cat;}
+  &>.total{
+    grid-area: total;
+    justify-self: end;
+  }
+  &>.amount{
+    grid-area: amount;
+    justify-self: end;
+  }
+
+}
+.ModalOverlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #00000099;
+  display: grid;
   place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
+  z-index: 5;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s, visibility 0.5ms; 
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+  &.modal.active {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5ms;
   }
 }
+.ModalContainer{
+  position: relative;
+  display: grid;
+  place-items: center;
+  gap: 20px;  
+  background-color: #0d0da7;
+  padding: 60px 20px;
+  border-radius: 16px;
+  z-index: 7;
+  color: var(--text-color);
+  @media screen and (min-width: 768px) {
+    width: 500px;
+  }
+}
+
+
+
+/* Hide arrows in Chrome, Safari, Edge, and Opera */
+/* input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+} */
+
+/* Hide arrows in Firefox */
+/* input[type="number"] {
+  -moz-appearance: textfield;
+} */
