@@ -1,6 +1,8 @@
 import { z } from "zod";
 
 export const transactionSchema = z.object({
+ _id: z
+  .string(),
     name: z
     .string()
     .trim()

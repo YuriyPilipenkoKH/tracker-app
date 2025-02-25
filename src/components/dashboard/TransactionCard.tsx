@@ -6,7 +6,7 @@ import {  ZoomIn } from "lucide-react";
 import { useModalStore } from "../../store/useModalStore";
 
 interface TransactionCardProps{
-transaction: Transaction
+  transaction: Transaction
 }
 
 const TransactionCard:React.FC<TransactionCardProps> = ({transaction}) => {

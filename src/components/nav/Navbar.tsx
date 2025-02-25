@@ -14,12 +14,12 @@ const Navbar = () => {
 
   return (
     <header
-      className="   w-full transition-all duration-800 ease-in-out" >
-    <div className="container mx-auto px-4 h-16">
+      className="w-full transition-all ease-in-out  duration-800" >
+    <div className="h-16 px-4 mx-auto ">
       <div className="flex items-center justify-between h-full">
         <div className="flex items-center gap-3">
           <Link to="/" className="flex items-center gap-2.5 hover:opacity-80 transition-all">
-            <div className="size-9 rounded-lg bg-primary/10 flex items-center justify-center">
+            <div className="flex items-center justify-center rounded-lg size-9 bg-primary/10">
             <Logo/>
             </div>
           </Link>
@@ -37,7 +37,7 @@ const Navbar = () => {
                 : (path === '/dashboard' ) && 'Tracker' 
              : 'Login' }
             </div>
-            <div className="MobileWrap gap-8 sm:hidden">
+            <div className="gap-8 MobileWrap sm:hidden">
             {token 
              ? (path === '/' ) 
               ? <LayoutDashboard /> 
@@ -48,16 +48,16 @@ const Navbar = () => {
             </div>
           </Link>
         </div>
-        <div className="flex items-center max-sm:gap-1 gap-4">
+        <div className="flex items-center gap-4 max-sm:gap-1">
        < ThemeChanger/>
 
           {token && (
-            <div className="flex max-sm:gap-1 gap-4 ">
+            <div className="flex gap-4 max-sm:gap-1 ">
             <UserButton/>
 
               <button 
               type="button"
-              className="btn btn-ghost px-2 flex justify-center" 
+              className="flex justify-center px-2 btn btn-ghost" 
               onClick={logOut}
               >
                 <LogOut className="size-5" />

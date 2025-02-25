@@ -9,7 +9,7 @@ interface useModalStoreprops{
   onModalClose: () => void
 }
 
-export const useModalStore = create<useModalStoreprops>((set, get) => ({
+export const useModalStore = create<useModalStoreprops>((set,) => ({
 
   modalIsOpen:false,
   selectedTransaction:null,
