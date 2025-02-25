@@ -5,12 +5,13 @@ import { options } from "./lib/hotToast"
 import NotFoundPage from './pages/NotFoundPage';
 import { useAuthStore } from './store/useAuthStore';
 import { useEffect } from 'react';
-import { Container, Loader } from 'lucide-react';
-import Navbar from './components/nav/Navbar';
 import DashboardPage from './pages/DashboardPage';
 import SignUpPage from './pages/SignUpPage';
 import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
+import Layout from './components/layout/Layout';
+import { Container } from './components/container/Container';
+import { Loader } from 'lucide-react';
 
 function App() {
   const { userId, checkAuth , token, pending } = useAuthStore();
@@ -20,12 +21,12 @@ function App() {
 
 
   return (
-    <div className='flex flex-col items-center gap-4 '>
-      <Navbar/>
+    <>
+
       <Container>
         <Routes>
-        <Route path="/"
-            element ={<HomePage/>}/>
+        <Route path="/" element={<Layout />}>
+        <Route index element={< HomePage />}/>
          <Route path="/signup"
             element ={!token
               ? <SignUpPage/>
@@ -45,6 +46,7 @@ function App() {
               />
         <Route path="*" 
             element={<NotFoundPage />} />
+          </Route>
         </Routes>
       </Container>
 
@@ -58,7 +60,7 @@ function App() {
       </div>
       )}
     
-    </div>
+    </>
   )
 }
 

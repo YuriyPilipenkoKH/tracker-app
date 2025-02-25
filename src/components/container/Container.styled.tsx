@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const MainContainer = styled.div`
-   min-height: 100vh;
+   /* min-height: 100vh; */
 
     display: grid;
     justify-items: center;
@@ -22,6 +22,7 @@ export const MainContainer = styled.div`
     }
 
       @media screen and (min-width: 1280px) {
+        justify-items: normal;
        padding: 0 16px;
          width: 1280px;
    }
