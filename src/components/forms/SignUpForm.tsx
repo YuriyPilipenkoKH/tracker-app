@@ -54,7 +54,7 @@ export const SignUpForm = () => {
 
   return (
     <form  onSubmit={handleSubmit(onSubmit)}
-    className='flex flex-col gap-3 w-full p-5'
+    className='flex flex-col gap-3 w-full '
     autoComplete="off"
     noValidate>
       <label className={cn('formLabel  flex items-center gap-1')}>
