@@ -6,6 +6,7 @@ import { cn } from '../../lib/cn'
 import { useAuthStore } from '../../store/useAuthStore'
 import { useNavigate } from 'react-router-dom'
 import { LuEye, LuEyeOff, LuRefreshCw } from 'react-icons/lu'
+import { Input_DU, Label_DU } from './Forms.styled'
 
 
 export const SignUpForm = () => {
@@ -57,27 +58,27 @@ export const SignUpForm = () => {
     className='flex flex-col gap-3 w-full '
     autoComplete="off"
     noValidate>
-      <label className={cn('formLabel  flex items-center gap-1')}>
-        <input 
-          className={cn('grow input input-bordered focus:ring focus:border-blue-500' )}
+      <Label_DU className={cn('formLabel  flex items-center gap-1')}>
+        <Input_DU  
+          className={cn('grow input  ' )}
           {...register('name', 
           { onChange: handleInputChange })}
           placeholder=	{( isSubmitting )? "Processing" : 'name'}
           />
-      </label>
+      </Label_DU>
       {errors.name && <div className='text-purple-900'>{errors.name.message}</div>}
-      <label className={cn('formLabel  flex items-center gap-1')}>
-        <input 
-          className={cn('grow input input-bordered focus:ring focus:border-blue-500' )}
+      <Label_DU className={cn('formLabel  flex items-center gap-1')}>
+        <Input_DU  
+          className={cn('grow input  ' )}
           {...register('email', 
           { onChange: handleInputChange })}
           placeholder=	{( isSubmitting )? "Processing" : 'email'}
           />
-      </label>
+      </Label_DU>
       {errors.email && <div className='text-purple-900'>{errors.email.message}</div>}
-      <label className={cn('formLabel  flex items-center gap-1 relative')}>
-        <input 
-          className={cn('grow input input-bordered focus:ring focus:border-blue-500' )}
+      <Label_DU className={cn('formLabel  flex items-center gap-1 relative')}>
+        <Input_DU  
+          className={cn('grow input ' )}
           {...register('password', 
           { onChange: handleInputChange })}
           placeholder=	{( isSubmitting )? "Processing" : "•••••"}
@@ -94,7 +95,7 @@ export const SignUpForm = () => {
             <LuEye className="size-5 text-base-content/40" />
           )}
         </button>
-      </label>
+      </Label_DU>
       {errors.password && <div className='text-purple-900'>{errors.password.message}</div>}
       {logError && <div  className='text-purple-900'>{logError}</div>}
       <button

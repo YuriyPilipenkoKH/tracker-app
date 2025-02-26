@@ -18,6 +18,8 @@
   --orange: #FB6D3A;
   --dark: #7772;
   --modal-bg: #A4C495;
+  --input-color: #333;
+  --input-bg: #ece3ca;
 }
 
 /* root[data-theme='light'] {
@@ -30,6 +32,8 @@
   --accent-color: #777;
   --hover: #7CE3B3;
   --modal-bg: #12141c;
+  --input-color: #A4C495;
+  --input-bg: #A4C495;
 }
 
 body {
