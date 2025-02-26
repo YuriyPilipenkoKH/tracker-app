@@ -7,6 +7,7 @@ import { useAuthStore } from '../../store/useAuthStore'
 import { useNavigate } from 'react-router-dom'
 import { LuEye, LuEyeOff, LuRefreshCw } from 'react-icons/lu'
 import { AuthForm_DU, Input_DU, Label_DU } from './Forms.styled'
+import { Button } from '../button/Button'
 
 
 export const SignUpForm = () => {
@@ -98,14 +99,14 @@ export const SignUpForm = () => {
       </Label_DU>
       {errors.password && <div className='text-purple-900'>{errors.password.message}</div>}
       {logError && <div  className='text-purple-900'>{logError}</div>}
-      <button
-        className='flex gap-5 mt-auto btn btn-active btn-primary w-full'
+      <Button
+        className=' w-full'
         type='submit'
         disabled={isSubmitting || !isDirty || !isValid || !!logError}
             >
       { isSubmitting &&  <LuRefreshCw className='size-6 animate-spin' />}      
       { isLoading  ? "Sending.." :  "Sign Up" }
-      </button>
+      </Button>
 
     </AuthForm_DU>
   )

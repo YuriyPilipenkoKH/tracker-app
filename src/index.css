@@ -20,6 +20,35 @@
   --modal-bg: #A4C495;
   --input-color: #333;
   --input-bg: #ece3ca;
+
+
+  --current-color: #B92F2C;
+  --primary-text-color: #f7f7f7;
+  --secondary-text-color: #212121;
+  --add-text-color: #8c8c8c;
+  --footer-text-color: #545454;
+  /* --background-color: #f7f7f7; */
+  --backdrop-color: #00000033;
+  --overlay-color: #00000066;
+  --body-color: #cad9d9;
+  --react-color: #00ccec;
+  --orange: orange;
+  --white: #ffffff;
+  --black: #010101;
+  --bright-green: #12e319;
+  --green: #0A8817;
+  --red: #B92F2C;
+  --blue: #2196f3;
+  --yellow: #f8d24e;
+  --lauren: #A4C495;
+  --crimson: #dc143c;
+  --teal: #008080;
+  --grey: #f7f7f7;
+  --orange: #ffa500;
+  --purple: #9797e8;
+  --beige: #f5f5dc;
+  --adelyn: #C204B9;
+  --chamomile: #E9DBC4;
 }
 
 /* root[data-theme='light'] {
