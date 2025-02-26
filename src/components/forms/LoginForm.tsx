@@ -5,6 +5,9 @@ import { useForm } from 'react-hook-form'
 import { cn } from '../../lib/cn'
 import { useAuthStore } from '../../store/useAuthStore'
 import { LuEye, LuEyeOff, LuRefreshCw } from 'react-icons/lu'
+import { AuthForm_DU, Input_DU, Label_DU } from './Forms.styled'
+import { ZodError } from '../button/Button.styled'
+import { Button } from '../button/Button'
 
 
 
@@ -56,24 +59,22 @@ const LoginForm = () => {
     // }, []);
 
   return (
-     <form 
+     <AuthForm_DU 
       onSubmit={handleSubmit(onSubmit)}
-        className='flex flex-col gap-3 w-full p-5'
         autoComplete="off"
         noValidate>
-         
-          <label className={cn('formLabel  flex items-center gap-1')}>
-            <input 
-              className={cn('grow input input-bordered focus:ring focus:border-blue-500' )}
+          <Label_DU className={cn('formLabel  flex items-center gap-1')}>
+            <Input_DU 
+              className={cn('grow ' )}
               {...register('email', 
               { onChange: handleInputChange } )}
               placeholder=	{( isSubmitting )? "Processing" : 'email'}
               />
-          </label>
-          {errors.email && <div className='text-purple-900'>{errors.email.message}</div>}
-          <label className={cn('formLabel  flex items-center gap-1 relative')}>
-            <input 
-              className={cn('grow input input-bordered focus:ring focus:border-blue-500' )}
+          </Label_DU>
+          {errors.email && <ZodError >{errors.email.message}</ZodError>}
+          <Label_DU className={cn('formLabel  flex items-center gap-1 relative')}>
+            <Input_DU 
+              className={cn('grow 0' )}
               {...register('password', 
               { onChange: handleInputChange } )}
               placeholder=	{( isSubmitting )? "Processing" : "•••••"}
@@ -90,18 +91,19 @@ const LoginForm = () => {
             <LuEye className="size-5 text-base-content/40" />
           )}
         </button>
-          </label>
-          {errors.password && <div className='text-purple-900'>{errors.password.message}</div>}
-          {logError && <div  className='text-purple-900'>{logError}</div>}
-          <button
+          </Label_DU>
+          {errors.password && <ZodError >{errors.password.message}</ZodError>}
+          {logError && <ZodError  >{logError}</ZodError>}
+          <Button
+            type='submit'
             className='flex gap-5 mt-auto btn btn-active btn-primary w-full'
             disabled={isSubmitting || !isDirty || !isValid || !!logError}
                 >
             { isLoading &&  <LuRefreshCw className='size-6 animate-spin' />}
             { isLoading  ? "Sending.." :  "Log In.." }
-          </button>
+          </Button>
     
-        </form>
+        </AuthForm_DU>
   )
 }
 
