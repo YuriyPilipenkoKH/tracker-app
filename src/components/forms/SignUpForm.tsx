@@ -6,7 +6,7 @@ import { cn } from '../../lib/cn'
 import { useAuthStore } from '../../store/useAuthStore'
 import { useNavigate } from 'react-router-dom'
 import { LuEye, LuEyeOff, LuRefreshCw } from 'react-icons/lu'
-import { Input_DU, Label_DU } from './Forms.styled'
+import { AuthForm_DU, Input_DU, Label_DU } from './Forms.styled'
 
 
 export const SignUpForm = () => {
@@ -54,13 +54,13 @@ export const SignUpForm = () => {
   }
 
   return (
-    <form  onSubmit={handleSubmit(onSubmit)}
-    className='flex flex-col gap-3 w-full '
+    <AuthForm_DU  onSubmit={handleSubmit(onSubmit)}
+
     autoComplete="off"
-    noValidate>
+     noValidate>
       <Label_DU className={cn('formLabel  flex items-center gap-1')}>
         <Input_DU  
-          className={cn('grow input  ' )}
+          className={cn('grow input ' )}
           {...register('name', 
           { onChange: handleInputChange })}
           placeholder=	{( isSubmitting )? "Processing" : 'name'}
@@ -69,7 +69,7 @@ export const SignUpForm = () => {
       {errors.name && <div className='text-purple-900'>{errors.name.message}</div>}
       <Label_DU className={cn('formLabel  flex items-center gap-1')}>
         <Input_DU  
-          className={cn('grow input  ' )}
+          className={cn('grow input ' )}
           {...register('email', 
           { onChange: handleInputChange })}
           placeholder=	{( isSubmitting )? "Processing" : 'email'}
@@ -107,6 +107,6 @@ export const SignUpForm = () => {
       { isLoading  ? "Sending.." :  "Sign Up" }
       </button>
 
-    </form>
+    </AuthForm_DU>
   )
 }

@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 
 
 export const Label_DU = styled.label`
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -22,15 +23,27 @@ export const Input_DU = styled.input`
   color: var(--text-color);
   border-radius: 12px;
   border: 3px solid #555;
-  transition: all 0.5s ease-in-out;
+  transition: all 0.3s ease-in-out;
   &::placeholder {
-    color: var(--placeholder-input-color);
+    color: #777;
   }
   &:focus{
-    outline: 4px solid #2196f3;
+    outline:3px solid #2196f3;
+    border: 3px solid transparent;
   }
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 767px) {
         padding: 8px 16px;
         font-size: 14px;
+    }
+`
+
+export const AuthForm_DU = styled.form`
+  width: 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  @media screen and (min-width: 768px) {
+    width: 400px;
     }
 `

@@ -19,7 +19,7 @@ const {modalIsOpen} = useModalStore()
             <Outlet />
         </Suspense>
         <MainFooter >
-          {'lang.footerTitle'} 
+          {'Expense Tracker'} 
         </MainFooter>
       {modalIsOpen && <MainModal/>}
       </>
