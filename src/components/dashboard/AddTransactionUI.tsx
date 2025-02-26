@@ -17,13 +17,13 @@ const AddTransactionUI = () => {
           >
             <span className='text-xl font-bold'>Add New Transaction</span>
         <LuChevronDown 
-        className={cn('transition-transform duration-1000 ease-in-out',
+        className={cn('transition-transform duration-800 ease-in-out',
           open ? 'rotate-180' : 'rotate-0'
         )}   />
       </button>
 
       <div
-      className= {cn('w-full overflow-hidden transition-all duration-1000 ease-in-out ' ,
+      className= {cn('w-full overflow-hidden transition-all duration-800 ease-in-out ' ,
           open ? 'max-h-screen opacity-100 py-2' : 'max-h-0 opacity-0'
       )}>
         <AddTransactionForm setOpen={setOpen}/>

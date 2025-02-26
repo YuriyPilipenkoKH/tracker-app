@@ -44,14 +44,14 @@ export const ModalOverlay = styled.div`
   z-index: 5;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.5s, visibility 0.5ms; 
+  transition: opacity 0.8s, visibility 0.8s; 
 
 
   
 &.modal.active {
   opacity: 1;
   visibility: visible;
-  transition: opacity 0.5ms;
+  transition: opacity 0.8s;
 }
 `;
 

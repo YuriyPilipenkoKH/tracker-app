@@ -15,7 +15,7 @@ export const buttonStyles =`
   cursor: pointer;
   outline: none;
   box-shadow: var(--shadow-four);
-  transition: all 0.4s ease;
+  transition: all 0.8s ease-in-out;;
 
   &:hover  {
     color: #888;
@@ -46,7 +46,7 @@ export const ripple=`
   background-position: 50%;
   transform: scale(10, 10);
   opacity: 0;
-  transition: transform 0.4s, opacity 1s;
+  transition: transform 0.8s, opacity 1s;
 }
 
 &:active:after {
@@ -86,18 +86,18 @@ export const StyledButton = styled.button`
   cursor: pointer;
   outline: none;
   box-shadow: var(--shadow-four);
-  transition: all 0.4s ease;
+  transition: all 0.8s ease;
 
   &:hover  {
-    color: #888;
-    background-color: var(--bright-green);
-    box-shadow: var(--shadow-two);
-  
-    & >svg {
-    fill: #888;
-    }
+  color: #888;
+  background-color: var(--bright-green);
+  box-shadow: var(--shadow-two);
+
+  & >svg {
+  fill: #888;
   }
-  /* ${ripple} ; */
+  }
+  ${ripple} ;
 
 `;
 
@@ -112,11 +112,18 @@ export const StyledArrowButton = styled.button`
 `;
 
 export const StyledFlatButton = styled.button`
-    padding: 0;
-    outline: none;
-    border:none;
-    background-color: transparent;
-    cursor: pointer; 
-    transition: all 0.4s ease-in-out; 
+  padding: 0;
+  outline: none;
+  border:none;
+  background-color: transparent;
+  cursor: pointer; 
+  transition: all 0.8s ease-in-out; 
 
+`
+
+export const ZodError = styled.div`
+  
+  color: var(--current-color);
+  font-size: 14px;
+  font-weight: 600;
 `

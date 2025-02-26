@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { LuEye, LuEyeOff, LuRefreshCw } from 'react-icons/lu'
 import { AuthForm_DU, Input_DU, Label_DU } from './Forms.styled'
 import { Button } from '../button/Button'
+import { ZodError } from '../button/Button.styled'
 
 
 export const SignUpForm = () => {
@@ -67,7 +68,7 @@ export const SignUpForm = () => {
           placeholder=	{( isSubmitting )? "Processing" : 'name'}
           />
       </Label_DU>
-      {errors.name && <div className='text-purple-900'>{errors.name.message}</div>}
+      {errors.name && <ZodError >{errors.name.message}</ZodError>}
       <Label_DU className={cn('formLabel  flex items-center gap-1')}>
         <Input_DU  
           className={cn('grow input ' )}
@@ -76,7 +77,7 @@ export const SignUpForm = () => {
           placeholder=	{( isSubmitting )? "Processing" : 'email'}
           />
       </Label_DU>
-      {errors.email && <div className='text-purple-900'>{errors.email.message}</div>}
+      {errors.email && <ZodError >{errors.email.message}</ZodError>}
       <Label_DU className={cn('formLabel  flex items-center gap-1 relative')}>
         <Input_DU  
           className={cn('grow input ' )}
@@ -97,7 +98,7 @@ export const SignUpForm = () => {
           )}
         </button>
       </Label_DU>
-      {errors.password && <div className='text-purple-900'>{errors.password.message}</div>}
+      {errors.password && <ZodError >{errors.password.message}</ZodError>}
       {logError && <div  className='text-purple-900'>{logError}</div>}
       <Button
         className=' w-full'

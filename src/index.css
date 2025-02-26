@@ -4,22 +4,7 @@
 
 
 :root {
-  --background-color: #738260;
-  --text-color: #212121;
-  --card-color: #e3ecc0;
-  --accent-color: #555;
-  --hover: #3333f5;
 
-  --grey: #293138;
-  --blue: #2C70DA;
-  --white: #EDF3F8;
-  --soft-green: #9DB88F;
-  --vivid-green: #7CE3B3;
-  --orange: #FB6D3A;
-  --dark: #7772;
-  --modal-bg: #A4C495;
-  --input-color: #333;
-  --input-bg: #ece3ca;
 
 
   --current-color: #B92F2C;
@@ -49,6 +34,23 @@
   --beige: #f5f5dc;
   --adelyn: #C204B9;
   --chamomile: #E9DBC4;
+
+  --background-color: #738260;
+  --text-color: #212121;
+  --card-color: #e3ecc0;
+  --accent-color: #555;
+  --hover: #3333f5;
+
+  --grey: #293138;
+  --blue: #2C70DA;
+  --white: #EDF3F8;
+  --soft-green: #9DB88F;
+  --vivid-green: #7CE3B3;
+  --orange: #FB6D3A;
+  --dark: #7772;
+  --modal-bg: #A4C495;
+  --input-color: #333;
+  --input-bg: #ece3ca;
 }
 
 /* root[data-theme='light'] {
@@ -61,8 +63,8 @@
   --accent-color: #777;
   --hover: #7CE3B3;
   --modal-bg: #12141c;
-  --input-color: #A4C495;
-  --input-bg: #A4C495;
+  --input-color: #e9e692;
+  --input-bg: #343b55;
 }
 
 body {
@@ -72,7 +74,7 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  transition: all 1s ease-in-out;
+  transition: all 0.8s ease-in-out;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

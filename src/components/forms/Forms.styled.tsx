@@ -20,10 +20,11 @@ export const Input_DU = styled.input`
   font-weight: 600;
   line-height: 150%;
   letter-spacing: 0.64px;
-  color: var(--text-color);
+  color: var(--input-color);
+  background-color: var(--input-bg);
   border-radius: 12px;
   border: 3px solid #555;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.8s ease-in-out;
   &::placeholder {
     color: #777;
   }

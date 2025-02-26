@@ -8,7 +8,7 @@ export const MainContainer = styled.div`
     grid-gap: 25px;
     grid-template-rows: 80px auto 80px;
 
-    transition: background-color 1s ease-in-out, color 1s ease-in-out;
+    transition: background-color 0.8s ease-in-out, color 0.8s ease-in-out;
     background: var(--background-color);
     color: var(--text-color);
     padding: 0 16px;
