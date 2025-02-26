@@ -8,6 +8,9 @@ import { useFinanceStore } from '../../store/useFinanceStore'
 import { useAuthStore } from '../../store/useAuthStore'
 import toast from 'react-hot-toast'
 import { LuCircleMinus, LuCirclePlus, LuCircleX, LuRefreshCw } from "react-icons/lu";
+import { Input_DU, Label_DU } from './Forms.styled'
+import { ZodError } from '../button/Button.styled'
+import { Button } from '../button/Button'
 
 interface AddTransactionFormProps {
   setOpen: React.Dispatch<boolean>
@@ -123,12 +126,12 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = () => {
             </label>
         </div>
 
-      <label className={cn('relative  flex items-center gap-1')}>
+      <Label_DU className={cn('relative  flex items-center gap-1')}>
       {/* {sign === '-' && !errors.amount && isDirty && 
       <span className='absolute left-2 text-[var(--orange)]' >-</span>} */}
-        <input 
+        <Input_DU 
           type='number'
-          className={cn('grow input input-bordered focus:ring focus:border-blue-500' ,
+          className={cn('grow ' ,
             sign === '+'
             ? 'text-[var(--vivid-green)]' 
             : 'text-[var(--orange)]'
@@ -140,38 +143,38 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = () => {
         )}
           placeholder=	{( isSubmitting )? "Processing" : 'amount'}
           />
-      </label>
-      {errors.amount && <div className='text-purple-900'>{errors.amount.message}</div>}
-      {amountError && <div  className='text-purple-900'>{amountError}</div>}
+      </Label_DU>
+      {errors.amount && <ZodError >{errors.amount.message}</ZodError>}
+      {amountError && <ZodError  >{amountError}</ZodError>}
 
-      <label className={cn('formLabel  flex items-center gap-1')}>
-        <input 
-          className={cn('grow input input-bordered focus:ring focus:border-blue-500' )}
+      <Label_DU className={cn('formLabel  flex items-center gap-1')}>
+        <Input_DU 
+          className={cn('grow ' )}
           {...register('name', {
             onChange: handleNameChange
           } )}
           placeholder=	{( isSubmitting )? "Processing" : 'name'}
           />
-      </label>
-      {errors.name && <div className='text-purple-900'>{errors.name.message}</div>}
-      {nameError && <div  className='text-purple-900'>{nameError}</div>}
+      </Label_DU>
+      {errors.name && <ZodError >{errors.name.message}</ZodError>}
+      {nameError && <ZodError  >{nameError}</ZodError>}
 
-      <label className={cn('formLabel  flex items-center gap-1')}>
-        <input 
-          className={cn('grow input input-bordered focus:ring focus:border-blue-500' )}
+      <Label_DU className={cn('formLabel  flex items-center gap-1')}>
+        <Input_DU 
+          className={cn('grow 0' )}
           {...register('description', )}
           placeholder=	{( isSubmitting )? "Processing" : 'description'}
           />
-      </label>
-      {errors.description && <div className='text-purple-900'>{errors.description.message}</div>}
-      <button
+      </Label_DU>
+      {errors.description && <ZodError >{errors.description.message}</ZodError>}
+      <Button
         className='flex w-full gap-5 mt-auto btn btn-active btn-primary'
         type='submit'
         disabled={isSubmitting || !isDirty || !isValid }
             >
       { isSubmitting &&  <LuRefreshCw className='size-6 animate-spin' />}      
       { isLoading  ? "Sending.." :  "Send" }
-      </button>
+      </Button>
 
       { (errors.name || errors.amount  || errors.description)  &&  (
       <button 

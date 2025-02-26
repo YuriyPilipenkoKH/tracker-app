@@ -7,7 +7,7 @@ export const MobileWrap = styled.div`
     }
 `
 
-export const Tabwrap = styled.div`
+export const DeskWrap = styled.div`
     @media screen and (max-width: 1280px) {
       display: none;
     }

@@ -8,7 +8,7 @@ import ThemeChanger from "../button/ThemeChanger";
 import Logo from "./Logo";
 import { useModalStore } from "../../store/useModalStore";
 import { fake_transaction } from "../../data/transaction";
-import { MobileWrap, Tabwrap } from "./Nav.styled";
+import { DeskWrap, MobileWrap,  } from "./Nav.styled";
 
 
 const Navbar = () => {
@@ -32,7 +32,7 @@ const Navbar = () => {
            className={cn('btn btn-ghost ',
             (path === '/login' || path === '/signup')  && 'hidden')}
           >
-            <Tabwrap 
+            <DeskWrap 
             className="text-lg font-bold " >
              {token 
              ? (path === '/' ) 
@@ -41,7 +41,7 @@ const Navbar = () => {
                 ? 'Dashboard'
                 : (path === '/dashboard' ) && 'Tracker' 
              : 'Login' }
-            </Tabwrap>
+            </DeskWrap>
             <MobileWrap className="gap-8 MobileWrap ">
             {token 
              ? (path === '/' ) 
