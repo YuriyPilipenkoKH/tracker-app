@@ -8,6 +8,7 @@ import ThemeChanger from "../button/ThemeChanger";
 import Logo from "./Logo";
 import { useModalStore } from "../../store/useModalStore";
 import { fake_transaction } from "../../data/transaction";
+import { MobileWrap, Tabwrap } from "./Nav.styled";
 
 
 const Navbar = () => {
@@ -31,8 +32,8 @@ const Navbar = () => {
            className={cn('btn btn-ghost ',
             (path === '/login' || path === '/signup')  && 'hidden')}
           >
-            <div 
-            className="text-lg font-bold max-sm:hidden" >
+            <Tabwrap 
+            className="text-lg font-bold " >
              {token 
              ? (path === '/' ) 
               ? 'Dashboard' 
@@ -40,8 +41,8 @@ const Navbar = () => {
                 ? 'Dashboard'
                 : (path === '/dashboard' ) && 'Tracker' 
              : 'Login' }
-            </div>
-            <div className="gap-8 MobileWrap sm:hidden">
+            </Tabwrap>
+            <MobileWrap className="gap-8 MobileWrap ">
             {token 
              ? (path === '/' ) 
               ? <MdOutlineDashboardCustomize size={25}/>
@@ -49,7 +50,7 @@ const Navbar = () => {
                 ? <MdOutlineDashboardCustomize size={25}/>
                 : (path === '/dashboard' ) && <FaSackDollar size={25}/>
              : <MdOutlineLogin size={25}/> }
-            </div>
+            </MobileWrap>
           </Link>
         </div>
         <div className="flex items-center gap-4 max-sm:gap-1">
