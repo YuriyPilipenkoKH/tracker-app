@@ -51,7 +51,7 @@ export const addingNewSchema = transactionSchema.pick({
 export type addingNewSchemaType = z.infer<typeof addingNewSchema>;
 
 export const updatingSchema = transactionSchema.pick({
-  amount: true,
+
   name: true,
   description: true,
 });

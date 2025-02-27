@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Transaction, transactionSchema } from '../../models/transaction'
+import { Transaction, transactionSchema, updatingSchemaType } from '../../models/transaction'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useModalStore } from '../../store/useModalStore'
 import { Input_DU, Label_DU } from './Forms.styled'
@@ -15,8 +15,8 @@ import { useAuthStore } from '../../store/useAuthStore'
 
 const EditTransactionForm = () => {
   const {selectedTransaction} = useModalStore()
-   const {totalBalance,  newTransaction, amountError, nameError, clearAnyError} = useFinanceStore()
-   const { updateBalance } = useAuthStore() 
+   const { nameError, clearAnyError} = useFinanceStore()
+  
    const [edit, setedit] = useState<boolean>(false)
 
    const {
@@ -41,9 +41,16 @@ const EditTransactionForm = () => {
         isLoading 
       } = formState
 
-    const onSubmit = async (data: Transaction) => {
+    const onSubmit = async (data: updatingSchemaType) => {
       console.log(data);
-      
+      const finalData = {
+        ...data,
+        _id:selectedTransaction?._id,
+        amount:selectedTransaction?.amount,
+        total: selectedTransaction?.total,
+      }
+      console.log('finalAmount',finalData)
+      const response = await newTransaction(finalData)
     }
 
     const handleNameChange =   () => {

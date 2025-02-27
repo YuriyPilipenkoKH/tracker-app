@@ -1,6 +1,6 @@
 import React ,{ useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Transaction, transactionSchema, } from '../../models/transaction'
+import { addingNewSchemaType, Transaction, transactionSchema, } from '../../models/transaction'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { cn } from '../../lib/cn'
 
@@ -44,7 +44,7 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = () => {
     } = formState
 
 
-    const onSubmit = async (data: Transaction) => {
+    const onSubmit = async (data: addingNewSchemaType) => {
       console.log(data);
       const sanitizedData = {
         ...data,
@@ -60,20 +60,21 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = () => {
       console.log('finalAmount',finalData)
       const response = await newTransaction(finalData)
 
-      if(response?.success){
-         const newBalance = refreshTotalBalance(finalData.amount)
-         if(response.id) {
-           await updateBalance({
-            balance: newBalance,
-            id: response.id
-          })
-         }
-        toast.success(response.message)
-        // console.log(response.message);
-        clearErrors()
-        reset()
-        // setOpen(false)
-      } 
+        if(response?.success){
+           const newBalance = refreshTotalBalance(finalData.amount)
+           if(response.id) {
+             await updateBalance({
+              balance: newBalance,
+              id: response.id
+            })
+           }
+          toast.success(response.message)
+          // console.log(response.message);
+          clearErrors()
+          reset()
+          // setOpen(false)
+        } 
+
     }
     const changeSign = (e: React.ChangeEvent<HTMLInputElement>) => {
       // setValue("sign", e.target.value as "+" | "-")

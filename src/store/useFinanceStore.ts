@@ -18,6 +18,7 @@ interface FinanceStoreTypes {
   setTotalBalance: (data: number) => void
   grabTransactions: (data: pagination) => Promise<loginResponse | undefined>
   newTransaction: (data:Transaction) => Promise<loginResponse | undefined>
+  updateTransaction: (data:Transaction) => Promise<loginResponse | undefined>
   clearAnyError: (data: err) => void
 
 }
@@ -100,6 +101,38 @@ export const useFinanceStore = create<FinanceStoreTypes>((set, get) => ({
     if(error === 'nameError') {
       set({nameError: '',})
     }
+  },
+
+  updateTransaction: async(data) => {
+    set({ pending: true });
+    const { grabTransactions } = get();
+    try {
+      const response = await axios.patch('/transaction/update', data)
+      if (response.data) {
+        await grabTransactions({ page: get().currentPage, limit: 5 });
+        // ✅ 2. Update state immediately (optional: avoids small delay in UI update)
+        set((state) => ({
+          transactions: [ ...state.transactions.slice(0, 5)], // Keep max 5 items
+        }));
+        }
+        return { 
+          success: true, 
+          message:  response.data.message,
+          id: response.data.payload._id
+        } 
+      
+    } catch (error) {
+      if (error instanceof AxiosError && error.response) {
+        console.log(error.response.data.message);
+        
+      if (error.response.data.nameError){
+        set({nameError:  error.response.data.message})
+      }
+        return { success: false, message: error.response.data.message };
+     } 
+     return { success: false, message: "An unexpected error occurred" };
+    }
+     finally{  set({ pending: false }) }
   }
 
 }))
