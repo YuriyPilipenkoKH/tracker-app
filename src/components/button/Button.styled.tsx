@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
+import { css } from '@emotion/react';
 
-export const buttonStyles =`
+export const buttonStyles =css`
   
   display: flex;
   align-items: center;
@@ -32,7 +34,7 @@ export const buttonStyles =`
   }
 `
 
-export const ripple=`
+export const ripple=css`
 &:after {
   content: '';
   position: absolute;
@@ -111,7 +113,7 @@ export const StyledArrowButton = styled.button`
   cursor: pointer;
 `;
 
-export const StyledFlatButton = styled.button`
+export const flatBtnStyles =css`
  display: flex;
   align-items: center;
   justify-content: center;
@@ -129,6 +131,14 @@ export const StyledFlatButton = styled.button`
   &:disabled{
   background-color: #888;
   }
+`
+
+export const StyledFlatButton = styled.button`
+  ${flatBtnStyles} ;
+
+`
+export const StyledFlatLink = styled(Link)`
+    ${flatBtnStyles} ;
 `
 
 export const ZodError = styled.div`

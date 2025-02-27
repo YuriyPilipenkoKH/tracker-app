@@ -8,6 +8,7 @@ import ThemeChanger from "../button/ThemeChanger";
 import Logo from "./Logo";
 import { DeskWrap, MobileWrap,  } from "./Nav.styled";
 import { FlatButton } from "../button/Button";
+import { StyledFlatLink } from "../button/Button.styled";
 
 
 const Navbar = () => {
@@ -21,13 +22,13 @@ const Navbar = () => {
       className="w-full transition-all ease-in-out  duration-800" >
     <div className="h-16  mx-auto ">
       <div className="flex items-center justify-between h-full">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <Link to="/" className="flex items-center gap-2.5 hover:opacity-80 transition-all">
             <div className="flex items-center justify-center rounded-lg size-9 bg-primary/10">
             <Logo/>
             </div>
           </Link>
-          <Link to='/dashboard' 
+          <StyledFlatLink to='/dashboard' 
            className={cn('btn btn-ghost ',
             (path === '/login' || path === '/signup')  && 'hidden')}
           >
@@ -50,15 +51,14 @@ const Navbar = () => {
                 : (path === '/dashboard' ) && <FaSackDollar size={25}/>
              : <MdOutlineLogin size={25}/> }
             </MobileWrap>
-          </Link>
+          </StyledFlatLink>
         </div>
         <div className="flex items-center gap-4 max-sm:gap-1">
-
 
        < ThemeChanger/>
 
           {token && (
-            <div className="flex gap-4 items-center max-sm:gap-1 ">
+            <div className="flex gap-2 items-center max-sm:gap-1 ">
             <UserButton/>
 
               <FlatButton
