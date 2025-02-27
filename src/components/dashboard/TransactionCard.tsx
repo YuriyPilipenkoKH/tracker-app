@@ -36,16 +36,16 @@ const TransactionCard:React.FC<TransactionCardProps> = ({transaction}) => {
           )}
         > {'$'}{' '}{Math.abs(amount)}
         </p>
-        <div className="des font-light h-6 overflow-hidden">{description}</div>
+        <div className="des ">{description}</div>
         <button
           className='zoom flex gap-2'
           onClick={click}
           >
           <LuZoomIn />
         </button>
-        {createdAt && <p className="cat text-sm text-gray-500">{format(new Date(createdAt), "dd-MM-yyyy HH:mm")}
+        {createdAt && <p className="cat ">{format(new Date(createdAt), "dd-MM-yyyy HH:mm")}
           </p>}
-        <div className="total flex gap-1 text-sm text-gray-500">
+        <div className="total flex gap-1 ">
           <p>total:</p>
           <p>{total}</p>
         </div>

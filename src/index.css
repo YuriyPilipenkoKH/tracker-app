@@ -48,6 +48,7 @@
   --modal-bg: #A4C495;
   --input-color: #333;
   --input-bg: #cbc4b0;
+  --sec-color: #233049 ;
 }
 
 /* root[data-theme='light'] {
@@ -62,6 +63,7 @@
   --modal-bg: #12141c;
   --input-color: #e9e692;
   --input-bg: #343b55;
+  --sec-color: #6b7280 ;
 }
 
 body {
@@ -148,29 +150,45 @@ img {
     overflow: hidden;
     text-overflow: ellipsis; 
     white-space: nowrap; 
+    transition: all 0.8s ease-in-out;
   }
   &>.edit{
     grid-area: edit;
     justify-self: center;
+    transition: all 0.8s ease-in-out;
   }
   &>.des{
     grid-area: des;
+    font-weight: 300;
     overflow: hidden;
     text-overflow: ellipsis; 
     white-space: nowrap; 
+    transition: all 0.8s ease-in-out;
   }
   &>.zoom{
     grid-area: zoom;
     justify-self: end;
+    transition: all 0.8s ease-in-out;
   }
-  &>.cat{grid-area: cat;}
+  &>.cat{
+    grid-area: cat;
+    color: var(--sec-color);
+    font-size: 0.875rem /* 14px */;
+    line-height: 1.25rem /* 20px */;
+    transition: all 0.8s ease-in-out;
+  }
   &>.total{
     grid-area: total;
     justify-self: end;
+    color: var(--sec-color);
+    font-size: 0.875rem /* 14px */;
+    line-height: 1.25rem /* 20px */;
+    transition: all 0.8s ease-in-out;
   }
   &>.amount{
     grid-area: amount;
     justify-self: end;
+    transition: all 0.8s ease-in-out;
   }
 
 }
