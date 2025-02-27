@@ -22,10 +22,10 @@ const EditTransactionForm = () => {
           resolver: zodResolver(transactionSchema), })
       const {
         errors,
-        isDirty,
-        isValid ,
-        isSubmitting,
-        isLoading 
+        // isDirty,
+        // isValid ,
+        // isSubmitting,
+        // isLoading 
       } = formState
 
     const onSubmit = async (data: Transaction) => {
