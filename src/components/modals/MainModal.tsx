@@ -4,6 +4,7 @@ import { useModalStore } from '../../store/useModalStore';
 import { ModalContainer, ModalOverlay } from './MainModal.styled';
 import { Transaction } from '../../models/transaction';
 import EditTransactionForm from '../forms/EditTransactionForm';
+import { useFinanceStore } from '../../store/useFinanceStore';
 
 
 interface MainModalProps {
@@ -14,16 +15,19 @@ const modalRoot = document.getElementById('modal-root');
 const MainModal: React.FC<MainModalProps> = (
   // {transaction}
 ) => {
-  const {modalIsOpen, onModalClose, selectedTransaction} = useModalStore()
+  const {modalIsOpen, onModalClose, } = useModalStore()
+   const { clearAnyError,} = useFinanceStore()
 
   useEffect(() => {
     const handleBackdropClick =( e:MouseEvent ) => {
       if ((e.target as HTMLElement).classList.contains("modal-backdrop")) {
+        clearAnyError({error: 'nameError'})
         onModalClose()
       }
     };
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
+        clearAnyError({error: 'nameError'})
         onModalClose()
         }
     };

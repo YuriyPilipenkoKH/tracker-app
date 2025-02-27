@@ -53,7 +53,7 @@ const EditTransactionForm = () => {
       if(response?.success){
         toast.success(response.message)
         // console.log(response.message);
-        clearErrors()
+        clearAnyError({error: 'nameError'})
         reset()
       }
     }
