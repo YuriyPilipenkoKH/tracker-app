@@ -32,6 +32,10 @@ export const Input_DU = styled.input`
     outline:3px solid #2196f3;
     border: 3px solid transparent;
   }
+  &:disabled{
+    background-color: #666;
+    border: none;
+  }
   @media screen and (max-width: 767px) {
         padding: 8px 16px;
         font-size: 14px;
