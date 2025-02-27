@@ -124,7 +124,7 @@ export const flatBtnStyles =css`
   border-radius: 50%; 
   border: none;
   background-color: transparent;
-  transition: all 0.8s ease-in-out; 
+  transition: all 0.4s ease-in-out; 
   &:hover {
   background-color: #5983679b;
   }

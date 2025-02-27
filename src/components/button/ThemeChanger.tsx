@@ -1,6 +1,7 @@
 import { MdOutlineNightlight } from "react-icons/md";
 import { useState, useEffect } from 'react';
 import { LuLampDesk } from "react-icons/lu";
+import { FlatButton } from "./Button";
 
 
 export default function ThemeChanger() {
@@ -37,12 +38,12 @@ export default function ThemeChanger() {
   }
 
   return (
-    <button
+    <FlatButton
       className="btn btn-ghost text-[var(--text-color)]"
       onClick={toggleTheme}
       aria-label="Toggle Theme"
     >
       {theme === 'light' ? <LuLampDesk size={25}/> : <MdOutlineNightlight  size={25}/>}
-    </button>
+    </FlatButton>
   );
 }
