@@ -5,6 +5,8 @@ import { profileSchema, profileSchemaType } from '../../models/profileSchema';
 import { cn } from '../../lib/cn';
 import { useEffect, useState } from 'react';
 import { LuBuilding2, LuMail, LuPhone, LuRefreshCw, LuSquarePen, LuSquareX, LuUser } from 'react-icons/lu';
+import { Input_DU, Label_DU } from './Forms.styled';
+import { ZodError } from '../button/Button.styled';
 
 
 const ProfileForm = () => {
@@ -71,57 +73,57 @@ const ProfileForm = () => {
            : <LuSquarePen  className="w-4 h-4" />}
           </button>
 
-        <label className={cn('formLabel  flex flex-col  gap-1')}>
+        <Label_DU className={cn('formLabel  flex flex-col  gap-1')}>
         <div className="text-sm  flex items-center gap-2">
           <LuUser className="w-4 h-4" />
           Full Name
         </div>
-          <input 
+          <Input_DU 
             className={cn('grow input input-bordered  focus:ring focus:border-blue-500 ' )}
             {...register('name',{ onChange: handleInputChange })}
             placeholder=	{( isSubmitting )? "Processing" : 'email'}
             disabled = {!anable}/>
-        </label>
-          {errors.name && <div className='text-purple-900'>{errors.name.message}</div>}
+        </Label_DU>
+          {errors.name && <ZodError >{errors.name.message}</ZodError>}
           
-        <label className={cn('formLabel  flex flex-col  gap-1')}>
+        <Label_DU className={cn('formLabel  flex flex-col  gap-1')}>
         <div className="text-sm  flex items-center gap-2">
           <LuMail className="w-4 h-4" />
           Email Address
         </div>
-          <input 
+          <Input_DU 
             className={cn('grow input input-bordered  focus:ring focus:border-blue-500 ' )}
             {...register('email', { onChange: handleInputChange })}
             placeholder=	{( isSubmitting )? "Processing" : 'email'}
             disabled = {!anable}/>
-        </label>
-          {errors.email && <div className='text-purple-900'>{errors.email.message}</div>}
+        </Label_DU>
+          {errors.email && <ZodError >{errors.email.message}</ZodError>}
 
-        <label className={cn('formLabel  flex flex-col  gap-1')}>
+        <Label_DU className={cn('formLabel  flex flex-col  gap-1')}>
         <div className="text-sm  flex items-center gap-2">
           <LuPhone  className="w-4 h-4" />
           Phone Number
         </div>
-          <input 
+          <Input_DU 
             className={cn('grow input input-bordered  focus:ring focus:border-blue-500 ' )}
             {...register('phone', { onChange: handleInputChange })}
             placeholder=	{( isSubmitting )? "Processing" : 'phone'}
             disabled = {!anable}/>
-        </label>
-          {errors.phone && <div className='text-purple-900'>{errors.phone.message}</div>}
+        </Label_DU>
+          {errors.phone && <ZodError >{errors.phone.message}</ZodError>}
 
-        <label className={cn('formLabel  flex flex-col  gap-1')}>
+        <Label_DU className={cn('formLabel  flex flex-col  gap-1')}>
         <div className="text-sm  flex items-center gap-2">
           <LuBuilding2   className="w-4 h-4" />
           City
         </div>
-          <input 
+          <Input_DU 
             className={cn('grow input input-bordered  focus:ring focus:border-blue-500 ' )}
             {...register('city', { onChange: handleInputChange })}
             placeholder=	{( isSubmitting )? "Processing" : 'City'}
             disabled = {!anable}/>
-        </label>
-          {errors.city && <div className='text-purple-900'>{errors.city.message}</div>}
+        </Label_DU>
+          {errors.city && <ZodError >{errors.city.message}</ZodError>}
       <button 
         type='submit'
         className={cn('btn btn-primary mt-1 flex gap-5',
