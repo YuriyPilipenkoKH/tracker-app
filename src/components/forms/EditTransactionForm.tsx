@@ -21,10 +21,8 @@ interface EditTransactionFormProps {
 const EditTransactionForm: React.FC<EditTransactionFormProps> = ({
   edit, setEdit
 }) => {
-  const {selectedTransaction} = useModalStore()
+  const {selectedTransaction, onModalClose} = useModalStore()
    const { nameError, clearAnyError, updateTransaction} = useFinanceStore()
-  
-   
 
    const {
       register, 
@@ -60,7 +58,7 @@ const EditTransactionForm: React.FC<EditTransactionFormProps> = ({
         toast.success(response.message)
         // console.log(response.message);
         clearAnyError({error: 'nameError'})
-        reset()
+        onModalClose()
       }
     }
 
