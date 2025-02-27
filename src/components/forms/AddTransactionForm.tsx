@@ -99,7 +99,7 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = () => {
     className='relative flex flex-col w-full gap-3 px-1 pt-12 pb-6'
     autoComplete="off"
     noValidate>
-      <div className="absolute right-9 top-[60px] z-50 flex gap-6 items-center justify-center">
+      <div className="absolute Sign-color right-9 top-[65px] z-50 flex gap-6 items-center justify-center">
           <label className="flex items-center justify-center gap-1 cursor-pointer">
             <input
               type="radio"
@@ -109,7 +109,8 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = () => {
             value={'+'}
             />
             <span className='p-0 bg-red'>
-              <LuCirclePlus  className={cn('', sign === '+'  && 'text-[var(--vivid-green)]')}/>
+              <LuCirclePlus  size={25}
+              className={cn('', sign === '+'  && 't-pls text-[var(--green)]')}/>
             </span>
           </label>
             <label className="flex items-center justify-center gap-1 cursor-pointer">
@@ -121,20 +122,21 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = () => {
                 value={'-'}
               />
               <span>
-                <LuCircleMinus className={cn('', sign === '-'  && 'text-[var(--orange)]')}/>
+                <LuCircleMinus size={25}
+                className={cn('', sign === '-'  && 't-min text-[var(--orange)]')}/>
                 </span>
             </label>
         </div>
 
-      <Label_DU className={cn('relative  flex items-center gap-1')}>
+      <Label_DU className={cn('relative Label_number  flex items-center gap-1')}>
       {/* {sign === '-' && !errors.amount && isDirty && 
       <span className='absolute left-2 text-[var(--orange)]' >-</span>} */}
         <Input_DU 
           type='number'
           className={cn('grow ' ,
             sign === '+'
-            ? 'text-[var(--vivid-green)]' 
-            : 'text-[var(--orange)]'
+            ? 't-pls text-[var(--green)]' 
+            : 't-min text-[var(--orange)]'
           )}
           {...register('amount', { 
             onChange: handleAmountChange,

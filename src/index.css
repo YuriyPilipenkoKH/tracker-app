@@ -50,7 +50,7 @@
   --dark: #7772;
   --modal-bg: #A4C495;
   --input-color: #333;
-  --input-bg: #ece3ca;
+  --input-bg: #cbc4b0;
 }
 
 /* root[data-theme='light'] {
@@ -177,7 +177,14 @@ img {
   }
 
 }
-
+.Label_number{
+  &>input.t-pls{
+    color: var(--green) ;
+  }
+  &>input.t-min{
+    color: var(--orange) ;
+  }
+}
 
 
 

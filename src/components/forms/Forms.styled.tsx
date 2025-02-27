@@ -24,7 +24,7 @@ export const Input_DU = styled.input`
   background-color: var(--input-bg);
   border-radius: 12px;
   border: 3px solid #555;
-  transition: all 0.8s ease-in-out;
+  transition: all 0.3s ease-in-out;
   &::placeholder {
     color: #777;
   }
