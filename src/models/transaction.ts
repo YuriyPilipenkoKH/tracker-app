@@ -40,3 +40,20 @@ export const transactionSchema = z.object({
 })
 
 export type Transaction = z.infer<typeof transactionSchema>
+
+
+export const addingNewSchema = transactionSchema.pick({
+  amount: true,
+  name: true,
+  description: true,
+});
+
+export type addingNewSchemaType = z.infer<typeof addingNewSchema>;
+
+export const updatingSchema = transactionSchema.pick({
+  amount: true,
+  name: true,
+  description: true,
+});
+
+export type updatingSchemaType = z.infer<typeof updatingSchema>;

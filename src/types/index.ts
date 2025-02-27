@@ -30,6 +30,8 @@ export interface AuthResponse {
   token: string;
   success: boolean
  }
+
+
 // export interface User {
 //   _id:string
 //   name: string

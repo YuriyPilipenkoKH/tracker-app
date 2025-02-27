@@ -11,11 +11,14 @@ import { useFinanceStore } from '../../store/useFinanceStore'
 import { ZodError } from '../button/Button.styled'
 import { Button } from '../button/Button'
 import { LuCircleX, LuPenLine, LuRefreshCw } from 'react-icons/lu'
+import { useAuthStore } from '../../store/useAuthStore'
 
 const EditTransactionForm = () => {
   const {selectedTransaction} = useModalStore()
    const {totalBalance,  newTransaction, amountError, nameError, clearAnyError} = useFinanceStore()
+   const { updateBalance } = useAuthStore() 
    const [edit, setedit] = useState<boolean>(false)
+
    const {
       register, 
       handleSubmit,
@@ -42,6 +45,10 @@ const EditTransactionForm = () => {
       console.log(data);
       
     }
+
+    const handleNameChange =   () => {
+      if( nameError ) clearAnyError({error: 'nameError'})
+    }
   return (
     <form  
     onSubmit={handleSubmit(onSubmit)}
@@ -59,7 +66,7 @@ const EditTransactionForm = () => {
         <Input_DU 
           className={cn('grow ' )}
           {...register('name', {
-            // onChange: handleNameChange
+            onChange: handleNameChange
           } )}
           placeholder=	{( isSubmitting )? "Processing" : 'name'}
           disabled={!edit}
@@ -92,7 +99,7 @@ const EditTransactionForm = () => {
       type='button'
       onClick ={() => setedit(!edit)}
       className='btn btn-ghost absolute top-[-8px] right-5 ' >
-            <LuPenLine  />
+          {!edit ?  <LuPenLine  /> : <LuCircleX  />}
       </button>
     </form>
   )
@@ -100,4 +107,4 @@ const EditTransactionForm = () => {
 
 export default EditTransactionForm
 
-// <LuCircleX  />
+// 
