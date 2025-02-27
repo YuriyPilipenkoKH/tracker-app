@@ -1,6 +1,6 @@
 import  { AxiosError } from 'axios'
 import {create} from 'zustand'
-import { Transaction } from '../models/transaction'
+import { Transaction, updatingSchemaType } from '../models/transaction'
 import { err, loginResponse, pagination } from '../types'
 import { axios } from '../lib/axios'
 
@@ -18,7 +18,7 @@ interface FinanceStoreTypes {
   setTotalBalance: (data: number) => void
   grabTransactions: (data: pagination) => Promise<loginResponse | undefined>
   newTransaction: (data:Transaction) => Promise<loginResponse | undefined>
-  updateTransaction: (data:Transaction) => Promise<loginResponse | undefined>
+  updateTransaction: (data:updatingSchemaType) => Promise<loginResponse | undefined>
   clearAnyError: (data: err) => void
 
 }

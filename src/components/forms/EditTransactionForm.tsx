@@ -11,11 +11,12 @@ import { useFinanceStore } from '../../store/useFinanceStore'
 import { ZodError } from '../button/Button.styled'
 import { Button } from '../button/Button'
 import { LuCircleX, LuPenLine, LuRefreshCw } from 'react-icons/lu'
-import { useAuthStore } from '../../store/useAuthStore'
+import toast from 'react-hot-toast'
+
 
 const EditTransactionForm = () => {
   const {selectedTransaction} = useModalStore()
-   const { nameError, clearAnyError} = useFinanceStore()
+   const { nameError, clearAnyError, updateTransaction} = useFinanceStore()
   
    const [edit, setedit] = useState<boolean>(false)
 
@@ -46,11 +47,15 @@ const EditTransactionForm = () => {
       const finalData = {
         ...data,
         _id:selectedTransaction?._id,
-        amount:selectedTransaction?.amount,
-        total: selectedTransaction?.total,
       }
       console.log('finalAmount',finalData)
-      const response = await newTransaction(finalData)
+      const response = await updateTransaction(finalData)
+      if(response?.success){
+        toast.success(response.message)
+        // console.log(response.message);
+        clearErrors()
+        reset()
+      }
     }
 
     const handleNameChange =   () => {
