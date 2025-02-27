@@ -9,6 +9,8 @@ import ProfilePage from './pages/ProfilePage'
 import NotFoundPage from './pages/NotFoundPage'
 import { useAuthStore } from './store/useAuthStore'
 import { useEffect } from 'react'
+import { Toaster } from 'react-hot-toast'
+import { options } from './lib/hotToast'
 
 
 function App() {
@@ -47,6 +49,9 @@ function App() {
         </Routes>
       </Container>
 
+      <Toaster
+       position="top-center" 
+      toastOptions={options} />
     </>
   )
 }

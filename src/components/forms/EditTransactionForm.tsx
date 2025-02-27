@@ -55,6 +55,7 @@ const EditTransactionForm: React.FC<EditTransactionFormProps> = ({
       console.log('finalAmount',finalData)
       const response = await updateTransaction(finalData)
       if(response?.success){
+        console.log(response);
         toast.success(response.message)
         // console.log(response.message);
         clearAnyError({error: 'nameError'})
