@@ -22,7 +22,7 @@ const AvatarUploadForm_b64 = () => {
   
   const onSubmit = async (data: AvatarUploadSchemaType) => {
         // await uploadAvatar({ image: data.image });
-          // await updateProfile({ profilePic: base64Image });
+          // await uploadAvatar_b64({ image:  selectedImg });
   }
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]; // Use optional chaining to handle null or undefined
@@ -40,6 +40,7 @@ const AvatarUploadForm_b64 = () => {
       const base64Image = reader.result;
       setSelectedImg(base64Image);
       // await updateProfile({ profilePic: base64Image });
+      handleSubmit(onSubmit)();
     };
   }
 

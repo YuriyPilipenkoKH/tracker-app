@@ -26,6 +26,7 @@ interface AuthStoreTypes {
   logOut: () => Promise<void>
   updateProfile: (data: profileSchemaType) => Promise<boolean | undefined>
   uploadAvatar: (data: img) => Promise<void>
+  uploadAvatar_b64: (data: img) => Promise<void>
   clearLogError: () => void
   updateBalance: (data: bal) =>Promise<void>
 }
@@ -203,6 +204,22 @@ export const useAuthStore = create<AuthStoreTypes>((set, get) => ({
       set({ authUser: response.data.user });
       toast.success(response.data.message);
     }
+    } catch (error: unknown) {
+      if (error instanceof AxiosError && error.response) {
+        toast.error(error.response.data.message);
+      }
+    } finally {  set({ pending: false })  }
+  },
+
+  uploadAvatar_b64: async (data) => {
+    set({ pending: true });
+    try {
+      const response = await axios.put("/auth/upload-avatar_b64", data);
+      if(response.data){
+        set({ authUser: response.data.user });
+        toast.success(response.data.message);
+      }
+
     } catch (error: unknown) {
       if (error instanceof AxiosError && error.response) {
         toast.error(error.response.data.message);
