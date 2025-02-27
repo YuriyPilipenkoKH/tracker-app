@@ -6,13 +6,11 @@ import UserButton from "./UserButton";
 import { cn } from "../../lib/cn";
 import ThemeChanger from "../button/ThemeChanger";
 import Logo from "./Logo";
-import { useModalStore } from "../../store/useModalStore";
-import { fake_transaction } from "../../data/transaction";
 import { DeskWrap, MobileWrap,  } from "./Nav.styled";
 
 
 const Navbar = () => {
-  const {onModalOpen} = useModalStore()
+
   const { logOut , token } = useAuthStore();
   const location = useLocation()
   const path = location.pathname
@@ -20,7 +18,7 @@ const Navbar = () => {
   return (
     <header
       className="w-full transition-all ease-in-out  duration-800" >
-    <div className="h-16 px-4 mx-auto ">
+    <div className="h-16  mx-auto ">
       <div className="flex items-center justify-between h-full">
         <div className="flex items-center gap-3">
           <Link to="/" className="flex items-center gap-2.5 hover:opacity-80 transition-all">
@@ -55,10 +53,6 @@ const Navbar = () => {
         </div>
         <div className="flex items-center gap-4 max-sm:gap-1">
 
-      <button
-        type="button" 
-        onClick={() => onModalOpen(fake_transaction)}   >
-      Mo</button>
 
        < ThemeChanger/>
 
@@ -71,7 +65,7 @@ const Navbar = () => {
               className="flex justify-center px-2 btn btn-ghost" 
               onClick={logOut}
               >
-                <MdOutlineLogout />
+                <MdOutlineLogout size={25}/>
                 <span className="hidden sm:inline"></span>
               </button>
             </div>

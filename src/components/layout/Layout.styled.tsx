@@ -33,7 +33,7 @@ width: 100%;
     }
   }
   @media screen and (min-width: 768px) {
-    padding: 32px 20px 16px;
+    padding: 32px 0 16px;
     }
   @media screen and (min-width: 1280px) {
     padding: 32px 40px 16px;
