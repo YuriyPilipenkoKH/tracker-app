@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { LuBuilding2, LuMail, LuPhone, LuRefreshCw, LuSquarePen, LuSquareX, LuUser } from 'react-icons/lu';
 import { Input_DU, Label_DU } from './Forms.styled';
 import { ZodError } from '../button/Button.styled';
+import { Button, FlatButton } from '../button/Button';
 
 
 const ProfileForm = () => {
@@ -64,14 +65,14 @@ const ProfileForm = () => {
         className='relative flex flex-col gap-3 w-full py-5'
         autoComplete="off"
         noValidate>
-          <button 
+          <FlatButton
           type='button' 
-          className='absolute btn btn-ghost right-0 top-[-8px]'
+          className='absolute btn btn-ghost right-0 top-[-12px]'
           onClick={()=>setAnable(!anable)}>
            { anable
            ? <LuSquareX className="w-4 h-4" />
            : <LuSquarePen  className="w-4 h-4" />}
-          </button>
+          </FlatButton>
 
         <Label_DU className={cn('formLabel  flex flex-col  gap-1')}>
         <div className="text-sm  flex items-center gap-2">
@@ -124,7 +125,8 @@ const ProfileForm = () => {
             disabled = {!anable}/>
         </Label_DU>
           {errors.city && <ZodError >{errors.city.message}</ZodError>}
-      <button 
+      {anable && (
+      <Button 
         type='submit'
         className={cn('btn btn-primary mt-1 flex gap-5',
           !anable && 'visually-hidden'
@@ -133,7 +135,8 @@ const ProfileForm = () => {
         >
         { isSubmitting &&  <LuRefreshCw className='size-6 animate-spin' />}
         { isSubmitting  ? "Sending.." :  " Save" }
-          </button>
+      </Button>
+      )}    
     </form>
   </div>
   )
