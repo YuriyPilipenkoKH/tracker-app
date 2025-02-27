@@ -38,7 +38,7 @@ export const ModalOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #00000029;
+  background-color: #00000088;
   display: grid;
   place-items: center;
   z-index: 5;
@@ -62,7 +62,7 @@ export const ModalContainer = styled.div`
   display: grid;
   place-items: center;
   gap: 20px;  
-  background-color: #0d0da7;
+  background-color: var(--card-color);
   padding: 60px 20px;
   border-radius: 16px;
   z-index: 7;

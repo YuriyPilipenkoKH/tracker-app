@@ -28,7 +28,7 @@ const TransactionCard:React.FC<TransactionCardProps> = ({transaction}) => {
   return (
 
     <div 
-      className="n12 w-full items-center  bg-base-300   p-5  border rounded-[12px] shadow md:w-96">
+      className="n12 ">
         <h2 className="name font-semibold h-6 overflow-hidden">{name}</h2>
         <p   className ={cn('amount font-bold text-xl', 
           amount < 0 
