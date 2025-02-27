@@ -10,7 +10,9 @@ interface MainModalProps {
 }
 const modalRoot = document.getElementById('modal-root');
 
-const MainModal: React.FC<MainModalProps> = ({transaction}) => {
+const MainModal: React.FC<MainModalProps> = (
+  // {transaction}
+) => {
   const {modalIsOpen, onModalClose, selectedTransaction} = useModalStore()
 
   useEffect(() => {
@@ -48,8 +50,9 @@ const MainModal: React.FC<MainModalProps> = ({transaction}) => {
             : 'modal-backdrop'
             }`}>
           <ModalContainer  className=''>
-            <p> {transaction?._id } </p>
-            <p>amount {selectedTransaction?.amount} </p>
+            <h3 className='text-2xl'> {'Transaction detais' } </h3>
+            <p className='text-xl'>name: {selectedTransaction?.name} </p>
+            <p className='text-xl'>amount: ${selectedTransaction?.amount} </p>
 
           </ModalContainer>
         </ModalOverlay>

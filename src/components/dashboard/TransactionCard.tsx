@@ -19,7 +19,7 @@ const TransactionCard:React.FC<TransactionCardProps> = ({transaction}) => {
     total,
     description
   } = transaction
-    // const [open, setOpen] = useState<boolean>(false)
+
     const { onModalOpen} = useModalStore()
 
     const click = () => {
