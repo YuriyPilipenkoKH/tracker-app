@@ -7,6 +7,7 @@ import { cn } from "../../lib/cn";
 import ThemeChanger from "../button/ThemeChanger";
 import Logo from "./Logo";
 import { DeskWrap, MobileWrap,  } from "./Nav.styled";
+import { FlatButton } from "../button/Button";
 
 
 const Navbar = () => {
@@ -57,17 +58,17 @@ const Navbar = () => {
        < ThemeChanger/>
 
           {token && (
-            <div className="flex gap-4 max-sm:gap-1 ">
+            <div className="flex gap-4 items-center max-sm:gap-1 ">
             <UserButton/>
 
-              <button 
+              <FlatButton
               type="button"
               className="flex justify-center px-2 btn btn-ghost" 
               onClick={logOut}
               >
                 <MdOutlineLogout size={25}/>
                 <span className="hidden sm:inline"></span>
-              </button>
+              </FlatButton>
             </div>
           )}
         </div>

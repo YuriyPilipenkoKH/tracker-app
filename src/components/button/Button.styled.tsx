@@ -112,13 +112,23 @@ export const StyledArrowButton = styled.button`
 `;
 
 export const StyledFlatButton = styled.button`
-  padding: 0;
-  outline: none;
-  border:none;
+ display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  padding: 8px;
+  font-weight: 600;
+  border-radius: 50%; 
+  border: none;
   background-color: transparent;
-  cursor: pointer; 
   transition: all 0.8s ease-in-out; 
-
+  &:hover {
+  background-color: #5983679b;
+  }
+  &:disabled{
+  background-color: #888;
+  }
 `
 
 export const ZodError = styled.div`
