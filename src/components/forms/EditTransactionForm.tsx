@@ -13,12 +13,18 @@ import { Button } from '../button/Button'
 import { LuCircleX, LuPenLine, LuRefreshCw } from 'react-icons/lu'
 import toast from 'react-hot-toast'
 
+interface EditTransactionFormProps {
+  edit: boolean
+  setEdit: React.Dispatch<boolean>
+} 
 
-const EditTransactionForm = () => {
+const EditTransactionForm: React.FC<EditTransactionFormProps> = ({
+  edit, setEdit
+}) => {
   const {selectedTransaction} = useModalStore()
    const { nameError, clearAnyError, updateTransaction} = useFinanceStore()
   
-   const [edit, setedit] = useState<boolean>(false)
+   
 
    const {
       register, 
@@ -109,7 +115,7 @@ const EditTransactionForm = () => {
 
       <button 
       type='button'
-      onClick ={() => setedit(!edit)}
+      onClick ={() => setEdit(!edit)}
       className='btn btn-ghost absolute top-[-8px] right-5 ' >
           {!edit ?  <LuPenLine  /> : <LuCircleX  />}
       </button>

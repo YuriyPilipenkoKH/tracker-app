@@ -1,4 +1,4 @@
-import React, { useEffect, } from 'react'
+import React, { useEffect, useState, } from 'react'
 import { createPortal } from 'react-dom';
 import { useModalStore } from '../../store/useModalStore';
 import { ModalContainer, ModalOverlay } from './MainModal.styled';
@@ -17,6 +17,7 @@ const MainModal: React.FC<MainModalProps> = (
 ) => {
   const {modalIsOpen, onModalClose, } = useModalStore()
    const { clearAnyError,} = useFinanceStore()
+   const [edit, setEdit] = useState<boolean>(false)
 
   useEffect(() => {
     const handleBackdropClick =( e:MouseEvent ) => {
@@ -55,9 +56,13 @@ const MainModal: React.FC<MainModalProps> = (
             : 'modal-backdrop'
             }`}>
           <ModalContainer  className=''>
-            <h3 className='text-2xl'> {'Transaction detais' } </h3>
+            <h3 className='text-2xl'> 
+              {!edit ? 'Transaction details' : 'Updating fields..' } 
+            </h3>
           
-          <EditTransactionForm/>    
+          <EditTransactionForm 
+          setEdit={setEdit}
+          edit={edit}/>    
           </ModalContainer>
         </ModalOverlay>
       ,
