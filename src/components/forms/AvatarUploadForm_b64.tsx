@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react'
+import React from 'react'
 import { useAuthStore } from '../../store/useAuthStore';
 import { useForm } from 'react-hook-form';
 import { avatarUploadSchema, AvatarUploadSchemaType } from '../../models/avatarUploadSchema';
@@ -10,20 +10,19 @@ import toast from 'react-hot-toast';
 
 const AvatarUploadForm_b64 = () => {
   const { authUser, pending, uploadAvatar_b64 } = useAuthStore();
-  const [selectedImg, setSelectedImg] =  useState< string | ArrayBuffer | null>(null)
+  // const [selectedImg, setSelectedImg] =  useState< string | ArrayBuffer | null>(null)
 
   const {
     handleSubmit,
-    setValue,
     formState: { errors, isSubmitting },
   } = useForm<AvatarUploadSchemaType >({
     resolver: zodResolver(avatarUploadSchema),
   });
   
-  const onSubmit = async (data: AvatarUploadSchemaType) => {
-        // await uploadAvatar({ image: data.image });
-          // await uploadAvatar_b64({ image:  selectedImg });
-  }
+  const onSubmit = async (data: AvatarUploadSchemaType) => { 
+    console.log(data);
+   }
+
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]; // Use optional chaining to handle null or undefined
       if (!file) return;
@@ -38,14 +37,14 @@ const AvatarUploadForm_b64 = () => {
     reader.readAsDataURL(file);
     reader.onload = async () => {
       const base64Image = reader.result;
-      // setSelectedImg(base64Image);
-      // await updateProfile({ profilePic: base64Image });
+  
       await uploadAvatar_b64({ image:  base64Image });
     };
   }
 
   return (
     <div  className="flex flex-col items-center gap-4">
+      {/* <h2>Base_64</h2> */}
         <img
           src={authUser?.image}
           alt="Profile image"

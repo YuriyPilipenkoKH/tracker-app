@@ -22,9 +22,9 @@ const Navbar = () => {
       className="w-full transition-all ease-in-out  duration-800" >
     <div className="h-16  mx-auto ">
       <div className="flex items-center justify-between h-full">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-start gap-2 lg:gap-6">
           <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-all">
-            <div className="flex items-center justify-center rounded-lg size-9 bg-primary/10">
+            <div className="flex items-center  rounded-lg size-9 bg-primary/10">
             <Logo/>
             </div>
           </Link>
