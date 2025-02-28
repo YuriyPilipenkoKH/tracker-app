@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import { useFinanceStore } from './useFinanceStore';
 import { User } from '../models/UserSchema';
 import { signUpSchemaType } from '../models/signUpSchema';
-import { AuthResponse, bal, img, loginResponse } from '../types';
+import { AuthResponse, bal, img, img_b64, loginResponse } from '../types';
 import { LoginSchemaType } from '../models/loginSchema';
 import { profileSchemaType } from '../models/profileSchema';
 import { axios, clearAuthHeader, setAuthHeader } from '../lib/axios';
@@ -26,7 +26,7 @@ interface AuthStoreTypes {
   logOut: () => Promise<void>
   updateProfile: (data: profileSchemaType) => Promise<boolean | undefined>
   uploadAvatar: (data: img) => Promise<void>
-  uploadAvatar_b64: (data: img) => Promise<void>
+  uploadAvatar_b64: (data: img_b64) => Promise<void>
   clearLogError: () => void
   updateBalance: (data: bal) =>Promise<void>
 }

@@ -3,6 +3,11 @@ import { User } from "../models/UserSchema"
 export interface img {
   image: File
 }
+export interface img_b64 {
+  image: string | ArrayBuffer | null
+}
+
+
 export interface loginResponse {
   success: boolean
   message: string

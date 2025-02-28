@@ -9,8 +9,8 @@ import { LuCamera } from 'react-icons/lu';
 import toast from 'react-hot-toast';
 
 const AvatarUploadForm_b64 = () => {
-  const { authUser, pending, uploadAvatar } = useAuthStore();
-  const [selectedImg, setSelectedImg] =  useState<string | ArrayBuffer | null>(authUser?.image || "/avatar.png");
+  const { authUser, pending, uploadAvatar_b64 } = useAuthStore();
+  const [selectedImg, setSelectedImg] =  useState< string | ArrayBuffer | null>(null)
 
   const {
     handleSubmit,
@@ -38,9 +38,9 @@ const AvatarUploadForm_b64 = () => {
     reader.readAsDataURL(file);
     reader.onload = async () => {
       const base64Image = reader.result;
-      setSelectedImg(base64Image);
+      // setSelectedImg(base64Image);
       // await updateProfile({ profilePic: base64Image });
-      handleSubmit(onSubmit)();
+      await uploadAvatar_b64({ image:  base64Image });
     };
   }
 
